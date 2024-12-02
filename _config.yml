@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Cyber Risk Management and Compliance"
+title                    : "Risk Management and Compliance"
 title_separator          : "-"
 name                     : &name "Your Name"
 description              : &description "personal description"
