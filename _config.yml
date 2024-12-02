@@ -21,13 +21,13 @@ repository               : "academicpages/academicpages.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "images/np.jpg"
   name             : "Nkereiso Ikot Godswill"
   pronouns         : # example: "she/her"  
   bio              : "Short biography for the left-hand sidebar"
   location         : "Earth"
   employer         : "Red Brick University"
-  uri              : # URL
+  uri              : # URL profile.png
   email            : "none@example.org" 
 
   # Academic websites
