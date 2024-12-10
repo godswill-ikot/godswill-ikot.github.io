@@ -7,9 +7,9 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Rob Williams"
+title                    : "Nkereiso Ikot Godswill"
 title_separator          : "-"
-name                     : &name "Rob Williams"
+name                     : &name "Nkereiso Ikot Godswill"
 description              : &description "Postdoc in Political Science"
 url                      : https://godswill-ikot.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -79,7 +79,7 @@ analytics:
   google:
     tracking_id          : 
   goatcounter:
-    code		 : jayrobwilliams
+    code		 : godswill-ikot
 
 
 # Site Author
