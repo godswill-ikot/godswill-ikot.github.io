@@ -9,7 +9,7 @@
 locale                   : "en-US"
 title                    : "Nkereiso Ikot Godswill"
 title_separator          : "-"
-name                     : &name "Nkereiso Ikot Godswill"
+name                     : &name "Nkereiso I Godswill"
 description              : &description "Postdoc in Political Science"
 url                      : https://godswill-ikot.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -84,7 +84,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "Nkereiso Ikot Godswill"
+  name             : "Nkereiso I Godswill"
   avatar           : "profile.png"
   bio              : "Cybersecurity Analyst"
   location         :
