@@ -143,7 +143,7 @@ Access the opencart e-commerce site using the desktop web browser and IP address
 
 Access the google site for internet connect on the desktop web browser using www.google.com 
 
-<img src="/images/posts/nest-map/broswser.PNG" style="display: block; margin: auto;" />
+<img src="/images/posts/nest-map/broswer.PNG" style="display: block; margin: auto;" />
 
 Using ssh@192.168.126.1 to access the gateway from the desktop
 
