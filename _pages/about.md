@@ -14,7 +14,7 @@ My expertise lies in building frameworks with the organisations' available resou
 With hands-on and lab experience in network security, threat analysis, and incident response, I thrive in environments that demand critical thinking and quick decision-making. I am proficient in leveraging tools like SIEM systems, firewalls, Wireshark, Nessus, and Metasploit to identify and mitigate potential threats and vulnerability scanners, alongside scripting languages such as Python and Bash, to detect and neutralize security threats effectively and I am also proficient in the use of Mysql for database query. 
 
 I earned my MSc in Cybersecurity from the
-[University *of* Reohampton London]([https://www.roehampton.ac.uk/]) and my
+[University *of* Roehampton London]([https://www.roehampton.ac.uk/]) and my
 B.Tech in Statics from [Federal University *of* Technology Akure]([https://www.futa.edu.ng/])
 
 In addition to my academic certifications I also hold certifications such as [e.g., Google Cybersecurity Certificate, CompTIA Security+], which validate my technical skills and commitment to continuous learning. 
