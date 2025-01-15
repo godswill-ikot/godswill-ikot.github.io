@@ -1,7 +1,7 @@
 ---
-title: 'There is as Yet Insufficient Data for a Meaningful Answer'
-date: 2022-07-05
-permalink: /posts/2022/07/insufficient-data
+title: 'Zabbix and web monitoring'
+date: 2025-01-15
+permalink: /posts/2025/15/Zabbix for monitoring a website
 excerpt_separator: <!--more-->
 toc: true
 tags:
