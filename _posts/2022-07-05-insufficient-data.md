@@ -12,12 +12,18 @@ tags:
 ## Zabbix for web monitoring portfolio 3 discussion
 Zabbix is an open-source monitoring software specially crafted and built for monitoring various IT infrastructure components, such as web-sites, servers, network devices, applications, and services. It provides a holistic and comprehensive suite of features for real-time monitoring, alerting, and visualization of system health and performance. Zabbix is particularly popular in enterprise environments due to its scalability, flexibility, and open-source nature, making it highly customizable and cost-effective.
 
-#### Key Features of Zabbix
-- Real-time Monitoring: Network devices (Switches), Servers (Physical and virtual <!--more--> servers, etc) , Applications (Web applications, databases, email systems, etc.), Cloud environments (AWS, Azure, Google Cloud, etc.), Storage devices (Disk usage, file systems, etc.)
+#### Key Features of Zabbix <!--more-->
+- Real-time Monitoring: For network devices (switches), servers (physical and virtual servers, etc), applications (Web applications, databases, email systems, etc.), cloud environments (AWS, Azure, Google Cloud, etc.), storage devices (Disk usage, file systems, etc.).
 - Data Collection: it consists of Agent-based monitoring (Zabbix agents are installed on monitored machines) and, Agentless monitoring (For devices or systems where agent installation is not possible or desirable, Zabbix can collect data via protocols like SNMP (Simple Network Management Protocol), IPMI (Intelligent Platform Management Interface), or SSH (Secure Shell).
+- Visualization: It provides dashboards with customizable, real-time visual representations of the system’s health, graphs, and charts, as well as trend analysis of performance metrics such as CPU usage, memory usage, and network throughput.
+- #### Other features
+- Scalability, Auto-discovery, Security, Alerts and Notifications
 
-<!--more-->
-As I mentioned in my [previous post](/posts/2022/03/so-it-goes), I'm drawing inferences from an *n* of one, so take anything I say with a hefty grain of salt.[^time] While I'm structuring this post largely as pieces of advice, keep in mind that these were things that worked for me, and may not generalize.[^negotiation]
+### Zabbix portfolio network segmentation (create a VM sandbox)
+This a continuation and an extension from my [previous post](/posts/2023/03/nest-map) on 'A Basic Sandboxing Portfolio', we are going to consider an extended network segmentation for this portfolio study.
+#### Zabbix network segmentation diagram
+
+I'm drawing inferences from an *n* of one, so take anything I say with a hefty grain of salt.[^time] While I'm structuring this post largely as pieces of advice, keep in mind that these were things that worked for me, and may not generalize.[^negotiation]
 
 [^time]: Three months is also [far too short a time](https://archive.org/details/Science_Fiction_Quarterly_New_Series_v04n05_1956-11_slpn/page/n5/mode/2up?view=theater) to reach a definitive conclusion on this topic.
 
