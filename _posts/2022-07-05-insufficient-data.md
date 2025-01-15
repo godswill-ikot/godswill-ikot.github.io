@@ -6,10 +6,16 @@ excerpt_separator: <!--more-->
 toc: true
 tags:
   - career
-  - data-science
+  - cyber security
+  - zabbix
 ---
+## Zabbix for web monitoring portfolio 3 discussion
+Zabbix is an open-source monitoring software specially crafted and built for monitoring various IT infrastructure components, such as web-sites, servers, network devices, applications, and services. It provides a holistic and comprehensive suite of features for real-time monitoring, alerting, and visualization of system health and performance. Zabbix is particularly popular in enterprise environments due to its scalability, flexibility, and open-source nature, making it highly customizable and cost-effective.
 
-Since taking a job as a data scientist three months ago, I've spoken with multiple political science PhD students who are interested in potentially making the same transition. This post synthesizes what I've said in those conversations with what I've learned in my first three months on the job, and I hope it will be helpful to anyone in the same position I was six months ago.
+#### Key Features of Zabbix
+- Real-time Monitoring: Network devices (Switches), Servers (Physical and virtual <!--more--> servers, etc) , Applications (Web applications, databases, email systems, etc.), Cloud environments (AWS, Azure, Google Cloud, etc.), Storage devices (Disk usage, file systems, etc.)
+- Data Collection: it consists of Agent-based monitoring (Zabbix agents are installed on monitored machines) and, Agentless monitoring (For devices or systems where agent installation is not possible or desirable, Zabbix can collect data via protocols like SNMP (Simple Network Management Protocol), IPMI (Intelligent Platform Management Interface), or SSH (Secure Shell).
+
 <!--more-->
 As I mentioned in my [previous post](/posts/2022/03/so-it-goes), I'm drawing inferences from an *n* of one, so take anything I say with a hefty grain of salt.[^time] While I'm structuring this post largely as pieces of advice, keep in mind that these were things that worked for me, and may not generalize.[^negotiation]
 
