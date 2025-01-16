@@ -23,6 +23,90 @@ Zabbix is an open-source monitoring software specially crafted and built for mon
 This a continuation and an extension from my [previous post](/posts/2023/03/nest-map) on 'A Basic Sandboxing Portfolio', we are going to consider an extended network segmentation for this portfolio study.
 #### Zabbix network segmentation diagram
 
+<img src="/images/posts/nest-map/p2.png" style="display: block; margin: auto;" /> 
+
+#### Create an IP table for each machine on the network
+
+| Device     | Role     | IP Address     | Subnet Mask     |
+|--------------|--------------|--------------|--------------|
+| Desktop 1 VM | Management and deployment | 192.168.200.9  | 255.255.255.0 |
+| Desktop 2 as Wordpress server VM | Management and deployment | 192.168.200.5  | 255.255.255.0 |
+| Gateway Router VM (enp0s3)  | Subnet 01 - Access to internet, Gateway and Desktop | 192.168.126.1  | 255.255.255.0 |
+| Gateway Router VM (enp0s8)  | Subnet 02 - Access to internet and Gateway Desktop 1 and Desktop Wordpress server| 192.168.200.1  | 255.255.255.0 |
+| Gateway Router VM (enp0s9)  |  Internet Access to Ubuntu Gateway  | 10.0.2.15  | 255.255.255.0 |
+| Gateway Router VM (enp0s10)  | Subnet 03 - Access to internet, Gateway and Desktop | 192.168.26.1  | 255.255.255.0 |
+| Application Server VM  | Server (Bitnami-Opencart)  | 192.168.26.2  | 255.255.255.0 |
+
+- #### Desktop Configuration:
+  - #### Desktop 1 for Management and deployment
+Go to setting and then click NETWORK and set ADPATER 1 to INTERNAL NETWORK, then clicked OK and click START to bootup the machine on the VM.
+
+<img src="/images/posts/nest-map/st1.PNG" style="display: block; margin: auto;" />
+
+After starting up the machine, go to Settings and click on WIRED SETTINGS then click on IDENTITY to setup the MAC Address to (08:00:27:97:75:31 (enp0s3)) then click IPV4 and set to Manual to set the ADDRESS, NETMASK, GATEWAY AND DNS ADDRESS: 192.168.126.2	NETMASK: 255.255.255.0 GATEWAY: 192.168.126.1	and DNS: 8.8.8.8, 1.1.1.1 
+Then click on APPLY and then DISCONNECT and RE-CONNECT the WIRED CONNECTION
+
+<img src="/images/posts/nest-map/ubsp1.PNG" style="display: block; margin: auto;" />
+
+Open a command line terminal using “Ctrl + alt + T” and type “ip a” to see if IP address is set, if IP address is set continue, else re-do the above step and restart the Ubuntu desktop machine. 
+
+<img src="/images/posts/nest-map/ubip.PNG" style="display: block; margin: auto;" />
+
+ - #### Desktop 2 for WORDPRESS maangement, installation and deployment
+Go to setting and then click NETWORK and set ADPATER 1 to INTERNAL NETWORK, then clicked OK and click START to bootup the machine on the VM.
+
+<img src="/images/posts/nest-map/st1.PNG" style="display: block; margin: auto;" />
+
+After starting up the machine, go to Settings and click on WIRED SETTINGS then click on IDENTITY to setup the MAC Address to (08:00:27:97:75:31 (enp0s3)) then click IPV4 and set to Manual to set the ADDRESS, NETMASK, GATEWAY AND DNS ADDRESS: 192.168.126.2	NETMASK: 255.255.255.0 GATEWAY: 192.168.126.1	and DNS: 8.8.8.8, 1.1.1.1 
+Then click on APPLY and then DISCONNECT and RE-CONNECT the WIRED CONNECTION
+
+<img src="/images/posts/nest-map/ubsp1.PNG" style="display: block; margin: auto;" />
+
+Open a command line terminal using “Ctrl + alt + T” and type “ip a” to see if IP address is set, if IP address is set continue, else re-do the above step and restart the Ubuntu desktop machine. 
+
+<img src="/images/posts/nest-map/ubip.PNG" style="display: block; margin: auto;" />
+** Command codes for installation of ZABBIX-AGENT and WORDPRESS
+
+{% capture notice-text %} I had an enormous amount of support in this process from both my institutions and my networks; in no way could I have gotten a data science job as easily on my own. I talk more about the help I received in this post. {% endcapture %}
+- #### Gateway(Router) Configuration:
+  Go to settings and then click NETWORK and set ADAPTER 1 to NAT, ADAPTER 2 for (desktop) to INTERNAL NETWORK and ADAPTER 3 for (opencart) to INTERNAL NETWORK
+<img src="/images/posts/nest-map/g1.PNG" style="display: block; margin: auto;" />
+<img src="/images/posts/nest-map/g2.PNG" style="display: block; margin: auto;" />
+<img src="/images/posts/nest-map/g3.PNG" style="display: block; margin: auto;" />
+
+Then click OK and click START to bootup the machine on the VM  
+
+After starting up the machine use:  
+
+**student@router:~$   sudo nano /etc/netplan/00-installer-config.yaml**  
+to enter the network interface to configure the ADDRESS, NETMASK, and GATEWAY for all three (3) ADAPTERS. 
+<img src="/images/posts/nest-map/setup.PNG" style="display: block; margin: auto;" />
+Then use: student@router:~$ **sudo netplan apply** 	       (to apply new configuration) 
+
+Then use: student@router:~$ **ip a**				(to view all IPs) 
+<img src="/images/posts/nest-map/g5.PNG" style="display: block; margin: auto;" />
+
+- #### Bitnami Opencart Server Configuration:
+  Go to settings and then click NETWORK and set ADPATER 1 to INTERNAL NETWORK, then click OK and click START to bootup the machine on the VM
+<img src="/images/posts/nest-map/st2.PNG" style="display: block; margin: auto;"/>
+
+After starting up the machine use:  
+bitnami@debian:~$   **sudo nano /etc/network/interfaces**  
+to enter the network interface to configure the ADDRESS, NETMASK, and GATEWAY.
+
+ADDRESS: 192.168.26.2	NETMASK: 255.255.255.0	GATEWAY: 192.168.126.1
+
+<img src="/images/posts/nest-map/opc1.PNG" style="display: block; margin: auto;"/>
+
+Then use **Ctrl + X** to save by pressing Y when asked do you want to save settings? 
+Use: bitnami@debian:~$  **sudo reboot now**  
+
+After reboot use: bitnami@debian:~$ **ip a** 	to see if IP Address is set. 
+
+<img src="/images/posts/nest-map/opcst.PNG" style="display: block; margin: auto;"/>             
+
+<!--more-->
+
 I'm drawing inferences from an *n* of one, so take anything I say with a hefty grain of salt.[^time] While I'm structuring this post largely as pieces of advice, keep in mind that these were things that worked for me, and may not generalize.[^negotiation]
 
 [^time]: Three months is also [far too short a time](https://archive.org/details/Science_Fiction_Quarterly_New_Series_v04n05_1956-11_slpn/page/n5/mode/2up?view=theater) to reach a definitive conclusion on this topic.
