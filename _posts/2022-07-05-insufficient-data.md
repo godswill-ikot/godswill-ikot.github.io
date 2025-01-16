@@ -97,7 +97,19 @@ To install WORDPRESS you need Apache2, Mysql, and Php
         <a href="https://example-link.com" style="color: #007acc;"></a>
     </p>
 </div>
-    - #### Steps to install Mysql server for database management
+  - #### Steps to install Mysql server for database management
+<div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
+    <p style="color: #333; font-size: 13px; line-height: 1.5;">
+        1.    sudo apt update<br>
+        2.    sudo apt install mysql-server<br>
+        3.    sudo systemctl restart mysql <!-- To restart the mysql --> <span style="color: #007acc;">[To restart the mysql]</span><br>
+        4.    sudo systemctl start mysql <!-- To start mysql installed --> <span style="color: #007acc;">[To start mysql installed] </span><br>
+        5.    sudo systemctl enable apache2 <!-- To start apache from system-boot up --> <span style="color: #007acc;">[To start mysql from system-boot up] </span><br>
+        6.    sudo systemctl status mysql <!-- To check availability installed --> <span style="color: #007acc;">[To check mysql availability if active or not] </span><br>
+        <a href="https://example-link.com" style="color: #007acc;"></a>
+    </p>
+</div>
+  - #### Steps to install Mysql server for database management
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
     <p style="color: #333; font-size: 13px; line-height: 1.5;">
         1.    sudo apt update<br>
