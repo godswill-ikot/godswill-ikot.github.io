@@ -81,10 +81,28 @@ Open a command line terminal using “Ctrl + alt + T” and type “ip a” to s
         7.    sudo systemctl enable zabbix-agent <!-- Enable from system start-up --> <span style="color: #007acc;">[Enable from system start-up]</span><br>
         8.    sudo systemctl start zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To start agent installed] </span><br>
         9.    sudo systemctl status zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To check agent availability if active or not] </span><br>
-        <a href="https://example-link.com" style="color: #007acc;"></a>.
+        <a href="https://example-link.com" style="color: #007acc;"></a>
     </p>
 </div>
 - #### Prequisite and dependecies for WORDPRESS installation 
+To install WORDPRESS you need Apache2, Mysql, and Php
+  - #### Steps to install Apache
+<div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
+    <p style="color: #333; font-size: 13px; line-height: 1.5;">
+        1.    sudo apt update<br>
+        2.    sudo apt install apache2 -y<br>
+        Enter the zabbix configuration file<br>
+        3.    sudo nano /etc/zabbix/zabbix_agentd.conf<br>
+        Search manually for Server, ServerActive and Hostname (insert the host IP on which the server is stored for monitoring)<br>
+        4.    Server=192.168.200.2<br>
+        5.    ServerActive=192.168.200.2<br>
+        6.    Hostname=Zabbi server <!-- Zabbix server --> <span style="color: #007acc;">[Zabbix server]</span><br>
+        7.    sudo systemctl enable zabbix-agent <!-- Enable from system start-up --> <span style="color: #007acc;">[Enable from system start-up]</span><br>
+        8.    sudo systemctl start zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To start agent installed] </span><br>
+        9.    sudo systemctl status zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To check agent availability if active or not] </span><br>
+        <a href="https://example-link.com" style="color: #007acc;"></a>
+    </p>
+</div>
 - #### Gateway(Router) Configuration:
   Go to settings and then click NETWORK and set ADAPTER 1 to NAT, ADAPTER 2 for (desktop) to INTERNAL NETWORK and ADAPTER 3 for (opencart) to INTERNAL NETWORK
 <img src="/images/posts/nest-map/g1.PNG" style="display: block; margin: auto;" />
