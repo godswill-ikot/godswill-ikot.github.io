@@ -70,12 +70,14 @@ Open a command line terminal using “Ctrl + alt + T” and type “ip a” to s
 
 <div style="background-color: #f0f8ff; border-left: 3px solid #007acc; padding: 8px; margin: 17px 0; font-style: italic; font-weight: bold;">
     <p style="color: #333; font-size: 14px;">
-        I had an enormous amount of support in this process from both my institutions and my networks; in no way could I have gotten a data science job as easily on my own. I talk more about the help I received in <a href="https://example-link.com" style="color: #007acc;">this post</a>.
+      - sudo apt update
+      - sudo apt install -y zabbix-agent
+      - <a href="https://example-link.com" style="color: #007acc;">this post</a>.
     </p>
 </div>
 
 {% capture notice-text %}
-I had an enormous amount of support in this process from both my institutions and my networks; in no way could I have gotten a data science job as easily on my own. I talk more about the help I received in this post.
+ Godswill I had an enormous amount of support in this process from both my institutions and my networks; in no way could I have gotten a data science job as easily on my own. I talk more about the help I received in this post.
 {% endcapture %}
 
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 20px 0; font-style: italic; font-weight: bold;">
