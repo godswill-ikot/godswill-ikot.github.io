@@ -67,22 +67,22 @@ Open a command line terminal using “Ctrl + alt + T” and type “ip a” to s
 <img src="/images/posts/nest-map/ubip.PNG" style="display: block; margin: auto;" />
 
 - #### **Command codes for installation of ZABBIX-AGENT and WORDPRESS**
-<div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
-    <p style="color: #333; font-size: 13px; line-height: 1.5;">
-        1.    sudo apt update<br>
-        2.    sudo apt install -y zabbix-agent<br>
-        Enter the zabbix configuration file<br>
-        3.    sudo nano /etc/zabbix/zabbix_agentd.conf<br>
+    <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
+        <p style="color: #333; font-size: 13px; line-height: 1.5;">
+          1.    sudo apt update<br>
+          2.    sudo apt install -y zabbix-agent<br>
+          Enter the zabbix configuration file<br>
+          3.    sudo nano /etc/zabbix/zabbix_agentd.conf<br>
         Search manually for Server, ServerActive and Hostname (insert the host IP on which the server is stored for monitoring)<br>
-        4.    Server=192.168.200.2<br>
-        5.    ServerActive=192.168.200.2<br>
-        6.    Hostname=Zabbix server <!-- Zabbix server --> <span style="color: #007acc;">[Zabbix server]</span><br>
-        7.    sudo systemctl enable zabbix-agent <!-- Enable from system start-up --> <span style="color: #007acc;">[Enable from system start-up]</span><br>
-        8.    sudo systemctl start zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To start agent installed] </span><br>
-        9.    sudo systemctl status zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To check agent availability if active or not] </span><br>
-        <a href="https://example-link.com" style="color: #007acc;"></a>
-    </p>
-</div>
+          4.    Server=192.168.200.2<br>
+          5.    ServerActive=192.168.200.2<br>
+          6.    Hostname=Zabbix server <!-- Zabbix server --> <span style="color: #007acc;">[Zabbix server]</span><br>
+          7.    sudo systemctl enable zabbix-agent <!-- Enable from system start-up --> <span style="color: #007acc;">[Enable from system start-up]</span><br>
+          8.    sudo systemctl start zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To start agent installed] </span><br>
+          9.    sudo systemctl status zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To check agent availability if active or not] </span><br>
+          <a href="https://example-link.com" style="color: #007acc;"></a>
+      </p>
+  </div>
 - #### Prequisite and dependecies for WORDPRESS installation 
 To install WORDPRESS you need Apache2, Mysql, and Php
     - #### Steps to install Apache
@@ -95,32 +95,32 @@ To install WORDPRESS you need Apache2, Mysql, and Php
           5.    sudo systemctl enable apache2 <!-- To start apache from system-boot up --> <span style="color: #007acc;">[To start apache from system-boot up] </span><br>
           6.    sudo systemctl status apache2 <!-- To check availability installed --> <span style="color: #007acc;">[To check apache2 availability if active or not] </span><br>
           <a href="https://example-link.com" style="color: #007acc;"></a>
+       </p>
+    </div>
+  - #### Steps to install Mysql server for database management
+      <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
+      <p style="color: #333; font-size: 13px; line-height: 1.5;">
+          1.    sudo apt update<br>
+          2.    sudo apt install mysql-server<br>
+          3.    sudo systemctl restart mysql <!-- To restart the mysql --> <span style="color: #007acc;">[To restart the mysql]</span><br>
+          4.    sudo systemctl start mysql <!-- To start mysql installed --> <span style="color: #007acc;">[To start mysql installed] </span><br>
+          5.    sudo systemctl enable mysql <!-- To start apache from system-boot up --> <span style="color: #007acc;">[To start mysql from system-boot up] </span><br>
+          6.    sudo systemctl status mysql <!-- To check availability installed --> <span style="color: #007acc;">[To check mysql availability if active or not] </span><br>
+          <a href="https://example-link.com" style="color: #007acc;"></a>
       </p>
   </div>
-  - #### Steps to install Mysql server for database management
-<div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
-    <p style="color: #333; font-size: 13px; line-height: 1.5;">
-        1.    sudo apt update<br>
-        2.    sudo apt install mysql-server<br>
-        3.    sudo systemctl restart mysql <!-- To restart the mysql --> <span style="color: #007acc;">[To restart the mysql]</span><br>
-        4.    sudo systemctl start mysql <!-- To start mysql installed --> <span style="color: #007acc;">[To start mysql installed] </span><br>
-        5.    sudo systemctl enable mysql <!-- To start apache from system-boot up --> <span style="color: #007acc;">[To start mysql from system-boot up] </span><br>
-        6.    sudo systemctl status mysql <!-- To check availability installed --> <span style="color: #007acc;">[To check mysql availability if active or not] </span><br>
-        <a href="https://example-link.com" style="color: #007acc;"></a>
-    </p>
-</div>
   - #### Steps to install PHP server for database management
-<div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
-    <p style="color: #333; font-size: 13px; line-height: 1.5;">
-        1.    sudo apt update<br>
-        2.    sudo apt sudo apt install php libapache2-mod-php php-mysql php-cli php-xml php-curl php-json php-mbstring php-zip php-gd php-intl<br><!-- php, libraries and other dependecies installation --> <span style="color: #007acc;">[php and other dependecies installation] </span><br>
-        3.    sudo sudo apt install php-bcmath php-soap php-ldap php-imagick php-xsl php-opcache php-sqlite3 php-memcached php-redis<br><!-- compactibility dependecies installation -->
-        4.    sudo apt install php-fpm <!--(Optional fpm-php for nginx)--> <span style="color: #007acc;">[Optional fpm-php for nginx] </span><br>
-        5.    sudo systemctl enable apache2 <!-- To start apache from system-boot up --> <span style="color: #007acc;">[To start mysql from system-boot up] </span><br>
-        6.    sudo systemctl status mysql <!-- To check availability installed --> <span style="color: #007acc;">[To check mysql availability if active or not] </span><br>
-        <a href="https://example-link.com" style="color: #007acc;"></a>
-    </p>
-</div>
+      <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
+      <p style="color: #333; font-size: 13px; line-height: 1.5;">
+          1.    sudo apt update<br>
+          2.    sudo apt sudo apt install php libapache2-mod-php php-mysql php-cli php-xml php-curl php-json php-mbstring php-zip php-gd php-intl<br><!-- php, libraries and other dependecies installation --> <span style="color: #007acc;">[php and other dependecies installation] </span><br>
+          3.    sudo sudo apt install php-bcmath php-soap php-ldap php-imagick php-xsl php-opcache php-sqlite3 php-memcached php-redis<br><!-- compactibility dependecies installation -->
+          4.    sudo apt install php-fpm <!--(Optional fpm-php for nginx)--> <span style="color: #007acc;">[Optional fpm-php for nginx] </span><br>
+          5.    sudo systemctl enable apache2 <!-- To start apache from system-boot up --> <span style="color: #007acc;">[To start mysql from system-boot up] </span><br>
+          6.    sudo systemctl status mysql <!-- To check availability installed --> <span style="color: #007acc;">[To check mysql availability if active or not] </span><br>
+          <a href="https://example-link.com" style="color: #007acc;"></a>
+        </p>
+    </div>
 - #### Gateway(Router) Configuration:
   Go to settings and then click NETWORK and set ADAPTER 1 to NAT, ADAPTER 2 for (desktop) to INTERNAL NETWORK and ADAPTER 3 for (opencart) to INTERNAL NETWORK
 <img src="/images/posts/nest-map/g1.PNG" style="display: block; margin: auto;" />
