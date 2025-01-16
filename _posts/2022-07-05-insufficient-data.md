@@ -77,7 +77,7 @@ Open a command line terminal using “Ctrl + alt + T” and type “ip a” to s
         Search manually for Server, ServerActive and Hostname (insert the host IP on which the server is stored for monitoring)<br>
         Server=192.168.200.2<br>
         ServerActive=192.168.200.2<br>
-        Hostname=Zabbi server<br> <!-- Zabbix server --> <span style="color: #007acc;">[Zabbix server]</span>
+        Hostname=Zabbi server <!-- Zabbix server --> <span style="color: #007acc;">[Zabbix server]</span><br>
         sudo systemctl enable zabbix-agent<br> <!-- Enable from system start-up --> <span style="color: #007acc;">[Enable from system start-up]</span><br>
         sudo systemctl start zabbix-agent<br> <!-- To start agent installed --> <span style="color: #007acc;">[To start agent installed] </span><br>
         sudo systemctl status zabbix-agent<br> <!-- To start agent installed --> <span style="color: #007acc;">[To check agent availability if active or not] </span><br>
