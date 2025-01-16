@@ -137,7 +137,7 @@ To install WORDPRESS you need Apache2, Mysql, and Php
 4.    sudo rm latest.tar.gz<!--remove the archive zip file--> <span style="color: #007acc;">[remove the archive zip file] </span><br>
 5.    cd wordpress <!-- Move to wordpress directory to configure --> <span style="color: #007acc;">[Move to wordpress directory to configure] </span><br>
 6.   sudo cp wp-config-sample.php wp-config.php
-<!-- Copy configuration file to create a new configuration file: --> <span style="color: #007acc;">[Copy configuration file to create a new configuration file:] </span><br>
+<!-- Copy configuration file to create a new configuration file: --> <span style="color: #007acc;">[Copy configuration file to create a new configuration file] </span><br>
 7.   sudo nano wp-config.php<!-- Edit the wp-config.php file--> <span style="color: #007acc;">[Edit the wp-config.php file] </span><br>
 Find and modify the following lines in the wp-config.php file to match the database settings you created earlier<br>
 8.   define( 'DB_NAME', 'wordpress' ); , define( 'DB_USER', 'wordpressuser' ); , define( 'DB_PASSWORD', 'your_password' ); , define( 'DB_HOST', 'localhost' ); <br>
@@ -145,21 +145,27 @@ Find and modify the following lines in the wp-config.php file to match the datab
 10.  sudo chown -R www-data:www-data /var/www/html/wordpress<!--Change ownership of WordPress files to the Apache user (www-data)--> <span style="color: #007acc;">[Change ownership of WordPress files to the Apache user (www-data)] </span><br>
 11.   sudo find /var/www/html/wordpress -type d -exec chmod 755 {} \; <!--Set appropriate permissions for WordPress files and directories--> <span style="color: #007acc;">[Set appropriate permissions for WordPress files and directories] </span><br>
 12.   sudo nano /etc/apache2/sites-available/wordpress.conf<!--Create a new Apache virtual host configuration file for WordPress--> <span style="color: #007acc;">[Create a new Apache virtual host configuration file for WordPress] </span><br>
-13.   <VirtualHost *:80><br>
-    ServerAdmin webmaster@localhost<br>
-    DocumentRoot /var/www/html/wordpress<br>
-    ServerName your_domain_or_IP<br>
-    <Directory /var/www/html/wordpress><br>
-        AllowOverride All<br>
-        Require all granted<br>
-    </Directory><br>
-    ErrorLog ${APACHE_LOG_DIR}/error.log<br>
-    CustomLog ${APACHE_LOG_DIR}/access.log combined<br>
+13.   Add this configuration 
+  <VirtualHost *:80><br>
+  ServerAdmin webmaster@localhost<br>
+  DocumentRoot /var/www/html/wordpress<br>
+  ServerName your_domain_or_IP<br>
+  <Directory /var/www/html/wordpress><br>
+  AllowOverride All<br>
+  Require all granted<br>
+  </Directory><br>
+  ErrorLog ${APACHE_LOG_DIR}/error.log<br>
+  CustomLog ${APACHE_LOG_DIR}/access.log combined<br>
 </VirtualHost><!--Add the following configuration (replace your_domain_or_IP with your domain or server IP)--> <span style="color: #007acc;">[Add the following configuration (replace your_domain_or_IP with your domain or server IP)] </span><br>
-Find and modify the following lines in the wp-config.php file to match the database settings you created earlier<br>
-8.   define( 'DB_NAME', 'wordpress' ); , define( 'DB_USER', 'wordpressuser' ); , define( 'DB_PASSWORD', 'your_password' ); , define( 'DB_HOST', 'localhost' ); <br>
-9.   Save and exit the file (Ctrl + O, Enter, Ctrl + X).<br>
-<a href="https://example-link.com" style="color: #007acc;"></a>
+
+14.   sudo a2ensite wordpress.conf<br><!--Enble WORDPRESS the default site)--> <span style="color: #007acc;">[Enble WORDPRESS the default site] </span><br>
+sudo a2dissite 000-default.conf<br><!--Disable the default site--> <span style="color: #007acc;">[disbale default site] </span><br>
+15.   sudo a2enmod rewrite<br><!--Enable apache to write module--> <span style="color: #007acc;">[Enable apache to write module] </span><br>
+16.   sudo systemctl restart apache2<!--Restart apache2--> <span style="color: #007acc;">[Restart apache2]</span><br>
+
+Complete WORDPRESS installation onli via Broswer (frontend)<br>
+17.   http://your_domain_or_IP<!--Use you ip address on you brower. e.g http://192.168.200.5--> <span style="color: #007acc;">[Use you ip address on you brower. e.g http://192.168.200.5] </span><br>
+ <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
 - #### Gateway(Router) Configuration:
