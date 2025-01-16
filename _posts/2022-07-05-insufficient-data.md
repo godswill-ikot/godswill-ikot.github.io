@@ -106,7 +106,13 @@ To install WORDPRESS you need Apache2, Mysql, and Php
 4.    sudo systemctl start mysql <!-- To start mysql installed --> <span style="color: #007acc;">[To start mysql installed] </span><br>
 5.    sudo systemctl enable mysql <!-- To start apache from system-boot up --> <span style="color: #007acc;">[To start mysql from system-boot up] </span><br>
 6.    sudo systemctl status mysql <!-- To check availability installed --> <span style="color: #007acc;">[To check mysql availability if active or not] </span><br>
-<a href="https://example-link.com" style="color: #007acc;"></a>
+7.    sudo mysql_secure_installation<!-- anwswer yes to all question in this section --> <span style="color: #007acc;">[anwswer yes to all question in this section] </span><br>
+8.    sudo mysql -u root -p <!-- To enter mysql database interface --> <span style="color: #007acc;">[To enter mysql database interface ]</span><br>
+9.    CREATE DATABASE wordpress; <!--In the mtsql enviroment enter this script to build wordpress database--> <span style="color: #007acc;">[in the mysql enviroment enter this script to build wordpress database] </span><br>
+10.    CREATE USER 'wordpressuser'@'localhost' IDENTIFIED BY 'your_password';<!--To create user named 'wordpressuser' set your password --> <span style="color: #007acc;">[To create user named 'wordpressuser' and set your password] </span><br>
+11.   GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressuser'@'localhost';<!--granting privileges and access--> <span style="color: #007acc;">[granting privileges and access] </span><br>
+12.    FLUSH PRIVILEGES;<!--make all changes permanent--> <span style="color: #007acc;">[make all changes permanent] </span><br>
+13.   EXIT;<!--To quit or leave--> <span style="color: #007acc;">[To quit or leave] </span><br> <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
 - #### Steps to install PHP server for database management
