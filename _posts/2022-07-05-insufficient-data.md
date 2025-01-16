@@ -68,11 +68,23 @@ Open a command line terminal using “Ctrl + alt + T” and type “ip a” to s
 
 **Command codes for installation of ZABBIX-AGENT and WORDPRESS**
 
-<div style="background-color: #f0f8ff; border-left: 3px solid #007acc; padding: 8px; margin: 17px 0; font-style: italic; font-weight: bold;">
-    <p style="color: #333; font-size: 14px;">
-      - sudo apt update
-      - sudo apt install -y zabbix-agent
-      - <a href="https://example-link.com" style="color: #007acc;">this post</a>.
+<div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 20px 0; font-style: italic; font-weight: bold;">
+    <p style="color: #333; font-size: 18px; line-height: 1.6;">
+        sudo apt update<br>
+        sudo apt install -y zabbix-agent<br>
+        an<br>
+        enormous<br>
+        amount<br>
+        of<br>
+        support<br>
+        in<br>
+        this<br>
+        process<br>
+        from<br>
+        both<br>
+        my<br>
+        ins
+        <a href="https://example-link.com" style="color: #007acc;">this post</a>.
     </p>
 </div>
 
