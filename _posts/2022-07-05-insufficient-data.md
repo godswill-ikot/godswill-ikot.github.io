@@ -70,17 +70,17 @@ Open a command line terminal using “Ctrl + alt + T” and type “ip a” to s
 
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 20px 0; font-style: italic; font-weight: bold;">
     <p style="color: #333; font-size: 13px; line-height: 1.5;">
-        1.  sudo apt update<br>
-        2.  sudo apt install -y zabbix-agent<br>
+        1.    sudo apt update<br>
+        2.    sudo apt install -y zabbix-agent<br>
         Enter the zabbix configuration file<br>
-        3.  sudo nano /etc/zabbix/zabbix_agentd.conf<br>
+        3.    sudo nano /etc/zabbix/zabbix_agentd.conf<br>
         Search manually for Server, ServerActive and Hostname (insert the host IP on which the server is stored for monitoring)<br>
-        Server=192.168.200.2<br>
-        ServerActive=192.168.200.2<br>
-        Hostname=Zabbi server <!-- Zabbix server --> <span style="color: #007acc;">[Zabbix server]</span><br>
-        sudo systemctl enable zabbix-agent<br> <!-- Enable from system start-up --> <span style="color: #007acc;">[Enable from system start-up]</span><br>
-        sudo systemctl start zabbix-agent<br> <!-- To start agent installed --> <span style="color: #007acc;">[To start agent installed] </span><br>
-        sudo systemctl status zabbix-agent<br> <!-- To start agent installed --> <span style="color: #007acc;">[To check agent availability if active or not] </span><br>
+        4.    Server=192.168.200.2<br>
+        5.    ServerActive=192.168.200.2<br>
+        6.    Hostname=Zabbi server <!-- Zabbix server --> <span style="color: #007acc;">[Zabbix server]</span><br>
+        7.    sudo systemctl enable zabbix-agent<br> <!-- Enable from system start-up --> <span style="color: #007acc;">[Enable from system start-up]</span><br>
+        8.    sudo systemctl start zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To start agent installed] </span><br>
+        9.    sudo systemctl status zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To check agent availability if active or not] </span><br>
         <a href="https://example-link.com" style="color: #007acc;">this post</a>.
     </p>
 </div>
