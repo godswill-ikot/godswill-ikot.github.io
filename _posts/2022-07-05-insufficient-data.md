@@ -70,20 +70,17 @@ Open a command line terminal using “Ctrl + alt + T” and type “ip a” to s
 
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 20px 0; font-style: italic; font-weight: bold;">
     <p style="color: #333; font-size: 18px; line-height: 1.6;">
-        sudo apt update<br>
-        sudo apt install -y zabbix-agent<br>
-        an<br>
-        enormous<br>
-        amount<br>
-        of<br>
-        support<br>
-        in<br>
-        this<br>
-        process<br>
-        from<br>
-        both<br>
-        my<br>
-        ins
+        1.  sudo apt update<br>
+        2.  sudo apt install -y zabbix-agent<br>
+        Enter the zabbix configuration file
+        3.  sudo nano /etc/zabbix/zabbix_agentd.conf<br>
+        Search manually for Server, ServerActive and Hostname (insert the host IP on which the server is stored for monitoring)<br>
+        Server=192.168.1.100<br>
+        ServerActive=192.168.1.100<br>
+        Hostname=your-hostname<br>
+        sudo systemctl enable zabbix-agent<br>
+        sudo systemctl start zabbix-agent<br>
+        sudo systemctl status zabbix-agent<br>
         <a href="https://example-link.com" style="color: #007acc;">this post</a>.
     </p>
 </div>
