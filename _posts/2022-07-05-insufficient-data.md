@@ -78,10 +78,10 @@ Open a command line terminal using “Ctrl + alt + T” and type “ip a” to s
         4.    Server=192.168.200.2<br>
         5.    ServerActive=192.168.200.2<br>
         6.    Hostname=Zabbi server <!-- Zabbix server --> <span style="color: #007acc;">[Zabbix server]</span><br>
-        7.    sudo systemctl enable zabbix-agent<br> <!-- Enable from system start-up --> <span style="color: #007acc;">[Enable from system start-up]</span><br>
+        7.    sudo systemctl enable zabbix-agent <!-- Enable from system start-up --> <span style="color: #007acc;">[Enable from system start-up]</span><br>
         8.    sudo systemctl start zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To start agent installed] </span><br>
         9.    sudo systemctl status zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To check agent availability if active or not] </span><br>
-        <a href="https://example-link.com" style="color: #007acc;">this post</a>.
+        <a href="https://example-link.com" style="color: #007acc;">https://www.zabbix.com/download_agents?version=7.2&release=7.2.2&os=Linux&os_version=3.0&hardware=amd64&encryption=No+encryption&packaging=Archive&show_legacy=0</a>.
     </p>
 </div>
 
