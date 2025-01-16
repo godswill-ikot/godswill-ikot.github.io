@@ -85,15 +85,6 @@ Open a command line terminal using “Ctrl + alt + T” and type “ip a” to s
     </p>
 </div>
 
-{% capture notice-text %}
- Godswill I had an enormous amount of support in this process from both my institutions and my networks; in no way could I have gotten a data science job as easily on my own. I talk more about the help I received in this post.
-{% endcapture %}
-
-<div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 20px 0; font-style: italic; font-weight: bold;">
-    <p style="color: #333; font-size: 18px;">{{ notice-text }}</p>
-</div>
-
-
 - #### Gateway(Router) Configuration:
   Go to settings and then click NETWORK and set ADAPTER 1 to NAT, ADAPTER 2 for (desktop) to INTERNAL NETWORK and ADAPTER 3 for (opencart) to INTERNAL NETWORK
 <img src="/images/posts/nest-map/g1.PNG" style="display: block; margin: auto;" />
