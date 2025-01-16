@@ -120,11 +120,27 @@ To install WORDPRESS you need Apache2, Mysql, and Php
 <p style="color: #333; font-size: 13px; line-height: 1.5;">
 1.    sudo apt update<br>
 2.    sudo apt sudo apt install php libapache2-mod-php php-mysql php-cli php-xml php-curl php-json php-mbstring php-zip php-gd php-intl<br><!-- php, libraries and other dependecies installation --> <span style="color: #007acc;">[php and other dependecies installation] </span><br>
-3.    sudo sudo apt install php-bcmath php-soap php-ldap php-imagick php-xsl php-opcache php-sqlite3 php-memcached php-redis<br><!-- compactibility dependecies installation -->
+3.    sudo apt install php-bcmath php-soap php-ldap php-imagick php-xsl php-opcache php-sqlite3 php-memcached php-redis<br><!-- compactibility dependecies installation -->
 4.    sudo apt install php-fpm <!--(Optional fpm-php for nginx)--> <span style="color: #007acc;">[Optional fpm-php for nginx] </span><br>
 5.    php -v <!-- To verify php and its version --> <span style="color: #007acc;">[To verify] </span><br>
 6.   sudo a2enmod php <!-- Configure apache to work with php --> <span style="color: #007acc;">[Configure apache to work with php] </span><br>
 7.   sudo systemctl restart apache2 <!-- Restarting apache --> <span style="color: #007acc;">[Restarting apache] </span><br>
+<a href="https://example-link.com" style="color: #007acc;"></a>
+</p>
+</div>
+- #### Steps to download install WORDPRESS
+<div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
+<p style="color: #333; font-size: 13px; line-height: 1.5;">
+1.    cd /var/www/html<br><!--Move into the html directory to download wordpress--> <span style="color: #007acc;">[Move into the html directory to download wordpress] </span><br>
+2.    sudo wget https://wordpress.org/latest.tar.gz<br><!--To download wordpress installation scripts--> <span style="color: #007acc;">[To download wordpress installation scripts] </span><br>
+3.    sudo tar -xvzf latest.tar.gz<br><!-- Extract the install zip file --><span style="color: #007acc;">[Extract the install zip file] </span><br>
+4.    sudo rm latest.tar.gz<!--remove the archive zip file--> <span style="color: #007acc;">[remove the archive zip file] </span><br>
+5.    cd wordpress <!-- Move to wordpress directory to configure --> <span style="color: #007acc;">[Move to wordpress directory to configure] </span><br>
+6.   sudo cp wp-config-sample.php wp-config.php
+<!-- Copy configuration file to create a new configuration file: --> <span style="color: #007acc;">[Copy configuration file to create a new configuration file:] </span><br>
+7.   sudo nano wp-config.php<!-- Edit the wp-config.php file--> <span style="color: #007acc;">[Edit the wp-config.php file] </span><br>
+Find and modify the following lines in the wp-config.php file to match the database settings you created earlier<br>
+8. define( 'DB_NAME', 'wordpress' ); , define( 'DB_USER', 'wordpressuser' ); , define( 'DB_PASSWORD', 'your_password' ); , define( 'DB_HOST', 'localhost' );
 <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
