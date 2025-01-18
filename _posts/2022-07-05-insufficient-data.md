@@ -154,7 +154,7 @@ Complete WORDPRESS installation online via Broswer (frontend)<br>
 - #### Gateway(Router) Configuration:
   
   Go to settings and then click NETWORK and set ADAPTER 1 for (desktop 1) to INTERNAL NETWORK, ADAPTER 2 for (desktop 2) to INTERNAL NETWORK, ADAPTER 3 to NAT (Internet Access), and ADAPTER 4 to INTERNAL NETWORK for all 192.168.200.1 network.<br>
-Set the network this way:
+Set the network this way: view  [previous post](/posts/2023/03/nest-map) for indentation
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
 <p style="color: #333; font-size: 13px; line-height: 1.5;">
 
@@ -163,14 +163,21 @@ Set the network this way:
       -  ethernets:<br>
         -  enp0s3:<br>
           -  dhcp4: no<br>
+          -  addresses: [192.168.xxx.1/24]
+
       -  enp0s8:<br>
           -  dhcp4: no<br>
           -  addresses: [192.168.xxx.1/24]
-      - enp0s3:<br>
+
+      - enp0s9:<br>
+          -  dhcp4: true<br>
+          -  addresses: []<br>
+
+      -  enp0s8:<br>
           -  dhcp4: no<br>
           -  addresses: [192.168.xxx.1/24]<br>
 ~~~
-
+</span><br>
 2.    sudo apt install -y zabbix-agent<br>
 Enter the zabbix configuration file<br>
 3.    sudo nano /etc/zabbix/zabbix_agentd.conf<br>
