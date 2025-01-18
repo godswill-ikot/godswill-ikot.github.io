@@ -145,7 +145,7 @@ sudo a2dissite 000-default.conf<br><!--Disable the default site--> <span style="
 15.   sudo a2enmod rewrite<br><!--Enable apache to write module--> <span style="color: #007acc;">[Enable apache to write module] </span><br>
 16.   sudo systemctl restart apache2<!--Restart apache2--> <span style="color: #007acc;">[Restart apache2]</span><br>
 
-Complete WORDPRESS installation onli via Broswer (frontend)<br>
+Complete WORDPRESS installation online via Broswer (frontend)<br>
 17.   http://your_domain_or_IP<!--Use you ip address on you brower. e.g http://192.168.200.5--> <span style="color: #007acc;">[Use you ip address on you brower. e.g http://192.168.200.5] </span><br>
  <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
@@ -155,13 +155,24 @@ Complete WORDPRESS installation onli via Broswer (frontend)<br>
   
   Go to settings and then click NETWORK and set ADAPTER 1 for (desktop 1) to INTERNAL NETWORK, ADAPTER 2 for (desktop 2) to INTERNAL NETWORK, ADAPTER 3 to NAT (Internet Access), and ADAPTER 4 to INTERNAL NETWORK for all 192.168.200.1 network.<br>
 Set the network this way:
-  <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
+<div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
 <p style="color: #333; font-size: 13px; line-height: 1.5;">
-network:<br>
-- ethernet:<br> 
- -- enp0s3:<br>
-  - <!-- Restarting apache --> <span style="color: #007acc;">[Restarting apache] </span><br>
-<a href="https://example-link.com" style="color: #007acc;"></a>
+    network:<br>
+      -  ethernets:<br>
+        -  enp0s3:<br>
+          -  dhcp4: no<br>
+  
+2.    sudo apt install -y zabbix-agent<br>
+Enter the zabbix configuration file<br>
+3.    sudo nano /etc/zabbix/zabbix_agentd.conf<br>
+Search manually for Server, ServerActive and Hostname (insert the host IP on which the server is stored for monitoring)<br>
+4.    Server=192.168.200.2<br>
+5.    ServerActive=192.168.200.2<br>
+6.    Hostname=Zabbix server <!-- Zabbix server --> <span style="color: #007acc;">[Zabbix server]</span><br>
+7.    sudo systemctl enable zabbix-agent <!-- Enable from system start-up --> <span style="color: #007acc;">[Enable from system start-up]</span><br>
+8.    sudo systemctl start zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To start agent installed] </span><br>
+9.    sudo systemctl status zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To check agent availability if active or not] </span><br>
+    <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
 
