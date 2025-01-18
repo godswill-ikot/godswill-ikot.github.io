@@ -168,7 +168,7 @@ Set the network this way:
           -  addresses: [192.168.xxx.1/24]
       - enp0s3:<br>
           -  dhcp4: no<br>
-          -  addresses: [192.168.xxx.1/24]
+          -  addresses: [192.168.xxx.1/24]<br>
 ~~~
 2.    sudo apt install -y zabbix-agent<br>
 Enter the zabbix configuration file<br>
