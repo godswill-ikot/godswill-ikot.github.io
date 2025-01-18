@@ -36,9 +36,9 @@ This a continuation and an extension from my [previous post](/posts/2023/03/nest
 
 - #### Desktop Configuration:
   - #### Desktop 1 for Management and deployment
-Go to setting and then click NETWORK and set ADPATER 1 to INTERNAL NETWORK, then clicked OK and click START to bootup the machine on the VM.
+Go to setting and then click NETWORK and set ADPATER 1 to INTERNAL NETWORK, then click OK and click START to bootup the machine on the VM.
 
-After starting up the machine, go to Settings and click on WIRED SETTINGS then click on IDENTITY to setup the MAC Address to (08:00:27:97:75:31 (enp0s3)) then click IPV4 and set to Manual to set the ADDRESS, NETMASK, GATEWAY AND DNS ADDRESS: 192.168.126.2	NETMASK: 255.255.255.0 GATEWAY: 192.168.126.1	and DNS: 8.8.8.8, 1.1.1.1 
+After starting up the machine, go to Settings and click on WIRED SETTINGS then click on IDENTITY to setup the MAC Address to (08:00:27:97:75:31 (enp0s3)) then click IPV4 and set to Manual to set the ADDRESS, NETMASK, GATEWAY AND DNS ADDRESS: 192.168.200.9 NETMASK: 255.255.255.0 GATEWAY: 192.168.200.9	and DNS: 8.8.8.8, 8.8.4.4, 1.1.1.1 
 Then click on APPLY and then DISCONNECT and RE-CONNECT the WIRED CONNECTION
 
 Open a command line terminal using “Ctrl + alt + T” and type “ip a” to see if IP address is set, if IP address is set continue, else re-do the above step and restart the Ubuntu desktop machine. 
@@ -73,18 +73,7 @@ Search manually for Server, ServerActive and Hostname (insert the host IP on whi
 To install WORDPRESS you need Apache2, Mysql, and Php <br>
 
 - #### Steps to install Apache
-<div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style:     italic; font-weight: bold;">
-<p style="color: #333; font-size: 13px; line-height: 1.5;">
-1.    sudo apt update<br>
-2.    sudo apt install apache2 -y<br>
-3.    sudo systemctl restart apache2 <!-- To restart the apache2 --> <span style="color: #007acc;">[To restart the apache2]</span><br>
-4.    sudo systemctl start apache2 <!-- To start apache installed --> <span style="color: #007acc;">[To start apache2 installed] </span><br>
-5.    sudo systemctl enable apache2 <!-- To start apache from system-boot up --> <span style="color: #007acc;">[To start apache from system-boot up] </span><br>
-6.    sudo systemctl status apache2 <!-- To check availability installed --> <span style="color: #007acc;">[To check apache2 availability if active or not] </span><br>
-<a href="https://example-link.com" style="color: #007acc;"></a>
-</p>
-</div>
-
+  
 - #### Steps to install Mysql server for database management
   
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
@@ -164,30 +153,32 @@ Complete WORDPRESS installation onli via Broswer (frontend)<br>
 
 - #### Gateway(Router) Configuration:
   
-  Go to settings and then click NETWORK and set ADAPTER 1 to NAT, ADAPTER 2 for (desktop) to INTERNAL NETWORK and ADAPTER 3 for (opencart) to INTERNAL NETWORK
-<img src="/images/posts/nest-map/g1.PNG" style="display: block; margin: auto;" />
-<img src="/images/posts/nest-map/g2.PNG" style="display: block; margin: auto;" />
-<img src="/images/posts/nest-map/g3.PNG" style="display: block; margin: auto;" />
+  Go to settings and then click NETWORK and set ADAPTER 1 for (desktop 1) to INTERNAL NETWORK, ADAPTER 2 for (desktop 2) to INTERNAL NETWORK, ADAPTER 3 to NAT (Internet Access), and ADAPTER 4 to INTERNAL NETWORK for all 192.168.200.1 network.<br>
+Set the network this way:
+  <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
+<p style="color: #333; font-size: 13px; line-height: 1.5;">
+network:<br>
+- ethernet:<br> 
+ -- enp0s3:<br>
+  - <!-- Restarting apache --> <span style="color: #007acc;">[Restarting apache] </span><br>
+<a href="https://example-link.com" style="color: #007acc;"></a>
+</p>
+</div>
 
 Then click OK and click START to bootup the machine on the VM  
 
-After starting up the machine use:  
-
-**student@router:~$   sudo nano /etc/netplan/00-installer-config.yaml**  
-to enter the network interface to configure the ADDRESS, NETMASK, and GATEWAY for all three (3) ADAPTERS. 
-<img src="/images/posts/nest-map/setup.PNG" style="display: block; margin: auto;" />
-Then use: student@router:~$ **sudo netplan apply** 	       (to apply new configuration) 
-
-Then use: student@router:~$ **ip a**				(to view all IPs) 
-<img src="/images/posts/nest-map/g5.PNG" style="display: block; margin: auto;" />
+After starting up the machine use:  <br>
+**student@router:~$   sudo nano /etc/netplan/00-installer-config.yaml**  <br>
+to enter the network interface to configure the ADDRESS, NETMASK, and GATEWAY for all three (4) ADAPTERS. <br>
+Then use: student@router:~$ **sudo netplan apply** 	       (to apply new configuration) <br>
+Then use: student@router:~$ **ip a**				(to view all IPs) <br>
 
 - #### Bitnami Opencart Server Configuration:
-  Go to settings and then click NETWORK and set ADPATER 1 to INTERNAL NETWORK, then click OK and click START to bootup the machine on the VM
-<img src="/images/posts/nest-map/st2.PNG" style="display: block; margin: auto;"/>
+  Go to settings and then click NETWORK and set ADPATER 1 to INTERNAL NETWORK, then click OK and click START to bootup the machine on the VM<br>
 
-After starting up the machine use:  
-bitnami@debian:~$   **sudo nano /etc/network/interfaces**  
-to enter the network interface to configure the ADDRESS, NETMASK, and GATEWAY.
+After starting up the machine use:  <br>
+bitnami@debian:~$   **sudo nano /etc/network/interfaces**  <br>
+to enter the network interface to configure the ADDRESS, NETMASK, and GATEWAY.<br>
 
 ADDRESS: 192.168.26.2	NETMASK: 255.255.255.0	GATEWAY: 192.168.126.1
 
