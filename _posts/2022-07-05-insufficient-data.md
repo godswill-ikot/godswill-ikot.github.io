@@ -21,9 +21,6 @@ Zabbix is an open-source monitoring software specially crafted and built for mon
 
 ### Zabbix portfolio network segmentation (create a VM sandbox)
 This a continuation and an extension from my [previous post](/posts/2023/03/nest-map) on 'A Basic Sandboxing Portfolio', we are going to consider an extended network segmentation for this portfolio study.
-#### Zabbix network segmentation diagram
-
-<img src="/images/posts/nest-map/p2.png" style="display: block; margin: auto;" /> 
 
 #### Create an IP table for each machine on the network
 
@@ -41,30 +38,18 @@ This a continuation and an extension from my [previous post](/posts/2023/03/nest
   - #### Desktop 1 for Management and deployment
 Go to setting and then click NETWORK and set ADPATER 1 to INTERNAL NETWORK, then clicked OK and click START to bootup the machine on the VM.
 
-<img src="/images/posts/nest-map/st1.PNG" style="display: block; margin: auto;" />
-
 After starting up the machine, go to Settings and click on WIRED SETTINGS then click on IDENTITY to setup the MAC Address to (08:00:27:97:75:31 (enp0s3)) then click IPV4 and set to Manual to set the ADDRESS, NETMASK, GATEWAY AND DNS ADDRESS: 192.168.126.2	NETMASK: 255.255.255.0 GATEWAY: 192.168.126.1	and DNS: 8.8.8.8, 1.1.1.1 
 Then click on APPLY and then DISCONNECT and RE-CONNECT the WIRED CONNECTION
 
-<img src="/images/posts/nest-map/ubsp1.PNG" style="display: block; margin: auto;" />
-
 Open a command line terminal using “Ctrl + alt + T” and type “ip a” to see if IP address is set, if IP address is set continue, else re-do the above step and restart the Ubuntu desktop machine. 
-
-<img src="/images/posts/nest-map/ubip.PNG" style="display: block; margin: auto;" />
 
  - #### Desktop 2 for WORDPRESS maangement, installation and deployment
 Go to setting and then click NETWORK and set ADPATER 1 to INTERNAL NETWORK, then clicked OK and click START to bootup the machine on the VM.
 
-<img src="/images/posts/nest-map/st1.PNG" style="display: block; margin: auto;" />
-
 After starting up the machine, go to Settings and click on WIRED SETTINGS then click on IDENTITY to setup the MAC Address to (08:00:27:97:75:31 (enp0s3)) then click IPV4 and set to Manual to set the ADDRESS, NETMASK, GATEWAY AND DNS ADDRESS: 192.168.126.2	NETMASK: 255.255.255.0 GATEWAY: 192.168.126.1	and DNS: 8.8.8.8, 1.1.1.1 
 Then click on APPLY and then DISCONNECT and RE-CONNECT the WIRED CONNECTION
 
-<img src="/images/posts/nest-map/ubsp1.PNG" style="display: block; margin: auto;" />
-
 Open a command line terminal using “Ctrl + alt + T” and type “ip a” to see if IP address is set, if IP address is set continue, else re-do the above step and restart the Ubuntu desktop machine. 
-
-<img src="/images/posts/nest-map/ubip.PNG" style="display: block; margin: auto;" />
 
 - #### **Command codes for installation of ZABBIX-AGENT and WORDPRESS**
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
@@ -83,8 +68,10 @@ Search manually for Server, ServerActive and Hostname (insert the host IP on whi
     <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
+
 - #### Prequisite and dependecies for WORDPRESS installation 
-To install WORDPRESS you need Apache2, Mysql, and Php
+To install WORDPRESS you need Apache2, Mysql, and Php <br>
+
 - #### Steps to install Apache
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style:     italic; font-weight: bold;">
 <p style="color: #333; font-size: 13px; line-height: 1.5;">
@@ -97,7 +84,9 @@ To install WORDPRESS you need Apache2, Mysql, and Php
 <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
+
 - #### Steps to install Mysql server for database management
+  
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
 <p style="color: #333; font-size: 13px; line-height: 1.5;">
 1.    sudo apt update<br>
@@ -115,7 +104,9 @@ To install WORDPRESS you need Apache2, Mysql, and Php
 13.   EXIT;<!--To quit or leave--> <span style="color: #007acc;">[To quit or leave] </span><br> <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
+
 - #### Steps to install PHP server for database management
+
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
 <p style="color: #333; font-size: 13px; line-height: 1.5;">
 1.    sudo apt update<br>
@@ -128,7 +119,9 @@ To install WORDPRESS you need Apache2, Mysql, and Php
 <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
+
 - #### Steps to download install WORDPRESS
+
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
 <p style="color: #333; font-size: 13px; line-height: 1.5;">
 1.    cd /var/www/html<br><!--Move into the html directory to download wordpress--> <span style="color: #007acc;">[Move into the html directory to download wordpress] </span><br>
@@ -168,7 +161,9 @@ Complete WORDPRESS installation onli via Broswer (frontend)<br>
  <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
+
 - #### Gateway(Router) Configuration:
+  
   Go to settings and then click NETWORK and set ADAPTER 1 to NAT, ADAPTER 2 for (desktop) to INTERNAL NETWORK and ADAPTER 3 for (opencart) to INTERNAL NETWORK
 <img src="/images/posts/nest-map/g1.PNG" style="display: block; margin: auto;" />
 <img src="/images/posts/nest-map/g2.PNG" style="display: block; margin: auto;" />
