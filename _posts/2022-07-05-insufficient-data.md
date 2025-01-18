@@ -170,6 +170,7 @@ Set the network this way:
           -  dhcp4: no<br>
           -  addresses: [192.168.xxx.1/24]<br>
 ~~~
+
 2.    sudo apt install -y zabbix-agent<br>
 Enter the zabbix configuration file<br>
 3.    sudo nano /etc/zabbix/zabbix_agentd.conf<br>
