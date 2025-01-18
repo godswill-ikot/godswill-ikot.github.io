@@ -157,16 +157,8 @@ Complete WORDPRESS installation online via Broswer (frontend)<br>
 Set the network this way:
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
 <p style="color: #333; font-size: 13px; line-height: 1.5;">
-```
-First item<br>
-   Sub-item 1<br>
-   Sub-item 2<br>
-      Nested sub-item 1<br>
-      Nested sub-item 2<br>
-Second item<br>
-   Sub-item 1<br>
-   Sub-item 2<br>
-```
+
+~~~
  network:<br>
       -  ethernets:<br>
         -  enp0s3:<br>
@@ -176,7 +168,8 @@ Second item<br>
           -  addresses: [192.168.xxx.1/24]
       - enp0s3:<br>
           -  dhcp4: no<br>
-  
+          -  addresses: [192.168.xxx.1/24]
+~~~
 2.    sudo apt install -y zabbix-agent<br>
 Enter the zabbix configuration file<br>
 3.    sudo nano /etc/zabbix/zabbix_agentd.conf<br>
