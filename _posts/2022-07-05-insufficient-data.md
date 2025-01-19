@@ -154,40 +154,37 @@ Complete WORDPRESS installation online via Broswer (frontend)<br>
 - #### Gateway(Router) Configuration:
   
   Go to settings and then click NETWORK and set ADAPTER 1 for (desktop 1) to INTERNAL NETWORK, ADAPTER 2 for (desktop 2) to INTERNAL NETWORK, ADAPTER 3 to NAT (Internet Access), and ADAPTER 4 to INTERNAL NETWORK for all 192.168.200.1 network.<br>
+Then click OK and click START to bootup the machine on the VM <br>
+After starting up the machine use:  <br>
+**student@router:~$   sudo nano /etc/netplan/00-installer-config.yaml**  <br>
+to enter the network interface to configure the ADDRESS, NETMASK, and GATEWAY for all three (4) ADAPTERS. <br>
+
+Then use: student@router:~$ **sudo netplan apply** 	       (to apply new configuration) <br>
+Then use: student@router:~$ **ip a**				(to view all IPs) <br>
 Set the network this way: view  [previous post](/posts/2023/03/nest-map) for indentation
 <div style="background-color: #f0f8ff; border-left: 5px solid #007acc; padding: 10px; margin: 25px 0; font-style: italic; font-weight: bold;">
 <p style="color: #333; font-size: 13px; line-height: 1.5;">
-
-~~~
+**student@router:~$   sudo nano /etc/netplan/00-installer-config.yaml**  <br>
+1.<br>
  network:<br>
-      -  ethernets:<br>
-        -  enp0s3:<br>
-          -  dhcp4: no<br>
-          -  addresses: [192.168.xxx.1/24]
-
-      -  enp0s8:<br>
-          -  dhcp4: no<br>
-          -  addresses: [192.168.xxx.1/24]
-
-      - enp0s9:<br>
-          -  dhcp4: true<br>
-          -  addresses: []<br>
-
-      -  enp0s8:<br>
-          -  dhcp4: no<br>
-          -  addresses: [192.168.xxx.1/24]<br>
-~~~
-</span><br>
-2.    sudo apt install -y zabbix-agent<br>
-Enter the zabbix configuration file<br>
-3.    sudo nano /etc/zabbix/zabbix_agentd.conf<br>
-Search manually for Server, ServerActive and Hostname (insert the host IP on which the server is stored for monitoring)<br>
-4.    Server=192.168.200.2<br>
-5.    ServerActive=192.168.200.2<br>
-6.    Hostname=Zabbix server <!-- Zabbix server --> <span style="color: #007acc;">[Zabbix server]</span><br>
-7.    sudo systemctl enable zabbix-agent <!-- Enable from system start-up --> <span style="color: #007acc;">[Enable from system start-up]</span><br>
-8.    sudo systemctl start zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To start agent installed] </span><br>
-9.    sudo systemctl status zabbix-agent <!-- To start agent installed --> <span style="color: #007acc;">[To check agent availability if active or not] </span><br>
+       ethernets:<br>
+        enp0s3:<br>
+          dhcp4: no<br>
+            addresses: [192.168.xxx.1/24]
+        enp0s8:<br>
+            dhcp4: no<br>
+            addresses: [192.168.xxx.1/24]
+        enp0s9:<br>
+            dhcp4: true<br>
+            addresses: []<br>
+        enp0s8:<br>
+            dhcp4: no<br>
+            addresses: [192.168.xxx.1/24]<br>
+version: 2 <br>
+            
+2.    sudo netplan apply <!--To apply changes--> <span style="color: #007acc;">[To apply changes]</span><br>
+3.   For final configuration follow this [LINK](https://moodle.roehampton.ac.uk/pluginfile.php/4873277/mod_resource/content/4/Setting%20Up%20a%20Ubuntu%20Gateway%20Router_v02.pdf)<br>
+4.  sudo reboot<br>
     <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
