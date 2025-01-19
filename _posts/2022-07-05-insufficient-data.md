@@ -73,6 +73,20 @@ Search manually for Server, ServerActive and Hostname (insert the host IP on whi
 To install WORDPRESS you need Apache2, Mysql, and Php <br>
 
 - #### Steps to install Apache
+# How to Install Apache2
+
+Follow the steps below to install Apache2 on different systems.
+
+---
+
+## For Ubuntu/Debian-based Systems
+
+1. **Update the system:**
+   Open a terminal and update your package index:
+
+   ```bash
+   sudo apt update
+
   
 - #### Steps to install Mysql server for database management
   
@@ -184,7 +198,7 @@ version: 2 <br>
     <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
-**Note** : For final configuration follow this [LINK](https://moodle.roehampton.ac.uk/pluginfile.php/4873277/mod_resource/content/4/Setting%20Up%20a%20Ubuntu%20Gateway%20Router_v02.pdf)<br>
+**Note** : For final configuration on IP table routing follow this [LINK](https://moodle.roehampton.ac.uk/pluginfile.php/4873277/mod_resource/content/4/Setting%20Up%20a%20Ubuntu%20Gateway%20Router_v02.pdf)<br>
 
 - #### Bitnami Opencart Server Configuration:
   Go to settings and then click NETWORK and set ADPATER 1 to INTERNAL NETWORK, then click OK and click START to bootup the machine on the VM<br>
