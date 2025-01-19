@@ -180,19 +180,11 @@ version: 2 <br>
             
 2.    sudo netplan apply <!--To apply changes--> <span style="color: #007acc;">[To apply changes]</span><br>
 3.    student@router:~$ ip a<!--To view all IP setting--> <span style="color: #007acc;">[To view all IP setting]</span><br>
-3.   For final configuration follow this [LINK](https://moodle.roehampton.ac.uk/pluginfile.php/4873277/mod_resource/content/4/Setting%20Up%20a%20Ubuntu%20Gateway%20Router_v02.pdf)<br>
 4.  sudo reboot<br>
     <a href="https://example-link.com" style="color: #007acc;"></a>
 </p>
 </div>
-
-Then click OK and click START to bootup the machine on the VM  
-
-After starting up the machine use:  <br>
-**student@router:~$   sudo nano /etc/netplan/00-installer-config.yaml**  <br>
-to enter the network interface to configure the ADDRESS, NETMASK, and GATEWAY for all three (4) ADAPTERS. <br>
-Then use: student@router:~$ **sudo netplan apply** 	       (to apply new configuration) <br>
-Then use: student@router:~$ **ip a**				(to view all IPs) <br>
+**Note** : For final configuration follow this [LINK](https://moodle.roehampton.ac.uk/pluginfile.php/4873277/mod_resource/content/4/Setting%20Up%20a%20Ubuntu%20Gateway%20Router_v02.pdf)<br>
 
 - #### Bitnami Opencart Server Configuration:
   Go to settings and then click NETWORK and set ADPATER 1 to INTERNAL NETWORK, then click OK and click START to bootup the machine on the VM<br>
