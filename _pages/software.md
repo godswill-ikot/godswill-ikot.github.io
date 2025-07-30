@@ -54,7 +54,7 @@ gn@gn-VirtualBox:~$ Oscap –version  # Check version
 ```
 
 ### CIS Benchmark and Security Compliance installation 
-[CIS Compliance]([https://github.com/ComplianceAsCode/content]) on GitHub can be installed with:
+`[CIS Compliance]([https://github.com/ComplianceAsCode/content])` on GitHub can be installed with:
 
 ```bash
 gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scape security guide compliance\
@@ -68,8 +68,7 @@ gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scape security guide comp
 gn@gn-VirtualBox:~$ sudo oscap info /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 2>/dev/null || echo  # Test Ubuntu content 
 
 gn@gn-VirtualBox:~$ sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_standard
---results results.xml
---report report.html /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 
+--results results.xml --report report.html /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 
 
 ```
 
