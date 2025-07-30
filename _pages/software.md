@@ -22,106 +22,231 @@ Software is a set of instructions, data, or programs used to operate computers a
 ### OS scan, audit and hardening
 This study entails installing and configuring tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities and will be in two (2) part. The 1st is OpenSCAP, CIS-CAT Lite Assessor, and Lynis installed on Ubuntu 20.04 workstation; the 2nd Microsoft Security Compliance Toolkit and CIS-CAT Lite Assessor installed on Windows_10_Enterprise. System performance metrics (memory usage, disk I/O, and CPU load) will be tracked at stages (pre-scan, during scan, and post-scan) as security operation is conducted.
 
-### Phase 1: OS Audit and Hardening tools installation on Ubuntu 20.04
-#### [OpenSCAP](https://www.open-scap.org/) Installation 
+## Phase 1: OS Audit and Hardening tools installation on Ubuntu 20.04
+### [OpenSCAP](https://www.open-scap.org/) Installation 
 The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles, compliance security guide and dev environment. Below is the following steps for the installation procedure.
 ```bash
-# OpenSCAP Installation Guide
-
 ## Update system and install basic tools
-
 sudo apt update && sudo apt install curl wget git vim -y
-```
-```bash
-## Install OpenSCAP dependencies
 
+## Install OpenSCAP dependencies
 sudo apt install cmake build-essential pkg-config \
     libxml2-dev libxslt1-dev libpcre3-dev libcurl4-openssl-dev \
     librpm-dev libbz2-dev libxmlsec1-dev libglib2.0-dev \
     libacl1-dev libselinux1-dev libdbus-1-dev libpopt-dev \
     python3-dev python3-pytest doxygen swig -y
 ```
-
-## Clone and build OpenSCAP from source
+#### Clone and build OpenSCAP from source
 ```bash
 # Clone the repository
 git clone https://github.com/OpenSCAP/openscap.git
-
 # Navigate to the project directory
 cd openscap
-
 # Create and enter build directory
 mkdir build
 cd build
-
 # Generate build files with CMake
 cmake ../
-
 # Compile using all available CPU cores
 make -j$(nproc)
+sudo make install # Install Openscap
 ```
-
-## Install OpenSCAP
-```bash
-sudo make install
-```
-
-## Locate and create symlink for oscap binary
+#### Locate and create symlink for oscap binary
 ```bash
 # Find where OpenSCAP was installed (system-wide)
 sudo find /usr/local -name "oscap" -type f 2>/dev/null
-
 # Find oscap binary in build directory
 find ~/openscap/build -name "oscap" -type f 2>/dev/null
-
 # Create symlink to make oscap available system-wide
 sudo ln -s /home/$USER/openscap/build/utils/oscap /usr/local/bin/oscap
 
-# Alternative: Add to PATH instead of creating symlink
-# echo 'export PATH="$HOME/openscap/build/utils:$PATH"' >> ~/.bashrc
-# source ~/.bashrc
-```
-
-## Verify installation
-```bash
+# Verify installation
 oscap --version
-```
-
-## Additional setup (optional)
-```bash
-# Update library cache
-sudo ldconfig
-
-# Verify OpenSCAP can find its libraries
-ldd /usr/local/bin/oscap
-``` 
 ```
 #### [CIS Compliance](https://github.com/ComplianceAsCode/content) Benchmark and Security Guide installation for OpenSCAP
 After installing OpenSCAP, also install its security profile from GitHub with:
 ```bash
-gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scap security guide compliance\
-      wget https://github.com/ComplianceAsCode/content/releases/download/0.1.76/scap-security-guide-0.1.76.zip \ 
-      unzip scap-security-guide-0.1.76.zip \ 
-      sudo mkdir -p /usr/share/xml/scap/ssg/content/ \ 
-      sudo cp scap-security-guide-0.1.76/*.xml  *.xml /usr/share/xml/scap/ssg/content/ \
-      sudo ls -la /usr/share/xml/scap/ssg/content # Check what content is available \
-      sudo find /usr/share -name "ubuntu" | grep -i scap #Check Ubuntu- content \
-# Test Ubuntu content
-gn@gn-VirtualBox:~$ sudo oscap info /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 2>/dev/null || echo   
-gn@gn-VirtualBox:~$ # Check the security compliance guide installed
-gn@gn-VirtualBox:~$ sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_standard
---results results.xml --report report.html /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 
+# Download the latest SCAP Security Guide
+wget https://github.com/ComplianceAsCode/content/releases/download/v0.1.76/scap-security-guide-0.1.76.zip
+# Extract the archive
+unzip scap-security-guide-0.1.76.zip
+
+# Create directory for SCAP content
+sudo mkdir -p /usr/share/xml/scap/ssg/content/
+# Copy SCAP content files to system directory
+cd scap-security-guide-0.1.76
+sudo cp *.xml /usr/share/xml/scap/ssg/content/
+
+# Verify content installation
+sudo ls -la /usr/share/xml/scap/ssg/content/
+# Find Ubuntu-specific SCAP content
+sudo find /usr/share -name "*ubuntu*" | grep -i scap
+
+# Test Ubuntu 20.04 content availability
+sudo oscap info /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 2>/dev/null || echo "Ubuntu 20.04 
+# List all available DataStream files
+ls -la /usr/share/xml/scap/ssg/content/ssg-*-ds.xml
+```
+```bash
+# Run SCAP evaluation with standard profile for Ubuntu 20.04
+sudo oscap xccdf eval \
+    --profile xccdf_org.ssgproject.content_profile_standard \
+    --results results.xml \
+    --report report.html \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+
+# Alternative: Run evaluation for Ubuntu 22.04 (or choose your version if available)
+# sudo oscap xccdf eval \
+#     --profile xccdf_org.ssgproject.content_profile_standard \
+#     --results results-ubuntu2204.xml \
+#     --report report-ubuntu2204.html \
+#     /usr/share/xml/scap/ssg/content/ssg-ubuntu2204-ds.xml
+```
+```bash
+# Show all available profiles for Ubuntu 20.04
+sudo oscap info /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml | grep -A 50 "Profiles:"
+```
+
+#### Additional useful commands
+```bash
+# Generate remediation script
+sudo oscap xccdf generate fix \
+    --profile xccdf_org.ssgproject.content_profile_standard \
+    --output remediation-script.sh \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+# Check for specific compliance frameworks
+sudo oscap info /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml | grep -i "cis\|nist\|pci"
+# To view HTML report use: firefox report.html or your preferred browser
+```
+```bash
+# Troubleshoot: If content files are missing, check what was actually extracted
+ls -la scap-security-guide-0.1.76/
+# Verify oscap can access the files
+sudo oscap --version
+# Check file permissions
+ls -la /usr/share/xml/scap/ssg/content/
+# If evaluation fails, run with verbose output
+sudo oscap xccdf eval \
+    --profile xccdf_org.ssgproject.content_profile_standard \
+    --results results.xml \
+    --report report.html \
+    --verbose INFO \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2204-ds.xml
 ```
 #### [CIS-CAT Lite](https://learn.cisecurity.org/cis-cat-lite) Audit Installation 
 CIS-CAT Lite is an audit tool incorporated with CIS benchmark and is useful for manual hardening.
+# CIS-CAT Lite Installation and Setup
+
+#### Install Java 11 (CIS-CAT dependency)
 ```bash
-#Install CIS-CAT dependency Java except jre/jdk 17
-gn@gn-VirtualBox:~$ sudo apt install -y openjdk-11-jdk && sudo java –version 
-gn@gn-VirtualBox:~$ mkdir -p ~/ciscat && cd ~/ciscat  # create and access cis-cat folder 
-#Unzip and extract into the openscap build folder
-gn@gn-VirtualBox:~/ciscat $ unzip ~/Downloads/'CIS-CAT Lite Assessor v4.55.0.zip' -d ~/openscap/build/ 
-#Give execution permission and run
-gn@gn-VirtualBox:~/openscap/build $ chmod +x ./Assessor-CLI.sh && ./Assessor-CLI.sh 
+# Install OpenJDK 11 (required for CIS-CAT)
+sudo apt install -y openjdk-11-jdk
+
+java --version # Verify Java installation
+echo $JAVA_HOME # Check Java environment
+which java
+```
+#### Set up CIS-CAT directory structure
+```bash
+# Create CIS-CAT working directory
+mkdir -p ~/ciscat
+cd ~/ciscat
+```
+#### Extract CIS-CAT Lite (assuming downloaded to ~/Downloads)
+```bash
+# Extract CIS-CAT Lite to dedicated directory
+unzip ~/Downloads/'CIS-CAT Lite Assessor v4.55.0.zip' -d ~/ciscat/
+
+# Alternative: Extract to openscap build folder if preferred
+# unzip ~/Downloads/'CIS-CAT Lite Assessor v4.55.0.zip' -d ~/openscap/build/
+
+# Navigate to extracted CIS-CAT directory
+cd ~/ciscat/Assessor-CLI/
+```
+
+## Set permissions and run CIS-CAT
+```bash
+# Make the assessor executable
+chmod +x ./Assessor-CLI.sh
+
+# Run CIS-CAT with basic options
+./Assessor-CLI.sh
+
+# Run with specific options (examples)
+# List available benchmarks
+./Assessor-CLI.sh -l
+
+# Run assessment for Ubuntu 20.04
+./Assessor-CLI.sh -b benchmarks/CIS_Ubuntu_Linux_20.04_LTS_Benchmark_v1.1.0-xccdf.xml
+
+# Run with HTML report output
+./Assessor-CLI.sh -b benchmarks/CIS_Ubuntu_Linux_20.04_LTS_Benchmark_v1.1.0-xccdf.xml -r ~/ciscat/reports/
+```
+
+## Alternative Java version management (if needed)
+```bash
+# If you need to switch between Java versions
+sudo update-alternatives --config java
+
+# Set JAVA_HOME explicitly (add to ~/.bashrc for persistence)
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+echo 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64' >> ~/.bashrc
+source ~/.bashrc
+```
+
+## Verify CIS-CAT installation
+```bash
+# Check CIS-CAT version and available options
+./Assessor-CLI.sh -h
+
+# List directory contents to verify extraction
+ls -la ~/ciscat/Assessor-CLI/
+
+# Check available benchmarks
+ls -la ~/ciscat/Assessor-CLI/benchmarks/
+```
+
+## Create reports directory and run assessment
+```bash
+# Create reports directory
+mkdir -p ~/ciscat/reports
+
+# Run full assessment with detailed reporting
+./Assessor-CLI.sh \
+    -b benchmarks/CIS_Ubuntu_Linux_20.04_LTS_Benchmark_v1.1.0-xccdf.xml \
+    -r ~/ciscat/reports/ \
+    -n \
+    -t
+
+# View generated reports
+ls -la ~/ciscat/reports/
+```
+
+## Troubleshooting
+```bash
+# If Java version issues occur
+java -version
+javac -version
+
+# Check if CIS-CAT files are properly extracted
+find ~/ciscat -name "*.sh" -type f
+
+# If permission denied errors
+chmod -R +x ~/ciscat/Assessor-CLI/
+
+# Check log files for errors
+tail -f ~/ciscat/Assessor-CLI/logs/assessor-cli.log
+```
+
+## Integration with OpenSCAP (optional)
+```bash
+# If you want to use CIS-CAT results with OpenSCAP
+# Convert CIS-CAT XCCDF results to OpenSCAP format
+oscap xccdf validate ~/ciscat/reports/*.xml
+
+# Generate HTML report from CIS-CAT XML results using OpenSCAP
+oscap xccdf generate report ~/ciscat/reports/[result-file].xml > ciscat-report.html
+```
 ```
 #### [Lynis](https://github.com/CISOfy/Lynis) Audit Installation
 This is a deep scanning and audit tool that will be used to verify `True/False Positive or Negative`.
@@ -132,8 +257,8 @@ gn@gn-VirtualBox:~/openscap/build $ git clone https://github.com/CISOfy/lynis.gi
 # Test run a scan
 gn@gn-VirtualBox:~/openscap/build $ sudo lynis audit system  
 ```
-### Phase 2: OS Audit and Hardening tools installation on Windows_10_Enterprise
-#### Microsoft Security Compliance Toolkit 
+## Phase 2: OS Audit and Hardening tools installation on Windows_10_Enterprise
+### Microsoft Security Compliance Toolkit 
 Since the researcher is using a virtual machine, there isa  need to install a compatible scripting environment, hence installing the latest `PowerShell 7 Installation`
 ```powershell
 # Navigate to the root of C: drive
