@@ -158,14 +158,13 @@ find ~/ciscat -name "*.sh" -type f
 chmod -R +x ~/ciscat/Assessor-CLI/
 ```
 #### [Lynis](https://github.com/CISOfy/Lynis) Audit Installation
-```bash
 This is a deep scanning and audit tool that will be used to verify `True/False Positive or Negative`.
 ```bash
-gn@gn-VirtualBox:~/openscap/build $ git clone https://github.com/CISOfy/lynis.git \
-      sudo ln -s /opt/lynis/lynis /usr/local/bin/lynis \
-      lynis --version #(Create symlink run from anywhere) 
-# Test run a scan
-gn@gn-VirtualBox:~/openscap/build $ sudo lynis audit system  
+sudo git clone https://github.com/CISOfy/lynis.git # Clone the Lynis repository
+# Create a symlink to run Lynis from anywhere
+sudo ln -s /opt/lynis/lynis /usr/local/bin/lynis
+lynis --version # Verify installation
+sudo lynis audit system # Test run system audit
 ```
 ## Phase 2: OS Audit and Hardening tools installation on Windows_10_Enterprise
 ### Microsoft Security Compliance Toolkit 
@@ -173,10 +172,8 @@ Since the researcher is using a virtual machine, there isa  need to install a co
 ```powershell
 # Navigate to the root of C: drive
 Set-Location C:\
-
 # Check Winget version (ensure it is installed)
 winget --version
-
 # Install the latest PowerShell 7 using Winget (requires Admin rights)
 winget install --id Microsoft.Powershell --source winget
 ```
