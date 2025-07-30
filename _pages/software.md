@@ -125,10 +125,9 @@ sudo oscap xccdf eval \
 ```
 #### [CIS-CAT Lite](https://learn.cisecurity.org/cis-cat-lite) Audit Installation 
 CIS-CAT Lite is an audit tool incorporated with CIS benchmark and is useful for manual hardening.
-# CIS-CAT Lite Installation and Setup
 ```bash
-# Install Java (CIS-CAT dependency) OpenJDK 11 
-sudo apt install -y openjdk-11-jdk
+# CIS-CAT Lite Installation and Setup
+sudo apt install -y openjdk-11-jdk # Install Java (CIS-CAT dependency) OpenJDK 11
 java --version # Verify Java installation
 echo $JAVA_HOME # Check Java environment
 which java
