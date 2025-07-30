@@ -1,6 +1,6 @@
 ---
 permalink: /software/
-title: "Software installation for operating system scan, audit and hardening"
+title: "Software OS scan, audit and hardening"
 gallery:
   - url: software/table.png
     image_path: software/table.png
@@ -18,13 +18,11 @@ header:
   og_image: "software/spatial_weighting.png"
 ---
 
-In the world of technology research, documentation of tools, applications, and software employed is fundamental to the completeness and reproducibility of any study. Central to this research is installing and configuring special tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities. To understand the impact of these security operations, system performance metrics (memory usage, disk I/O, and CPU load) were tracked at different stages: pre-scan, during scan, and post-scan. Cognising the effort put in solving challenges to the initial setup and ensuring consistent, recurring functionality of these tools, the subsequent sections provide a detailed account of their installation and operational procedures.
+In the world of technology research, documentation of tools, applications, and software employed is fundamental to the completeness and reproducibility of any study. This study entails installing and configuring tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities. To understand the impact of these security operations, system performance metrics (memory usage, disk I/O, and CPU load) were tracked at different stages: pre-scan, during scan, and post-scan. Seeing the effort put into installation and ensuring consistent functionality, the subsequent sections give an account of their installation and operational procedures.
 
 # OpenSCAP installation on Ubuntu 20.04 desktop
 
-[![OpenSCAP](https://www.open-scap.org/)](https://github.com/ShanaScogin/BayesPostEst/actions)
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/BayesPostEst)](https://CRAN.R-project.org/package=BayesPostEst)
-[![Codecov test coverage](https://codecov.io/gh/ShanaScogin/BayesPostEst/branch/master/graph/badge.svg)](https://codecov.io/gh/ShanaScogin/BayesPostEst?branch=master)
+[[OpenSCAP](https://www.open-scap.org/)]
 
 I am a developer of the [BayesPostEst](https://cran.r-project.org/package=BayesPostEst) R package for generating postestimation quantities of interest from Bayesian models. The package contains functions for producing regression tables, plotting predicted probabilities, calculating first differences, creating coefficient plots, and many other quantities. You can view the [Journal of Open Source Software](https://joss.theoj.org/) article for the package [here](https://doi.org/10.21105/joss.01722).
 
