@@ -51,7 +51,7 @@ gn@gn-VirtualBox:~$ sudo ln -s /home/gn/openscap/build/utils/oscap /usr/local/bi
 gn@gn-VirtualBox:~$ Oscap –version  # Check version 
 ```
 ### [CIS Compliance](https://github.com/ComplianceAsCode/content) Benchmark and Security Guide installation for OpenSCAP
-From github can be installed with:
+After installing OpenSCAP, also install its security profile from githubwith:
 ```bash
 gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scape security guide compliance\
       wget https://github.com/ComplianceAsCode/content/releases/download/0.1.76/scap-security-guide-0.1.76.zip \ 
