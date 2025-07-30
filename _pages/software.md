@@ -22,7 +22,7 @@ Software is a set of instructions, data, or programs used to operate computers a
 ### OS scan, audit and hardening
 This study entails installing and configuring tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities. The OpenSCAP, CIS-CAT Lite Assessor, and Lynis will be installed on an Ubuntu 20.04 workstation; the Microsoft Security Compliance Toolkit and CIS-CAT Lite Assessor will also be installed on Windows 10 Enterprise. System performance metrics (memory usage, disk I/O, and CPU load) will be tracked at stages(pre-scan, during scan, and post-scan) as security operation is conducted.
 
-### [OpenSCAP](https://www.open-scap.org/) installation on Ubuntu 20.04 desktop 
+### [OpenSCAP](https://www.open-scap.org/) Installation on Ubuntu 20.04 desktop 
 The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles, compliance security guide and dev environment. Below is the following steps for the installation procedure.
 ```bash
 gn@gn-VirtualBox:~$ sudo apt update && sudo apt install curl  wget  git  vim –y 
@@ -51,33 +51,41 @@ gn@gn-VirtualBox:~$ sudo ln -s /home/gn/openscap/build/utils/oscap /usr/local/bi
 gn@gn-VirtualBox:~$ Oscap –version  # Check version 
 ```
 ### [CIS Compliance](https://github.com/ComplianceAsCode/content) Benchmark and Security Guide installation for OpenSCAP
-After installing OpenSCAP, also install its security profile from githubwith:
+After installing OpenSCAP, also install its security profile from GitHub with:
 ```bash
-gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scape security guide compliance\
+gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scap security guide compliance\
       wget https://github.com/ComplianceAsCode/content/releases/download/0.1.76/scap-security-guide-0.1.76.zip \ 
       unzip scap-security-guide-0.1.76.zip \ 
       sudo mkdir -p /usr/share/xml/scap/ssg/content/ \ 
       sudo cp scap-security-guide-0.1.76/*.xml  *.xml /usr/share/xml/scap/ssg/content/ \
       sudo ls -la /usr/share/xml/scap/ssg/content # Check what content is available \
       sudo find /usr/share -name "ubuntu" | grep -i scap #Check Ubuntu- content \
-
-gn@gn-VirtualBox:~$ sudo oscap info /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 2>/dev/null || echo  # Test Ubuntu content 
+# Test Ubuntu content
+gn@gn-VirtualBox:~$ sudo oscap info /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 2>/dev/null || echo   
 gn@gn-VirtualBox:~$ # Check the security compliance guide installed
 gn@gn-VirtualBox:~$ sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_standard
 --results results.xml --report report.html /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 
 ```
-### CIS-CAT Lite Audit Installation 
+### [CIS-CAT Lite](https://learn.cisecurity.org/cis-cat-lite) Audit Installation 
+CIS-CAT Lite is an audit tool incorporated with CIS benchmark and is useful for manual hardening.
 ```bash
 #Install CIS-CAT dependency Java except jre/jdk 17
 gn@gn-VirtualBox:~$ sudo apt install -y openjdk-11-jdk && sudo java –version 
 gn@gn-VirtualBox:~$ mkdir -p ~/ciscat && cd ~/ciscat  # create and access cis-cat folder 
 #Unzip and extract into the openscap build folder
-gn@gn-VirtualBox:~/ciscat $ unzip ~/Downloads/'CIS-CAT Lite Assessor v4.55.0.zip' -d 						~/openscap/build/ 
+gn@gn-VirtualBox:~/ciscat $ unzip ~/Downloads/'CIS-CAT Lite Assessor v4.55.0.zip' -d ~/openscap/build/ 
 #Give execution permission and run
 gn@gn-VirtualBox:~/openscap/build $ chmod +x ./Assessor-CLI.sh && ./Assessor-CLI.sh 
 ```
-You can try out the `mcmcCoefPlot` function from the package in the interactive R console below:
-
+### [Lynis](https://github.com/CISOfy/Lynis) Audit Installation
+This is a deep scanning and audit tool that will be used to verify `True/False Positive or Negative`.
+```bash
+gn@gn-VirtualBox:~/openscap/build $ git clone https://github.com/CISOfy/lynis.git \
+      sudo ln -s /opt/lynis/lynis /usr/local/bin/lynis \
+      lynis --version #(Create symlink run from anywhere) 
+# Test run a scan
+gn@gn-VirtualBox:~/openscap/build $ sudo lynis audit system  
+```
 # RWmisc
 
 [![R build status](https://github.com/jayrobwilliams/RWmisc/workflows/R-CMD-check/badge.svg)](https://github.com/jayrobwilliams/RWmisc/actions)
