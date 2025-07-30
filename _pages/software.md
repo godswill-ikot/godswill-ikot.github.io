@@ -90,9 +90,18 @@ gn@gn-VirtualBox:~/openscap/build $ sudo lynis audit system
 ### Phase 2: OS Audit and Hardening tools installation on Windows_10_Enterprise
 #### Microsoft Security Compliance Toolkit 
 Since the researcher is using a virtual machine, there isa  need to install a compatible scripting environment, hence installing the latest `PowerShell 7 Installation`
-<pre> ```powershell 
-# Quick all-in-one Microsoft Security Compliance Toolkit (SCT) installer
+```powershell
+# Navigate to the root of C: drive
+Set-Location C:\
 
+# Check Winget version (ensure it is installed)
+winget --version
+
+# Install the latest PowerShell 7 using Winget (requires Admin rights)
+winget install --id Microsoft.Powershell --source winget
+```
+```powershell
+# Quick all-in-one Microsoft Security Compliance Toolkit (SCT) installer
 function Install-CompleteSCT {
     $SCTPath = "C:\SecurityCompliance"
     New-Item -Path $SCTPath -ItemType Directory -Force
@@ -130,7 +139,7 @@ function Install-CompleteSCT {
 
 # Run complete installation
 Install-CompleteSCT
-``` </pre>
+```
 
 
 I've collected convenience functions that I've written to address issues I frequently confront in my work into a personal R package called [RWmisc](https://CRAN.R-project.org/package=RWmisc). It includes functions for:
