@@ -165,8 +165,8 @@ sudo ln -s /opt/lynis/lynis /usr/local/bin/lynis
 lynis --version # Verify installation
 sudo lynis audit system # Test run system audit
 ```
-## Phase 2: OS Audit and Hardening tools installation on Windows_10_Enterprise
-### Microsoft Security Compliance Toolkit 
+### Phase 2: OS Audit and Hardening tools installation on Windows_10_Enterprise
+#### [Microsoft Security Compliance Toolkit](https://www.microsoft.com/en-us/download/details.aspx?id=55319) 
 Since the researcher is using a virtual machine, there isa  need to install a compatible scripting environment, hence installing the latest `PowerShell 7 Installation`
 ```powershell
 # Navigate to the root of C: drive
@@ -223,7 +223,20 @@ winget install --id Microsoft.OpenJDK.11 --source winget
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" +
             [System.Environment]::GetEnvironmentVariable("Path", "User") Java -version
 ```
-
+#### [CIS-CAT Lite](https://learn.cisecurity.org/cis-cat-lite) Audit Installation for Windows_10
+```powershell
+New-Item -ItemType Directory -Path "$env:USERPROFILE\Desktop\MSc" -Force # Create a folder MSc
+# Extract the CIS-CAT Lite zip file to the MSc folder
+Expand-Archive -Path "$env:USERPROFILE\Downloads\CIS-CAT Lite Assessor v4.54.1.zip" `
+               -DestinationPath "$env:USERPROFILE\Desktop\MSc" -Force
+Set-Location "$env:USERPROFILE\Desktop\MSc" # Navigate to CIS-CAT Assessor folder
+Get-ChildItem # Step 4: View folder contents
+Set-Location ".\CIS-CAT Lite Assessor v4.54.1\Assessor" #Enter the Assessor directory 
+# Step 6: Confirm the contents (.jar files, config folders, etc.)
+Get-ChildItem
+# To scan with CIS benchmark
+java -jar Assessor-CLI.jar -b "benchmarks\CIS_Microsoft_Windows_10_Enterprise_Benchmark_v4.0.0-xccdf.xml" -p "Level 1 (L1) - Corporate/Enterprise Environment (general use)" -html -txt
+```
 I've collected convenience functions that I've written to address issues I frequently confront in my work into a personal R package called [RWmisc](https://CRAN.R-project.org/package=RWmisc). It includes functions for:
 
 - Managing multiple different projections for cross-national spatial data
