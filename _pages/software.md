@@ -1,6 +1,6 @@
 ---
 permalink: /software/
-title: "Software OS scan, audit and hardening"
+title: "Software"
 gallery:
   - url: software/table.png
     image_path: software/table.png
@@ -18,9 +18,11 @@ header:
   og_image: "software/spatial_weighting.png"
 ---
 
-In the world of technology research, documentation of tools, applications, and software employed is fundamental to the completeness and reproducibility of any study. This study entails installing and configuring tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities. To understand the impact of these security operations, system performance metrics (memory usage, disk I/O, and CPU load) were tracked at different stages: pre-scan, during scan, and post-scan. Seeing the effort put into installation and ensuring consistent functionality, the subsequent sections give an account of their installation and operational procedures.
+In the world of technology research, documentation of tools, applications, and software employed is fundamental to the completeness and reproducibility of any study. 
+## OS scan, audit and hardening
+This study entails installing and configuring tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities. To understand the impact of these security operations, system performance metrics (memory usage, disk I/O, and CPU load) were tracked at different stages: pre-scan, during scan, and post-scan. Seeing the effort put into installation and ensuring consistent functionality, the subsequent sections give an account of their installation and operational procedures.
 
-# OpenSCAP installation on Ubuntu 20.04 desktop
+## OpenSCAP installation on Ubuntu 20.04 desktop
 
 [[OpenSCAP](https://www.open-scap.org/)]
 
