@@ -35,6 +35,8 @@ I am a developer of the [BayesPostEst](https://cran.r-project.org/package=BayesP
 To install the latest release on CRAN:
 
 ```bash
+Step 1. Update and install all dependencies for web download
+
 gn@gn-VirtualBox:~$ sudo apt update && sudo apt install curl  wget  git  vim –y 
 gn@gn-VirtualBox:~$ # Install every OpenSCAP dependencies 
 sudo apt install cmake build-essential pkg-config\ 
@@ -51,13 +53,14 @@ git clone https://github.com/OpenSCAP/openscap.git \
       cmake ../\  # generates build files 
       make -j$(nproc)  #  create the build directory and access it
 
-gn@gn-VirtualBox:~$ sudo make install (install every package containing OpenSCAPE) 
+gn@gn-VirtualBox:~$ sudo make install #install every package containing OpenSCAPE 
 gn@gn-VirtualBox:~$ # Find where OpenSCAP was installed \ 
       ~/openscap/build$ sudo find /usr/local -name "oscap" -type f 2>/dev/null 
 
-gn@gn-VirtualBox:~$ # Find directory \ 
+gn@gn-VirtualBox:~$ # Find directory \
       ~ /openscap/build$ find ~/openscap/build -name "oscap" -type f 2>/dev/null 
-gn@gn-VirtualBox:~$ sudo ln -s /home/gn/openscap/build/utils/oscap /usr/local/bin/oscap #Create a sysmlink 
+gn@gn-VirtualBox:~$ sudo ln -s /home/gn/openscap/build/utils/oscap /usr/local/bin/oscap #Create a sysmlink
+gn@gn-VirtualBox:~$ Oscap –version  # Check version 
 ```
 
 The latest [development version](https://github.com/ShanaScogin/BayesPostEst) on GitHub can be installed with:
