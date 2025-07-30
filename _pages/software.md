@@ -29,10 +29,8 @@ This study entails installing and configuring tools for comprehensive operating 
 The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles, compliance security guide and dev environment. Below is the following steps for the installation procedure.
 
 ```bash
-Step 1. Update and install all dependencies for web download
-
 gn@gn-VirtualBox:~$ sudo apt update && sudo apt install curl  wget  git  vim –y 
-gn@gn-VirtualBox:~$ # Install every OpenSCAP dependencies 
+gn@gn-VirtualBox:~$ # Install every OpenSCAP dependency 
 sudo apt install cmake build-essential pkg-config\ 
       libxml2-dev libxslt1-dev libpcre3-dev libcurl4-openssl-dev\ 
       librpm-dev libbz2-dev libxmlsec1-dev libglib2.0-dev\ 
@@ -57,11 +55,20 @@ gn@gn-VirtualBox:~$ sudo ln -s /home/gn/openscap/build/utils/oscap /usr/local/bi
 gn@gn-VirtualBox:~$ Oscap –version  # Check version 
 ```
 
-The latest [development version](https://github.com/ShanaScogin/BayesPostEst) on GitHub can be installed with:
+### CIS Benchmark and Security Compliance installation [development version](https://github.com/ShanaScogin/BayesPostEst) on GitHub can be installed with:
 
-```r
-library(remotes)
-install_github("ShanaScogin/BayesPostEst")
+```bash
+gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scape security guide compliance\
+      wget https://github.com/ComplianceAsCode/content/releases/download/0.1.76/scap-security-       guide-0.1.76.zip \ 
+      unzip scap-security-guide-0.1.76.zip \ 
+      sudo mkdir -p /usr/share/xml/scap/ssg/content/   \ 
+      sudo cp scap-security-guide-0.1.76/*.xml  *.xml /usr/share/xml/scap/ssg/content/ \
+      sudo ls -la /usr/share/xml/scap/ssg/content # Check what content is available \
+      sudo find /usr/share -name "ubuntu" | grep -i scap #Check Ubuntu- content \
+
+gn@gn-VirtualBox:~$ sudo oscap info /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 2>/dev/null || echo  # Test Ubuntu content 
+
+gn@gn-VirtualBox:~$ sudo oscap xccdf eval --profile 								xccdf_org.ssgproject.content_profile_standard --results results.xml --report 			report.html /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 
 ```
 
 You can try out the `mcmcCoefPlot` function from the package in the interactive R console below:
