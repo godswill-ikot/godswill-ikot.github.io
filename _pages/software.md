@@ -22,10 +22,8 @@ Software is a set of instructions, data, or programs used to operate computers a
 ### OS scan, audit and hardening
 This study entails installing and configuring tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities. The OpenSCAP, CIS-CAT Lite Assessor, and Lynis will be installed on an Ubuntu 20.04 workstation; the Microsoft Security Compliance Toolkit and CIS-CAT Lite Assessor will also be installed on Windows 10 Enterprise. System performance metrics (memory usage, disk I/O, and CPU load) will be tracked at stages(pre-scan, during scan, and post-scan) as security operation is conducted.
 
-### OpenSCAP installation on Ubuntu 20.04 desktop `[[OpenSCAP](https://www.open-scap.org/)]`
-
+### [OpenSCAP](https://www.open-scap.org/) installation on Ubuntu 20.04 desktop 
 The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles, compliance security guide and dev environment. Below is the following steps for the installation procedure.
-
 ```bash
 gn@gn-VirtualBox:~$ sudo apt update && sudo apt install curl  wget  git  vim –y 
 gn@gn-VirtualBox:~$ # Install every OpenSCAP dependency 
@@ -52,10 +50,8 @@ gn@gn-VirtualBox:~$ # Find directory \
 gn@gn-VirtualBox:~$ sudo ln -s /home/gn/openscap/build/utils/oscap /usr/local/bin/oscap #Create a sysmlink
 gn@gn-VirtualBox:~$ Oscap –version  # Check version 
 ```
-
-### CIS Benchmark and Security Compliance installation 
-`[CIS Compliance]`([https://github.com/ComplianceAsCode/content]) on GitHub can be installed with:
-
+### [CIS Compliance](https://github.com/ComplianceAsCode/content) Benchmark and Security Guide installation for OpenSCAP
+From github can be installed with:
 ```bash
 gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scape security guide compliance\
       wget https://github.com/ComplianceAsCode/content/releases/download/0.1.76/scap-security-guide-0.1.76.zip \ 
@@ -66,12 +62,20 @@ gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scape security guide comp
       sudo find /usr/share -name "ubuntu" | grep -i scap #Check Ubuntu- content \
 
 gn@gn-VirtualBox:~$ sudo oscap info /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 2>/dev/null || echo  # Test Ubuntu content 
-
+gn@gn-VirtualBox:~$ # Check the security compliance guide installed
 gn@gn-VirtualBox:~$ sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_standard
 --results results.xml --report report.html /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 
-
 ```
+### CIS-CAT Lite Audit Installation 
+```bash
+#Install CIS-CAT dependency **Java**
+gn@gn-VirtualBox:~$ sudo apt install -y openjdk-11-jdk && sudo java –version 
+gn@gn-VirtualBox:~$ mkdir -p ~/ciscat && cd ~/ciscat  # create and access cis-cat folder 
 
+gn@gn-VirtualBox:~/ciscat $ unzip ~/Downloads/'CIS-CAT Lite Assessor v4.55.0.zip' -d 						~/openscap/build/ 
+
+gn@gn-VirtualBox:~/openscap/build $ chmod +x ./Assessor-CLI.sh  &&  ./Assessor-CLI.sh 
+```
 You can try out the `mcmcCoefPlot` function from the package in the interactive R console below:
 
 # RWmisc
