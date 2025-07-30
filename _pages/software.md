@@ -68,13 +68,13 @@ gn@gn-VirtualBox:~$ sudo oscap xccdf eval --profile xccdf_org.ssgproject.content
 ```
 ### CIS-CAT Lite Audit Installation 
 ```bash
-#Install CIS-CAT dependency **Java**
+#Install CIS-CAT dependency Java except jre/jdk 17
 gn@gn-VirtualBox:~$ sudo apt install -y openjdk-11-jdk && sudo java –version 
 gn@gn-VirtualBox:~$ mkdir -p ~/ciscat && cd ~/ciscat  # create and access cis-cat folder 
-
+#Unzip and extract into the openscap build folder
 gn@gn-VirtualBox:~/ciscat $ unzip ~/Downloads/'CIS-CAT Lite Assessor v4.55.0.zip' -d 						~/openscap/build/ 
-
-gn@gn-VirtualBox:~/openscap/build $ chmod +x ./Assessor-CLI.sh  &&  ./Assessor-CLI.sh 
+#Give execution permission and run
+gn@gn-VirtualBox:~/openscap/build $ chmod +x ./Assessor-CLI.sh && ./Assessor-CLI.sh 
 ```
 You can try out the `mcmcCoefPlot` function from the package in the interactive R console below:
 
