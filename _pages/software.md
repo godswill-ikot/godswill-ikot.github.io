@@ -58,16 +58,17 @@ gn@gn-VirtualBox:~$ Oscap –version  # Check version
 
 ```bash
 gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scape security guide compliance\
-      wget https://github.com/ComplianceAsCode/content/releases/download/0.1.76/scap-security-       guide-0.1.76.zip \ 
+      wget https://github.com/ComplianceAsCode/content/releases/download/0.1.76/scap-security-guide-0.1.76.zip \ 
       unzip scap-security-guide-0.1.76.zip \ 
-      sudo mkdir -p /usr/share/xml/scap/ssg/content/   \ 
+      sudo mkdir -p /usr/share/xml/scap/ssg/content/ \ 
       sudo cp scap-security-guide-0.1.76/*.xml  *.xml /usr/share/xml/scap/ssg/content/ \
       sudo ls -la /usr/share/xml/scap/ssg/content # Check what content is available \
       sudo find /usr/share -name "ubuntu" | grep -i scap #Check Ubuntu- content \
 
 gn@gn-VirtualBox:~$ sudo oscap info /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 2>/dev/null || echo  # Test Ubuntu content 
 
-gn@gn-VirtualBox:~$ sudo oscap xccdf eval --profile 								xccdf_org.ssgproject.content_profile_standard --results results.xml --report 			report.html /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 
+gn@gn-VirtualBox:~$ sudo oscap xccdf eval --profile 								xccdf_org.ssgproject.content_profile_standard --results results.xml --report report.html /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 
+
 ```
 
 You can try out the `mcmcCoefPlot` function from the package in the interactive R console below:
