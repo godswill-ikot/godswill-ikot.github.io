@@ -18,13 +18,11 @@ header:
   og_image: "software/spatial_weighting.png"
 ---
 
-A research paper or thesis can never be complete in the field of education and technology without explaining and showing the tool, application or softwares used in the study.
-Part of my research agenda involves installing tools used to study operating system vulnerabilities through scanning, auditing and hardening while also monitoring the system performance metrics such as memory usage, disc i/o, and RAM usage for before, during and after scans. 
-Below is the installation and usage process, as a good deal of time was spent tackling the installation and usage process for recurring use of code.
+In the world of technology research, documentation of tools, applications, and software employed is fundamental to the completeness and reproducibility of any study. Central to this research is installing and configuring special tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities. To understand the impact of these security operations, system performance metrics (memory usage, disk I/O, and CPU load) were tracked at different stages: pre-scan, during scan, and post-scan. Cognising the effort put in solving challenges to the initial setup and ensuring consistent, recurring functionality of these tools, the subsequent sections provide a detailed account of their installation and operational procedures.
 
 # OpenSCAP installation on Ubuntu 20.04 desktop
 
-[![R build status](https://github.com/ShanaScogin/BayesPostEst/workflows/R-CMD-check/badge.svg)](https://github.com/ShanaScogin/BayesPostEst/actions)
+[![OpenSCAP](https://www.open-scap.org/)](https://github.com/ShanaScogin/BayesPostEst/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/BayesPostEst)](https://CRAN.R-project.org/package=BayesPostEst)
 [![Codecov test coverage](https://codecov.io/gh/ShanaScogin/BayesPostEst/branch/master/graph/badge.svg)](https://codecov.io/gh/ShanaScogin/BayesPostEst?branch=master)
 
@@ -35,7 +33,7 @@ I am a developer of the [BayesPostEst](https://cran.r-project.org/package=BayesP
 To install the latest release on CRAN:
 
 ```bash
-**Step 1. Update and install all dependencies for web download**
+Step 1. Update and install all dependencies for web download
 
 gn@gn-VirtualBox:~$ sudo apt update && sudo apt install curl  wget  git  vim –y 
 gn@gn-VirtualBox:~$ # Install every OpenSCAP dependencies 
