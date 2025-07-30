@@ -27,9 +27,6 @@ This study entails installing and configuring tools for comprehensive operating 
 [[OpenSCAP](https://www.open-scap.org/)]
 
 The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles, compliance security guide and dev environment. Below is the following steps for the installation procedure.
-
-To install the latest release on CRAN:
-
 ```bash
 Step 1. Update and install all dependencies for web download
 
