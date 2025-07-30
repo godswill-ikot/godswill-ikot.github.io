@@ -20,9 +20,10 @@ header:
 
 Software is a set of instructions, data, or programs used to operate computers and execute specific tasks. In the world of technology research, documentation of tools, applications, and software employed is fundamental to the completeness and reproducibility of any study. 
 ### OS scan, audit and hardening
-This study entails installing and configuring tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities. The OpenSCAP, CIS-CAT Lite Assessor, and Lynis will be installed on an Ubuntu 20.04 workstation; the Microsoft Security Compliance Toolkit and CIS-CAT Lite Assessor will also be installed on Windows 10 Enterprise. System performance metrics (memory usage, disk I/O, and CPU load) will be tracked at stages(pre-scan, during scan, and post-scan) as security operation is conducted.
+This study entails installing and configuring tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities and will be in two (2) part. The 1st is OpenSCAP, CIS-CAT Lite Assessor, and Lynis installed on Ubuntu 20.04 workstation; the 2nd Microsoft Security Compliance Toolkit and CIS-CAT Lite Assessor installed on Windows_10_Enterprise. System performance metrics (memory usage, disk I/O, and CPU load) will be tracked at stages (pre-scan, during scan, and post-scan) as security operation is conducted.
 
-### [OpenSCAP](https://www.open-scap.org/) Installation on Ubuntu 20.04 desktop 
+### Phase 1: OS Audit and Hardening tools installation on Ubuntu 20.04
+#### [OpenSCAP](https://www.open-scap.org/) Installation 
 The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles, compliance security guide and dev environment. Below is the following steps for the installation procedure.
 ```bash
 gn@gn-VirtualBox:~$ sudo apt update && sudo apt install curl  wget  git  vim –y 
@@ -50,7 +51,7 @@ gn@gn-VirtualBox:~$ # Find directory \
 gn@gn-VirtualBox:~$ sudo ln -s /home/gn/openscap/build/utils/oscap /usr/local/bin/oscap #Create a sysmlink
 gn@gn-VirtualBox:~$ Oscap –version  # Check version 
 ```
-### [CIS Compliance](https://github.com/ComplianceAsCode/content) Benchmark and Security Guide installation for OpenSCAP
+#### [CIS Compliance](https://github.com/ComplianceAsCode/content) Benchmark and Security Guide installation for OpenSCAP
 After installing OpenSCAP, also install its security profile from GitHub with:
 ```bash
 gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scap security guide compliance\
@@ -66,7 +67,7 @@ gn@gn-VirtualBox:~$ # Check the security compliance guide installed
 gn@gn-VirtualBox:~$ sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_standard
 --results results.xml --report report.html /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml 
 ```
-### [CIS-CAT Lite](https://learn.cisecurity.org/cis-cat-lite) Audit Installation 
+#### [CIS-CAT Lite](https://learn.cisecurity.org/cis-cat-lite) Audit Installation 
 CIS-CAT Lite is an audit tool incorporated with CIS benchmark and is useful for manual hardening.
 ```bash
 #Install CIS-CAT dependency Java except jre/jdk 17
@@ -77,7 +78,7 @@ gn@gn-VirtualBox:~/ciscat $ unzip ~/Downloads/'CIS-CAT Lite Assessor v4.55.0.zip
 #Give execution permission and run
 gn@gn-VirtualBox:~/openscap/build $ chmod +x ./Assessor-CLI.sh && ./Assessor-CLI.sh 
 ```
-### [Lynis](https://github.com/CISOfy/Lynis) Audit Installation
+#### [Lynis](https://github.com/CISOfy/Lynis) Audit Installation
 This is a deep scanning and audit tool that will be used to verify `True/False Positive or Negative`.
 ```bash
 gn@gn-VirtualBox:~/openscap/build $ git clone https://github.com/CISOfy/lynis.git \
@@ -86,11 +87,51 @@ gn@gn-VirtualBox:~/openscap/build $ git clone https://github.com/CISOfy/lynis.gi
 # Test run a scan
 gn@gn-VirtualBox:~/openscap/build $ sudo lynis audit system  
 ```
-# RWmisc
+### Phase 2: OS Audit and Hardening tools installation on Windows_10_Enterprise
+#### Microsoft Security Compliance Toolkit 
+Since the researcher is using a virtual machine, there isa  need to install a compatible scripting environment, hence installing the latest `PowerShell 7 Installation`
+<pre> ```powershell 
+# Quick all-in-one Microsoft Security Compliance Toolkit (SCT) installer
 
-[![R build status](https://github.com/jayrobwilliams/RWmisc/workflows/R-CMD-check/badge.svg)](https://github.com/jayrobwilliams/RWmisc/actions)
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/RWmisc)](https://CRAN.R-project.org/package=RWmisc)
-[![codecov](https://codecov.io/gh/jayrobwilliams/RWmisc/branch/master/graph/badge.svg)](https://codecov.io/gh/jayrobwilliams/RWmisc)
+function Install-CompleteSCT {
+    $SCTPath = "C:\SecurityCompliance"
+    New-Item -Path $SCTPath -ItemType Directory -Force
+
+    Write-Host "📥 Downloading complete Microsoft SCT suite..." -ForegroundColor Cyan
+
+    # All major SCT components
+    $downloads = @{
+        "Windows10-21H2"   = "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/Windows%2010%20Version%2021H2%20Security%20Baseline.zip"
+        "Windows10-2004"   = "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/Windows%2010%20Version%202004%20and%20Windows%20Server%20Version%202004%20Security%20Baseline.zip"
+        "PolicyAnalyzer"   = "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/PolicyAnalyzer.zip"
+        "EdgeBaseline"     = "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/Microsoft%20Edge%20Security%20Baseline.zip"
+    }
+
+    foreach ($name in $downloads.Keys) {
+        $url = $downloads[$name]
+        $zipFile = "$SCTPath\$name.zip"
+        $extractPath = "$SCTPath\$name"
+
+        Write-Host "🔽 Downloading $name..." -ForegroundColor Yellow
+        Invoke-WebRequest -Uri $url -OutFile $zipFile -UseBasicParsing
+
+        Write-Host "📦 Extracting $name..." -ForegroundColor Yellow
+        Expand-Archive -Path $zipFile -DestinationPath $extractPath -Force
+        Remove-Item $zipFile -Force
+
+        Write-Host "✅ $name installed" -ForegroundColor Green
+    }
+
+    Write-Host "`n🎉 Complete SCT installation finished!" -ForegroundColor Green
+    Write-Host "📁 Location: $SCTPath" -ForegroundColor Cyan
+
+    Start-Process explorer.exe -ArgumentList $SCTPath
+}
+
+# Run complete installation
+Install-CompleteSCT
+``` </pre>
+
 
 I've collected convenience functions that I've written to address issues I frequently confront in my work into a personal R package called [RWmisc](https://CRAN.R-project.org/package=RWmisc). It includes functions for:
 
