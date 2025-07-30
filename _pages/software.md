@@ -34,7 +34,7 @@ I am a developer of the [BayesPostEst](https://cran.r-project.org/package=BayesP
 
 To install the latest release on CRAN:
 
-```bash r
+```bash
 gn@gn-VirtualBox:~$ sudo apt update && sudo apt install curl  wget  git  vim –y 
 gn@gn-VirtualBox:~$ # Install every OpenSCAP dependencies 
 sudo apt install cmake build-essential pkg-config\ 
