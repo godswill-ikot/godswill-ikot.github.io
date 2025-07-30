@@ -26,30 +26,75 @@ This study entails installing and configuring tools for comprehensive operating 
 #### [OpenSCAP](https://www.open-scap.org/) Installation 
 The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles, compliance security guide and dev environment. Below is the following steps for the installation procedure.
 ```bash
-gn@gn-VirtualBox:~$ sudo apt update && sudo apt install curl  wget  git  vim –y 
-gn@gn-VirtualBox:~$ # Install every OpenSCAP dependency 
-sudo apt install cmake build-essential pkg-config\ 
-      libxml2-dev libxslt1-dev libpcre3-dev libcurl4-openssl-dev\ 
-      librpm-dev libbz2-dev libxmlsec1-dev libglib2.0-dev\ 
-      libacl1-dev libselinux1-dev libdbus-1-dev libpopt-dev\ 
-      python3-dev python3-pytest doxygen swig
+# OpenSCAP Installation Guide
 
-gn@gn-VirtualBox:~$ # Extract and Install OpenSCAP using Git \ 
-git clone https://github.com/OpenSCAP/openscap.git \ 
-      cd openscap \ 
-      mkdir build \ 
-      cd build \ 
-      cmake ../\  # generates build files 
-      make -j$(nproc)  #  create the build directory and access it
+## Update system and install basic tools
 
-gn@gn-VirtualBox:~$ sudo make install #install every package containing OpenSCAPE 
-gn@gn-VirtualBox:~$ # Find where OpenSCAP was installed \ 
-      ~/openscap/build$ sudo find /usr/local -name "oscap" -type f 2>/dev/null 
+sudo apt update && sudo apt install curl wget git vim -y
+```
+```bash
+## Install OpenSCAP dependencies
 
-gn@gn-VirtualBox:~$ # Find directory \
-      ~ /openscap/build$ find ~/openscap/build -name "oscap" -type f 2>/dev/null 
-gn@gn-VirtualBox:~$ sudo ln -s /home/gn/openscap/build/utils/oscap /usr/local/bin/oscap #Create a sysmlink
-gn@gn-VirtualBox:~$ Oscap –version  # Check version 
+sudo apt install cmake build-essential pkg-config \
+    libxml2-dev libxslt1-dev libpcre3-dev libcurl4-openssl-dev \
+    librpm-dev libbz2-dev libxmlsec1-dev libglib2.0-dev \
+    libacl1-dev libselinux1-dev libdbus-1-dev libpopt-dev \
+    python3-dev python3-pytest doxygen swig -y
+```
+
+## Clone and build OpenSCAP from source
+```bash
+# Clone the repository
+git clone https://github.com/OpenSCAP/openscap.git
+
+# Navigate to the project directory
+cd openscap
+
+# Create and enter build directory
+mkdir build
+cd build
+
+# Generate build files with CMake
+cmake ../
+
+# Compile using all available CPU cores
+make -j$(nproc)
+```
+
+## Install OpenSCAP
+```bash
+sudo make install
+```
+
+## Locate and create symlink for oscap binary
+```bash
+# Find where OpenSCAP was installed (system-wide)
+sudo find /usr/local -name "oscap" -type f 2>/dev/null
+
+# Find oscap binary in build directory
+find ~/openscap/build -name "oscap" -type f 2>/dev/null
+
+# Create symlink to make oscap available system-wide
+sudo ln -s /home/$USER/openscap/build/utils/oscap /usr/local/bin/oscap
+
+# Alternative: Add to PATH instead of creating symlink
+# echo 'export PATH="$HOME/openscap/build/utils:$PATH"' >> ~/.bashrc
+# source ~/.bashrc
+```
+
+## Verify installation
+```bash
+oscap --version
+```
+
+## Additional setup (optional)
+```bash
+# Update library cache
+sudo ldconfig
+
+# Verify OpenSCAP can find its libraries
+ldd /usr/local/bin/oscap
+``` 
 ```
 #### [CIS Compliance](https://github.com/ComplianceAsCode/content) Benchmark and Security Guide installation for OpenSCAP
 After installing OpenSCAP, also install its security profile from GitHub with:
@@ -140,7 +185,14 @@ function Install-CompleteSCT {
 # Run complete installation
 Install-CompleteSCT
 ```
+```powershell
+# Install OpenJDK 11 (required for running CIS-CAT Lite Assessor)
+winget install --id Microsoft.OpenJDK.11 --source winget
 
+# Refresh the environment variable for the current session
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" +
+            [System.Environment]::GetEnvironmentVariable("Path", "User") Java -version
+```
 
 I've collected convenience functions that I've written to address issues I frequently confront in my work into a personal R package called [RWmisc](https://CRAN.R-project.org/package=RWmisc). It includes functions for:
 
