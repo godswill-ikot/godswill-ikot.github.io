@@ -219,7 +219,6 @@ Install-CompleteSCT
 ```powershell
 # Install OpenJDK 11 (required for running CIS-CAT Lite Assessor)
 winget install --id Microsoft.OpenJDK.11 --source winget
-
 # Refresh the environment variable for the current session
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" +
             [System.Environment]::GetEnvironmentVariable("Path", "User") Java -version
