@@ -38,10 +38,10 @@ To install the latest release on CRAN:
 gn@gn-VirtualBox:~$ sudo apt update && sudo apt install curl  wget  git  vim –y 
 gn@gn-VirtualBox:~$ # Install every OpenSCAP dependencies 
 sudo apt install cmake build-essential pkg-config\ 
-    			libxml2-dev libxslt1-dev libpcre3-dev libcurl4-openssl-dev\ 
-     			librpm-dev libbz2-dev libxmlsec1-dev libglib2.0-dev\ 
-    			libacl1-dev libselinux1-dev libdbus-1-dev libpopt-dev\ 
-    			python3-dev python3-pytest doxygen swig 
+        libxml2-dev libxslt1-dev libpcre3-dev libcurl4-openssl-dev\ 
+     		librpm-dev libbz2-dev libxmlsec1-dev libglib2.0-dev\ 
+    		libacl1-dev libselinux1-dev libdbus-1-dev libpopt-dev\ 
+    		python3-dev python3-pytest doxygen swig 
 ```
 
 The latest [development version](https://github.com/ShanaScogin/BayesPostEst) on GitHub can be installed with:
