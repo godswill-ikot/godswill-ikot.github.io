@@ -22,7 +22,7 @@ Software is a set of instructions, data, or programs used to operate computers a
 ### OS scan, audit and hardening
 This study entails installing and configuring tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities. The OpenSCAP, CIS-CAT Lite Assessor, and Lynis will be installed on an Ubuntu 20.04 workstation; the Microsoft Security Compliance Toolkit and CIS-CAT Lite Assessor will also be installed on Windows 10 Enterprise. System performance metrics (memory usage, disk I/O, and CPU load) will be tracked at stages(pre-scan, during scan, and post-scan) as security operation is conducted.
 
-### OpenSCAP installation on Ubuntu 20.04 desktop [[OpenSCAP](https://www.open-scap.org/)]
+### OpenSCAP installation on Ubuntu 20.04 desktop `[[OpenSCAP](https://www.open-scap.org/)]`
 
 The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles, compliance security guide and dev environment. Below is the following steps for the installation procedure.
 
@@ -54,7 +54,7 @@ gn@gn-VirtualBox:~$ Oscap –version  # Check version
 ```
 
 ### CIS Benchmark and Security Compliance installation 
-`[CIS Compliance]([https://github.com/ComplianceAsCode/content])` on GitHub can be installed with:
+`[CIS Compliance]`([https://github.com/ComplianceAsCode/content]) on GitHub can be installed with:
 
 ```bash
 gn@gn-VirtualBox:~$ # Install latest CIS benchmark and scape security guide compliance\
