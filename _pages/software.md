@@ -41,7 +41,23 @@ sudo apt install cmake build-essential pkg-config\
       libxml2-dev libxslt1-dev libpcre3-dev libcurl4-openssl-dev\ 
       librpm-dev libbz2-dev libxmlsec1-dev libglib2.0-dev\ 
       libacl1-dev libselinux1-dev libdbus-1-dev libpopt-dev\ 
-      python3-dev python3-pytest doxygen swig 
+      python3-dev python3-pytest doxygen swig
+
+gn@gn-VirtualBox:~$ # Extract and Install OpenSCAP using Git \ 
+git clone https://github.com/OpenSCAP/openscap.git \ 
+      cd openscap \ 
+      mkdir build \ 
+      cd build \ 
+      cmake ../\  # generates build files 
+      make -j$(nproc)  #  create the build directory and access it
+
+gn@gn-VirtualBox:~$ sudo make install (install every package containing OpenSCAPE) 
+gn@gn-VirtualBox:~$ # Find where OpenSCAP was installed \ 
+      ~/openscap/build$ sudo find /usr/local -name "oscap" -type f 2>/dev/null 
+
+gn@gn-VirtualBox:~$ # Find directory \ 
+      ~ /openscap/build$ find ~/openscap/build -name "oscap" -type f 2>/dev/null 
+gn@gn-VirtualBox:~$ sudo ln -s /home/gn/openscap/build/utils/oscap /usr/local/bin/oscap #Create a sysmlink 
 ```
 
 The latest [development version](https://github.com/ShanaScogin/BayesPostEst) on GitHub can be installed with:
