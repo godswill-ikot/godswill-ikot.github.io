@@ -1,6 +1,6 @@
 ---
 permalink: /software/
-title: "Software"
+title: "Software installation for operating system scan, audit and hardening"
 gallery:
   - url: software/table.png
     image_path: software/table.png
@@ -18,9 +18,11 @@ header:
   og_image: "software/spatial_weighting.png"
 ---
 
-As one of my two research agendas involves improving the tools we use to study peace and conflict, a good deal of my time is spent using statistical software. Below you'll find software for working with estimates from Bayesian models and some code that I've written to save time on tasks that I find myself doing over and over again.
+A research paper or thesis can never be complete in the field of education and technology without explaining and showing the tool, application or softwares used in the study.
+Part of my research agenda involves installing tools used to study operating system vulnerabilities through scanning, auditing and hardening while also monitoring the system performance metrics such as memory usage, disc i/o, and RAM usage for before, during and after scans. 
+Below is the installation and usage process, as a good deal of time was spent tackling the installation and usage process for recurring use of code.
 
-# BayesPostEst
+# OpenSCAP installation on Ubuntu 20.04 desktop
 
 [![R build status](https://github.com/ShanaScogin/BayesPostEst/workflows/R-CMD-check/badge.svg)](https://github.com/ShanaScogin/BayesPostEst/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/BayesPostEst)](https://CRAN.R-project.org/package=BayesPostEst)
@@ -33,7 +35,21 @@ I am a developer of the [BayesPostEst](https://cran.r-project.org/package=BayesP
 To install the latest release on CRAN:
 
 ```r
-install.packages("BayesPostEst")
+gn@gn-VirtualBox:~$ sudo apt update && sudo apt install curl  wget  git  vim –y 
+
+ 
+
+gn@gn-VirtualBox:~$ # Install every OpenSCAP dependencies 
+
+sudo apt install cmake build-essential pkg-config \ 
+
+    			libxml2-dev libxslt1-dev libpcre3-dev libcurl4-openssl-dev \ 
+
+  			librpm-dev libbz2-dev libxmlsec1-dev libglib2.0-dev \ 
+
+    			libacl1-dev libselinux1-dev libdbus-1-dev libpopt-dev \ 
+
+  			python3-dev python3-pytest doxygen swig 
 ```
 
 The latest [development version](https://github.com/ShanaScogin/BayesPostEst) on GitHub can be installed with:
