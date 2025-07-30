@@ -26,7 +26,7 @@ This study entails installing and configuring tools for comprehensive operating 
 
 [[OpenSCAP](https://www.open-scap.org/)]
 
-I am a developer of the [BayesPostEst](https://cran.r-project.org/package=BayesPostEst) R package for generating postestimation quantities of interest from Bayesian models. The package contains functions for producing regression tables, plotting predicted probabilities, calculating first differences, creating coefficient plots, and many other quantities. You can view the [Journal of Open Source Software](https://joss.theoj.org/) article for the package [here](https://doi.org/10.21105/joss.01722).
+The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles and compliance security guide and dev environment. Below are the following steps for the installation procedure.
 
 {% include gallery %}
 
