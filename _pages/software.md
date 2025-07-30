@@ -2,13 +2,10 @@
 permalink: /software/
 title: "Software"
 gallery:
-  
 ---
-
 Software is a set of instructions, data, or programs used to operate computers and execute specific tasks. In the world of technology research, documentation of tools, applications, and software employed is fundamental to the completeness and reproducibility of any study. 
 ### OS scan, audit and hardening
 This study entails installing and configuring tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities and will be in two (2) part. The 1st is OpenSCAP, CIS-CAT Lite Assessor, and Lynis installed on Ubuntu 20.04 workstation; the 2nd Microsoft Security Compliance Toolkit and CIS-CAT Lite Assessor installed on Windows_10_Enterprise. System performance metrics (memory usage, disk I/O, and CPU load) will be tracked at stages (pre-scan, during scan, and post-scan) as security operation is conducted.
-
 ### Phase 1: OS Audit and Hardening tools installation on Ubuntu 20.04
 #### [OpenSCAP](https://www.open-scap.org/) Installation 
 The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles, compliance security guide and dev environment. Below is the following steps for the installation procedure.
