@@ -1,6 +1,6 @@
 ---
-permalink: /software/
-title: "Software"
+permalink: /softwares/
+title: "Softwares"
 gallery:
 ---
 Software is a set of instructions, data, or programs used to operate computers and execute specific tasks. In the world of technology research, documentation of tools, applications, and software employed is fundamental to the completeness and reproducibility of any study. 
@@ -22,15 +22,11 @@ sudo apt install cmake build-essential pkg-config \
 ```bash
 # Clone and build OpenSCAP from the repository
 git clone https://github.com/OpenSCAP/openscap.git
-# Navigate to the project directory
-cd openscap
-# Create and enter build directory
-mkdir build
+cd openscap # Navigate to the project directory
+mkdir build # Create and enter build directory
 cd build
-# Generate build files with CMake
-cmake ../
-# Compile using all available CPU cores
-make -j$(nproc)
+cmake ../ # Generate build files with CMake
+make -j$(nproc) # Compile using all available CPU cores
 sudo make install # Install Openscap
 ```
 #### Locate and create symlink for oscap binary
