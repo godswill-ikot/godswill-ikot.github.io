@@ -1,5 +1,5 @@
 ---
-permalink: /software/
+permalink: /softwares/
 title: "Softwares"
 gallery:
 ---
