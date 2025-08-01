@@ -123,7 +123,7 @@ Use: bitnami@debian:~$  **sudo reboot now**
 
 After reboot use: bitnami@debian:~$ **ip a** 	to see if IP Address is set. 
 
-<img src="/images/posts/nest-map/opcst.PNG" style="display: block; margin: auto;"/>              <!--more-->
+<img src="/images/posts/nest-map/opcst.PNG" style="display: block; margin: auto;"/>              
 
 ### Machines Functionality
 This is the interaction and communication between all three (3) machines
