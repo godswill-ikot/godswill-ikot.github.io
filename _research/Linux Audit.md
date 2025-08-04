@@ -1,7 +1,7 @@
 ---
 title: "Linux Audit Tool Installation"
 layout: single-portfolio
-excerpt: "<img src='/images/research/epr.png' alt=''>"
+excerpt: "<img src='images/research/Linux.png' alt=''>"
 collection: research
 order_number: 10
 header: 
@@ -131,7 +131,7 @@ sudo lynis audit system # Test run system audit
 ### Script for scanning using OpenSCAP, CIS-CAT, and Lynis
 This section gives a step-by-step guide on how to create a sript on Linux and use the script provided below for scanning and auditing with system information for befor, during and after scan
 #### Step 1: Create a bash script on Linux using
-```bah
+```bash
 # 1. Open terminal (Ctrl+Alt+T)
 # 2. Create a new script file
 nano my_script.sh
