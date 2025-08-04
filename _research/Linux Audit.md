@@ -1,11 +1,11 @@
 ---
 title: "Linux Audit Tool Installation"
 layout: single-portfolio
-excerpt: "<img src='images/research/Linux (1).png' alt=''>"
+excerpt: "<img src='images/research/linux.png' alt=''>"
 collection: research
 order_number: 10
 header: 
-  og_image: "images/research/Linux (1).png"
+  og_image: "research/linux.png"
 ---
 The ever expanding threat and breach on organizations has made operating systems auditing and hardening of great importance; Hence, i have give a step-wise direction on installing industry standard open-source tool for auditing and hardening.
 #### [OpenSCAP](https://www.open-scap.org/) Installation 
