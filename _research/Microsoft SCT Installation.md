@@ -1,7 +1,7 @@
 ---
 title: "Microsoft SCT Installation"
 layout: single-portfolio
-excerpt: "<img src='/images/research/map.png' alt=''>"
+excerpt: <img width="940" height="400" alt="image" src="https://github.com/user-attachments/assets/99440c02-c4ae-49d5-a8ad-e685efd48e66" />
 collection: research
 order_number: 20
 header: 
