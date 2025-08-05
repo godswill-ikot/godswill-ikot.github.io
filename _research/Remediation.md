@@ -11,7 +11,7 @@ header:
 In this thesis the researcher has given a proper "REMEDIATION" to vulnerabilities found during the scans in the form of code with respect to individual vulnereabilities.
 
 Remediation is divided into 2 parts, with the first 1st being Full Remediation and the second 2nd is Selective Remediation.
-#### Option A: Run Full Generated Script using OpenSCAP (CAUTION)
+#### Option A: Full Generated Script using OpenSCAP (CAUTION) for Ubuntu 20.04
 ```bash
 # BACKUP FIRST - This will make system-wide changes
 # Create restoration point
@@ -36,7 +36,7 @@ chmod +x ~/openscap-results/baseline/cis-l*-workstation-remediation.sh
 # Run the full remediation
 sudo ./cis-l1-workstation-remediation.sh 2>&1 | tee remediation-log.txt
 ```
-#### Option B: Run Selective Remediation using recommendations from CIS-CAT (RECOMMENDED)
+#### Option B: Selective Remediation using recommendations from CIS-CAT (**RECOMMENDED**) for for Ubuntu 20.04
 ```bash
 # Extract specific remediation commands and run them individually
 
@@ -65,7 +65,7 @@ WARNING: Unauthorized access to this system is prohibited.
 All connections are monitored and recorded.
 EOF
 ```
-Verify Remediation Results using Lynis, OpenSCAP and CIS-CAT
+Verify Remediation Results using Lynis, OpenSCAP and CIS-CAT for Ubuntu 20.04
 ```bash
 Use LYNIS for deep scan
 sudo lynis audit system # Test run system audit
@@ -81,7 +81,7 @@ oscap xccdf eval \
 
 # Compare before and after
 ```
-Rollback Procedure (If Needed)
+Rollback Procedure (If Needed) for Ubuntu 20.04
 ```bash
 # Create rollback script
 cat > rollback-remediation.sh << 'EOF'
@@ -101,7 +101,7 @@ EOF
 
 chmod +x rollback-remediation.sh
 ```
-Monitoring and Maintenance
+Monitoring and Maintenance for Ubuntu 20.04
 ```bash
 # Set up regular compliance checking
 cat > /etc/cron.weekly/openscap-check << 'EOF'
