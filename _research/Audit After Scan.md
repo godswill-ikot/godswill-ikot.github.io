@@ -1,7 +1,7 @@
 ---
 title: "Audit After Scan"
 layout: single-portfolio
-excerpt: "<img src='/images/research/Agreement-Strength.png' alt=''>"
+excerpt: <img width="1000" height="750" alt="image" src="https://github.com/user-attachments/assets/dcbf2247-10ba-48cc-a4d3-f0c846e6934c" />
 collection: research
 order_number: 30
 header: 
