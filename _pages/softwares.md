@@ -250,14 +250,14 @@ oscap xccdf eval \
 ```
 #### Scanning and Assessment using CIS-CAT on Ubuntu 20.04
 ```bash
-chmod +x Assessor.sh # Give permission to script
-sudo ./Assessor.sh # Run script
-            # OR
 # List available profiles first
 java -jar Assessor-CLI.jar \
     -b "benchmarks/CIS_Ubuntu_Linux_20.04_LTS_Benchmark_v3.0.0-xccdf.xml" \
     -D session.type=local \
     -p
+chmod +x Assessor.sh # Give permission to script
+sudo ./Assessor.sh # Run script
+            # OR
 # Run Level 1 Workstation assessment
 sudo java -jar Assessor-CLI.jar \
     -D session.type=local \
