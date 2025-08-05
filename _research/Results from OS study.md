@@ -1,7 +1,7 @@
 ---
 title: "Results"
 layout: single-portfolio
-excerpt: <img width="1124" height="613" alt="image" src="https://github.com/user-attachments/assets/4aecb591-4a91-4531-aed2-d5866c863344" />
+excerpt: <img width="1124" height="613" alt="image" src="https://github.com/user-attachments/assets/203d4465-3470-44a4-9564-2797a6dc99f6" />
 collection: research
 order_number: 10
 header: 
