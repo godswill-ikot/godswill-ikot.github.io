@@ -5,7 +5,7 @@ gallery:
 ---
 Software is a set of instructions, data, or programs used to operate computers and execute specific tasks. In the world of technology research, documentation of tools, applications, and software employed is fundamental to the completeness and reproducibility of any study. 
 ### OS scan, audit and hardening
-This study entails installing and configuring tools for comprehensive operating system vulnerability assessments, entailing scanning, auditing, and hardening activities and will be in two (2) part. The 1st is OpenSCAP, CIS-CAT Lite Assessor, and Lynis installed on Ubuntu 20.04 workstation; the 2nd Microsoft Security Compliance Toolkit and CIS-CAT Lite Assessor installed on Windows_10_Enterprise. System performance metrics (memory usage, disk I/O, and CPU load) will be tracked at stages (pre-scan, during scan, and post-scan) as security operation is conducted.
+This study entails installing, configuring, scanning, auditing and hardening for two (2) popular 'Operating Systems' which will be in four (4) parts. The 1st is the installation of OpenSCAP, CIS-CAT Lite Assessor, and Lynis on Ubuntu 20.04 workstation; the 2nd is the installation of Microsoft Security Compliance Toolkit and CIS-CAT Lite Assessor on Windows 10 Enterprise; the 3rd is the scanning and auditing of both OS's; while the 4th is remediation/hardening of discovered vulnerabilities after the scan while simultaneously gathering system performance metrics (memory usage, disk I/O, and CPU load) for (pre-scan, during scan, and post-scan) as security operation is conducted.
 ### Phase 1: OS Audit and Hardening tools installation on Ubuntu 20.04
 #### [OpenSCAP](https://www.open-scap.org/) Installation 
 The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles, compliance security guide and dev environment. Below is the following steps for the installation procedure.
@@ -145,7 +145,7 @@ sudo ln -s /opt/lynis/lynis /usr/local/bin/lynis
 lynis --version # Verify installation
 sudo lynis audit system # Test run system audit
 ```
-### Phase 2: OS Audit and Hardening tools installation on Windows_10_Enterprise
+### Phase 2: Microsoft SCT and CIS-CAT installation on Windows_10_Enterprise
 #### [Microsoft Security Compliance Toolkit](https://www.microsoft.com/en-us/download/details.aspx?id=55319) 
 Since the researcher is using a virtual machine, there isa  need to install a compatible scripting environment, hence installing the latest `PowerShell 7 Installation`
 ```powershell
@@ -217,7 +217,180 @@ Get-ChildItem
 # To scan with CIS benchmark
 java -jar Assessor-CLI.jar -b "benchmarks\CIS_Microsoft_Windows_10_Enterprise_Benchmark_v4.0.0-xccdf.xml" -p "Level 1 (L1) - Corporate/Enterprise Environment (general use)" -html -txt
 ```
+### Phase 3: Scanning and Baseline Assessment of both OSs 
+#### Scanning and assessment on Ubuntu 20.04
+```bash
+# Create timestamped directories for better organisation
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+mkdir -p ~/openscap-results/baseline/$TIMESTAMP
+# CIS LEVEL 1 Workstation
+oscap xccdf eval \
+    --profile xccdf_org.ssgproject.content_profile_cis_level1_workstation \
+    --results ~/openscap-results/baseline/$TIMESTAMP/cis-l1-workstation-results.xml \
+    --report ~/openscap-results/baseline/$TIMESTAMP/cis-l1-workstation-report.html \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+# CIS LEVEL 2 Workstation
+oscap xccdf eval \
+    --profile xccdf_org.ssgproject.content_profile_cis_level2_workstation \
+    --results ~/openscap-results/baseline/$TIMESTAMP/cis-l2-workstation-results.xml \
+    --report ~/openscap-results/baseline/$TIMESTAMP/cis-l2-workstation-report.html \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+# Run with OVAL results and verbose output
+oscap xccdf eval \
+    --profile xccdf_org.ssgproject.content_profile_cis_level1_workstation \
+    --results ~/openscap-results/baseline/cis-l1-workstation-detailed-results.xml \
+    --report ~/openscap-results/baseline/cis-l1-workstation-detailed-report.html \
+    --oval-results \
+    --verbose INFO \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+```
+```bash
+chmod +x Assessor.sh # Give permission to script
+sudo ./Assessor.sh # Run script
+            # OR
+# List available profiles first
+java -jar Assessor-CLI.jar \
+    -b "benchmarks/CIS_Ubuntu_Linux_20.04_LTS_Benchmark_v3.0.0-xccdf.xml" \
+    -D session.type=local \
+    -p
+# Run Level 1 Workstation assessment
+sudo java -jar Assessor-CLI.jar \
+    -D session.type=local \
+    -b "benchmarks/CIS_Ubuntu_Linux_20.04_LTS_Benchmark_v3.0.0-xccdf.xml" \
+    -p "Level 1 - Workstation" \
+    -html
+```
+#### View, Assess and  Generate Remediation scripts for results for Ubuntu scan
+After scans, it's important to view and assess the results to help understand the important areas of the OS to apply hardening security so as not to disrupt the OS functionality generally.
+```bash
+## Open HTML Reports for CIS-CAT (Graphical Interface)
+# Option 1: Firefox (if available)
+firefox *.html &
 
+# Option 2: Default system browser
+xdg-open *.html
 
+# Option 3: Chromium/Chrome
+chromium-browser *.html &
+google-chrome *.html &
 
+# Open HTML reports (if GUI available)
+# firefox ~/openscap-results/baseline/ubuntu-cis-l1-workstation-report.html &
+# firefox ~/openscap-results/baseline/ubuntu-cis-l2-workstation-report.html &
+
+# Generate remediation script for CIS Level 1 Workstation
+oscap xccdf generate fix \
+    --profile xccdf_org.ssgproject.content_profile_cis_level1_workstation \
+    --output ~/openscap-results/baseline/cis-l1-workstation-remediation.sh \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+# Generate remediation script for CIS Level 2 Workstation
+oscap xccdf generate fix \
+    --profile xccdf_org.ssgproject.content_profile_cis_level2_workstation \
+    --output ~/openscap-results/baseline/cis-l2-workstation-remediation.sh \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+# Make remediation scripts executable
+chmod +x ~/openscap-results/baseline/cis-l*-workstation-remediation.sh
+```
+### Phase 4: Remediation of vulnerabilities
+The remediation process is divided into parts which are "Full and Selective/Manual" remediation 
+#### Option A: Run Full Generated Script (CAUTION)
+```bash
+# BACKUP FIRST - This will make system-wide changes
+echo "WARNING: This will make significant system changes!"
+echo "Press Ctrl+C to cancel, or Enter to continue..."
+read
+
+# Create restoration point
+sudo cp /etc/passwd /etc/passwd.pre-remediation
+sudo cp /etc/shadow /etc/shadow.pre-remediation
+sudo cp -r /etc/ssh /etc/ssh.pre-remediation
+
+# Run the full remediation
+echo "Running CIS Level 1 remediation..."
+sudo ./cis-l1-workstation-remediation.sh 2>&1 | tee remediation-log.txt
+```
+#### Option B: Run Selective Remediation (RECOMMENDED)
+```bash
+# Run the custom selective remediation
+echo "Running selective remediation..."
+sudo ./custom-remediation.sh 2>&1 | tee selective-remediation-log.txt
+                        OR
+# Extract specific remediation commands and run them individually
+
+# Example: Fix file permissions
+echo "=== Fixing file permissions ==="
+sudo chmod 644 /etc/passwd
+sudo chmod 600 /etc/shadow
+sudo chmod 600 /etc/gshadow
+sudo chmod 644 /etc/group
+
+# Example: Configure system auditing
+echo "=== Installing and configuring audit daemon ==="
+sudo apt install -y auditd audispd-plugins
+sudo systemctl enable auditd
+sudo systemctl start auditd
+
+# Example: Configure login banner
+echo "=== Setting up login banner ==="
+sudo tee /etc/issue << 'EOF'
+WARNING: Unauthorized access to this system is prohibited.
+All connections are monitored and recorded.
+EOF
+
+sudo tee /etc/issue.net << 'EOF'
+WARNING: Unauthorized access to this system is prohibited.
+All connections are monitored and recorded.
+EOF
+```
+Verify Remediation Results
+```bash
+# Re-run the assessment to check improvements
+mkdir -p ~/openscap-results/post-remediation
+
+# Run post-remediation assessment
+oscap xccdf eval \
+    --profile xccdf_org.ssgproject.content_profile_cis_level1_workstation \
+    --results ~/openscap-results/post-remediation/cis-l1-post-remediation-results.xml \
+    --report ~/openscap-results/post-remediation/cis-l1-post-remediation-report.html \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+
+# Compare before and after
+```
+Rollback Procedure (If Needed)
+```bash
+# Create rollback script
+cat > rollback-remediation.sh << 'EOF'
+#!/bin/bash
+echo "Rolling back remediation changes..."
+
+# Restore from backup
+BACKUP_DIR="/root/openscap-backup/$(ls -1 /root/openscap-backup/ | tail -1)"
+if [ -d "$BACKUP_DIR" ]; then
+    cp -r $BACKUP_DIR/ssh /etc/
+    cp $BACKUP_DIR/login.defs /etc/
+    systemctl restart ssh
+    echo "Rollback completed from: $BACKUP_DIR"
+else
+    echo "No backup directory found!"
+fi
+EOF
+
+chmod +x rollback-remediation.sh
+```
+
+## Step 9: Monitoring and Maintenance
+```bash
+# Set up regular compliance checking
+cat > /etc/cron.weekly/openscap-check << 'EOF'
+#!/bin/bash
+/usr/local/bin/oscap xccdf eval \
+    --profile xccdf_org.ssgproject.content_profile_cis_level1_workstation \
+    --results /var/log/openscap/weekly-$(date +%Y%m%d)-results.xml \
+    --report /var/log/openscap/weekly-$(date +%Y%m%d)-report.html \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+EOF
+
+sudo mkdir -p /var/log/openscap
+sudo chmod +x /etc/cron.weekly/openscap-check
+```
 
