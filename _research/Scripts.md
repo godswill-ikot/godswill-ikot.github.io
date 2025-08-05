@@ -8,7 +8,7 @@ header:
   og_image: "research/epr.png"
 ---
 ### Script for scanning using OpenSCAP, CIS-CAT, and Lynis on Ubuntu 20.04
-This section gives a step-by-step guide on how to create a script on Linux and use the script provided below for scanning and auditing with system information for befor, during and after scan
+This section gives a step-by-step guide on how to create a script on Linux and use the script provided below for scanning and auditing with system information for before, during and after the scan.
 #### Step 1: Create a bash script on Linux using
 ```bash
 # 1. Open terminal (Ctrl+Alt+T)
@@ -17,12 +17,7 @@ nano my_script.sh
 # 3. Copy the below script content and paste in here
 #!/bin/bash
 
-# Comprehensive OS Vulnerability Scanning Script
-# For Ubuntu 20.04.6 LTS Desktop
-# Uses: Lynis, OpenSCAP, and CIS-CAT
-# Generates HTML and XML reports for all scans
-# Author: Security Assessment Tool
-# Date: $(date)
+Copy and paste the long script below and paste it here, and then move to number # 4 and so on.
 
 # 4. Save and exit (Ctrl+X, then Y, then Enter)
 # 5. Make it executable
