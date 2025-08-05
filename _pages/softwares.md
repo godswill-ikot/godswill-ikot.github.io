@@ -156,6 +156,7 @@ winget --version
 # Install the latest PowerShell 7 using Winget (requires Admin rights)
 winget install --id Microsoft.Powershell --source winget
 ```
+`Microsoft Security Compliance Toolkit installation`
 ```powershell
 # Quick all-in-one Microsoft Security Compliance Toolkit (SCT) installer
 function Install-CompleteSCT {
@@ -196,6 +197,7 @@ function Install-CompleteSCT {
 # Run complete installation
 Install-CompleteSCT
 ```
+`Java 11 installation`
 ```powershell
 # Install OpenJDK 11 (required for running CIS-CAT Lite Assessor)
 winget install --id Microsoft.OpenJDK.11 --source winget
@@ -218,7 +220,9 @@ Get-ChildItem
 java -jar Assessor-CLI.jar -b "benchmarks\CIS_Microsoft_Windows_10_Enterprise_Benchmark_v4.0.0-xccdf.xml" -p "Level 1 (L1) - Corporate/Enterprise Environment (general use)" -html -txt
 ```
 ### Phase 3: Scanning and Baseline Assessment of both OSs 
-#### Scanning and assessment on Ubuntu 20.04
+Click  on [**THESIS SCRIPT**](https://godswill-ikot.github.io/research/Scripts/) to review, copy and use the script used in my actual thesis research titled "Operating System Hardening and Vulnerability Assessment Using CIS Benchmarking and System Security Tools on Windows and Linux".
+Note: The script contains every tool on this page and every system info needed to verify system performance for pre, during and post scan.
+#### Scanning and assessment Using OpenSCAP on Ubuntu 20.04
 ```bash
 # Create timestamped directories for better organisation
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
@@ -244,6 +248,7 @@ oscap xccdf eval \
     --verbose INFO \
     /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
 ```
+#### Scanning and Assessment using CIS-CAT on Ubuntu 20.04
 ```bash
 chmod +x Assessor.sh # Give permission to script
 sudo ./Assessor.sh # Run script
@@ -377,8 +382,7 @@ EOF
 
 chmod +x rollback-remediation.sh
 ```
-
-## Step 9: Monitoring and Maintenance
+Monitoring and Maintenance
 ```bash
 # Set up regular compliance checking
 cat > /etc/cron.weekly/openscap-check << 'EOF'
