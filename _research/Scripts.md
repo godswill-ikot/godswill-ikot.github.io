@@ -1,7 +1,7 @@
 ---
 title: "Scripts for Ubuntu and Windows"
 layout: single-portfolio
-excerpt: "<img src='/images/research/epr.png' alt=''>"
+excerpt: <img width="680" height="408" alt="image" src="https://github.com/user-attachments/assets/f54d48d1-e8bb-4005-921a-0c09bf9c43de" />
 collection: research
 order_number: 10
 header: 
