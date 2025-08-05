@@ -1,7 +1,7 @@
 ---
 title: "Linux Audit Tool Installation"
 layout: single-portfolio
-excerpt: "<img src='images/New folder/Linux (1).png' alt=''>"
+excerpt: <img width="311" height="162" alt="image" src="https://github.com/user-attachments/assets/f8896a7f-7932-4f4d-9c96-91b74c3cb977" />
 collection: research
 order_number: 10
 header: 
