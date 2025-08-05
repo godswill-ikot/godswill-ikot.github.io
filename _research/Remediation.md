@@ -1,25 +1,118 @@
 ---
 title: "Remediation"
 layout: single-portfolio
-excerpt: "<img src='/images/research/ternary.png' alt=''>"
+excerpt: <img width="1400" height="800" alt="image" src="https://github.com/user-attachments/assets/3706eba1-a06a-4673-93ad-8091d5632eb5" />
 collection: research
 order_number: 40
 header: 
   og_image: "research/ternary.png"
 ---
 
-In these projects I leverage social media data to study the early stages of
-radicalization and participation in extremist movements. In one, I use geocoded
-videos uploads to explore the relationship between American military fatalities
-overseas and far-right mobilization. The other applies computer vision
-techniques to recruitment videos from groups within the Salafi Jihadi movement
-to study how different groups within a broader clandestine movement use
-rhetorical strategies to communicate to a broad pool of potential supporters.
+In this thesis the researcher has given a proper "REMEDIATION" to vulnerabilities found during the scans in the form of code with respect to individual vulnereabilities.
 
-## Article
+Remediation is divided into 2 parts, with the first 1st being Full Remediation and the second 2nd is Selective Remediation.
+#### Option A: Run Full Generated Script using OpenSCAP (CAUTION)
+```bash
+# BACKUP FIRST - This will make system-wide changes
+# Create restoration point
+sudo cp /etc/passwd /etc/passwd.pre-remediation
+sudo cp /etc/shadow /etc/shadow.pre-remediation
+sudo cp -r /etc/ssh /etc/ssh.pre-remediation
 
-Richard McAlexander, Rob Williams, and Michael Rubin. "They’re Still There, He’s All Gone: American Fatalities in Foreign Wars and Right-Wing Radicalization at Home." *American Political Science Review*.
+# Generate remediation script for CIS Level 1 Workstation
+oscap xccdf generate fix \
+    --profile xccdf_org.ssgproject.content_profile_cis_level1_workstation \
+    --output ~/openscap-results/baseline/cis-l1-workstation-remediation.sh \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+# Generate remediation script for CIS Level 2 Workstation
+oscap xccdf generate fix \
+    --profile xccdf_org.ssgproject.content_profile_cis_level2_workstation \
+    --output ~/openscap-results/baseline/cis-l2-workstation-remediation.sh \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
 
-> What explains right-wing radicalization in the US? Research shows that demographic changes and economic decline both drive support for the far-right. We contribute to this research agenda by 1) studying the elusive early stages in the process of radicalization and 2) highlighting an additional factor that contributes to right-wing radicalization in the US: the impact of foreign wars on society at home. We argue that the communities that bear the greatest costs of foreign wars are most prone to high rates of right-wing radicalization. To support this claim, we present robust correlations between participation in the far-right social media website Parler and fatalities among residents who served in the US wars in Iraq and Afghanistan. This correlation holds at both the county and census tract level, and persists after controlling for the level of military service in an area. The costs of the US's foreign wars have important effects on domestic US politics.
+# Make remediation scripts executable
+chmod +x ~/openscap-results/baseline/cis-l*-workstation-remediation.sh
 
-[Article](https://doi.org/10.1017/S0003055423000904){: .btn--research} [Preprint](/files/pdf/research/They're Still Here.pdf){: .btn--research} [Supplemental Information](/files/pdf/research/They're Still Here SI.pdf){: .btn--research} [Replication Archive](https://doi.org/10.7910/DVN/4GLPII){: .btn--research}
+# Run the full remediation
+sudo ./cis-l1-workstation-remediation.sh 2>&1 | tee remediation-log.txt
+```
+#### Option B: Run Selective Remediation using recommendations from CIS-CAT (RECOMMENDED)
+```bash
+# Extract specific remediation commands and run them individually
+
+# Example: Fix file permissions
+echo "=== Fixing file permissions ==="
+sudo chmod 644 /etc/passwd
+sudo chmod 600 /etc/shadow
+sudo chmod 600 /etc/gshadow
+sudo chmod 644 /etc/group
+
+# Example: Configure system auditing
+echo "=== Installing and configuring audit daemon ==="
+sudo apt install -y auditd audispd-plugins
+sudo systemctl enable auditd
+sudo systemctl start auditd
+
+# Example: Configure login banner
+echo "=== Setting up login banner ==="
+sudo tee /etc/issue << 'EOF'
+WARNING: Unauthorized access to this system is prohibited.
+All connections are monitored and recorded.
+EOF
+
+sudo tee /etc/issue.net << 'EOF'
+WARNING: Unauthorized access to this system is prohibited.
+All connections are monitored and recorded.
+EOF
+```
+Verify Remediation Results using Lynis, OpenSCAP and CIS-CAT
+```bash
+Use LYNIS for deep scan
+sudo lynis audit system # Test run system audit
+                  OR
+# Re-run the assessment to check improvements
+mkdir -p ~/openscap-results/post-remediation
+# Run post-remediation assessment
+oscap xccdf eval \
+    --profile xccdf_org.ssgproject.content_profile_cis_level1_workstation \
+    --results ~/openscap-results/post-remediation/cis-l1-post-remediation-results.xml \
+    --report ~/openscap-results/post-remediation/cis-l1-post-remediation-report.html \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+
+# Compare before and after
+```
+Rollback Procedure (If Needed)
+```bash
+# Create rollback script
+cat > rollback-remediation.sh << 'EOF'
+#!/bin/bash
+echo "Rolling back remediation changes..."
+# Restore from backup
+BACKUP_DIR="/root/openscap-backup/$(ls -1 /root/openscap-backup/ | tail -1)"
+if [ -d "$BACKUP_DIR" ]; then
+    cp -r $BACKUP_DIR/ssh /etc/
+    cp $BACKUP_DIR/login.defs /etc/
+    systemctl restart ssh
+    echo "Rollback completed from: $BACKUP_DIR"
+else
+    echo "No backup directory found!"
+fi
+EOF
+
+chmod +x rollback-remediation.sh
+```
+Monitoring and Maintenance
+```bash
+# Set up regular compliance checking
+cat > /etc/cron.weekly/openscap-check << 'EOF'
+#!/bin/bash
+/usr/local/bin/oscap xccdf eval \
+    --profile xccdf_org.ssgproject.content_profile_cis_level1_workstation \
+    --results /var/log/openscap/weekly-$(date +%Y%m%d)-results.xml \
+    --report /var/log/openscap/weekly-$(date +%Y%m%d)-report.html \
+    /usr/share/xml/scap/ssg/content/ssg-ubuntu2004-ds.xml
+EOF
+
+sudo mkdir -p /var/log/openscap
+sudo chmod +x /etc/cron.weekly/openscap-check
+```
