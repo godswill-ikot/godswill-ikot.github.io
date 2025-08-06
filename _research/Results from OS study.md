@@ -10,7 +10,7 @@ header:
 ---
 ### 🛡️ Ubuntu 20.04 CIS Security Assessment Results
 
-This comprehensive analysis compares two leading security assessment tools - **CIS-CAT Pro** and **OpenSCAP** - evaluating Ubuntu 20.04 LTS against CIS (Center for Internet Security) benchmarks.
+This comprehensive analysis compares two leading security assessment tools - **CIS-CAT Lite** and **OpenSCAP** - evaluating Ubuntu 20.04 LTS against CIS (Center for Internet Security) benchmarks.
 
 #### 🎯 Key Findings Summary
 
@@ -24,7 +24,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CIS-CAT vs OpenSCAP Security Assessment Comparison</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -758,10 +758,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
         // Ensure Chart.js is loaded before creating charts
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof Chart === 'undefined') {
-                return; //
-            
-            if (typeof Chart === 'undefined') {
-               return; // Exit if Chart.js failed to load
+                return; // Exit if Chart.js failed to load        
            }
            
            // Chart configuration
