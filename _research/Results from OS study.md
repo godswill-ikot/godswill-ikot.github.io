@@ -1,19 +1,42 @@
 ---
-title: "Results"
+title: "Ubuntu 20.04 CIS Security Assessment Results"
 layout: single-portfolio
-excerpt: <img width="1124" height="613" alt="image" src="https://github.com/user-attachments/assets/203d4465-3470-44a4-9564-2797a6dc99f6" />
+excerpt: "Comprehensive comparison of CIS-CAT vs OpenSCAP security assessment tools showing 59% compliance with critical network and firewall vulnerabilities requiring immediate attention."
 collection: research
 order_number: 10
 header: 
-  og_image: "research/epr.png"
+  og_image: "research/security-assessment.png"
+  teaser: "https://github.com/user-attachments/assets/203d4465-3470-44a4-9564-2797a6dc99f6"
 ---
+
+# 🛡️ Ubuntu 20.04 CIS Security Assessment Results
+
+This comprehensive analysis compares two leading security assessment tools - **CIS-CAT Pro** and **OpenSCAP** - evaluating Ubuntu 20.04 LTS against CIS (Center for Internet Security) benchmarks.
+
+## 🎯 Key Findings Summary
+
+- **Tool Validation Success**: Both tools show nearly identical Level 1 scores (59% vs 59.98%)
+- **Critical Vulnerabilities**: Network security and firewall configuration require immediate attention
+- **Major Discrepancy**: Access Control assessment varies significantly between tools (+45% difference)
+- **Implementation Readiness**: 85% of requirements are either implemented or easily addressable
+
+## 📋 Table of Contents
+
+1. [Tool Comparison Overview](#tool-comparison-overview)
+2. [Interactive Charts & Analysis](#interactive-charts)
+3. [Detailed Category Breakdown](#detailed-category-analysis)
+4. [Critical Recommendations](#critical-analysis--recommendations)
+5. [Export Options](#export-complete-analysis)
+
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CIS-CAT vs OpenSCAP Security Assessment Comparison</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -66,6 +89,11 @@ header:
             text-align: center;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             border: 3px solid;
+            transition: transform 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
         }
         
         .tool-card.ciscat { 
@@ -235,6 +263,11 @@ header:
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border-left: 4px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .insight-card:hover {
+            transform: translateY(-3px);
         }
         
         .insight-card h4 {
@@ -260,6 +293,11 @@ header:
             background: white;
             border-radius: 8px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-3px);
         }
         
         .stat-value {
@@ -293,12 +331,16 @@ header:
             cursor: pointer;
             margin: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
         }
         
         .download-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .download-btn:active {
+            transform: scale(0.95);
         }
         
         .legend {
@@ -326,6 +368,59 @@ header:
             margin-right: 8px;
         }
         
+        .error-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 15px;
+            }
+            
+            .tool-comparison {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 20px;
+            }
+            
+            .summary-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 15px;
+            }
+            
+            .comparison-table {
+                font-size: 11px;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 8px 6px;
+            }
+            
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .compliance-score {
+                font-size: 2.5em;
+            }
+        }
+        
         @media print {
             body { background: white; }
             .download-section { display: none; }
@@ -334,6 +429,11 @@ header:
     </style>
 </head>
 <body>
+    <div class="error-notice" id="errorNotice">
+        <h3>⚠️ Charts Not Available</h3>
+        <p>The interactive charts require JavaScript to be enabled and Chart.js to load properly.</p>
+    </div>
+    
     <div class="container">
         <div class="header">
             <h1>Security Assessment Tool Comparison</h1>
@@ -661,319 +761,13 @@ header:
     </div>
 
     <script>
+        // Check if Chart.js loaded and handle errors
+        if (typeof Chart === 'undefined') {
+            console.error('Chart.js failed to load');
+            document.getElementById('errorNotice').style.display = 'block';
+        }
+
         // Ensure Chart.js is loaded before creating charts
         document.addEventListener('DOMContentLoaded', function() {
-            // Chart configuration
-            Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
-            Chart.defaults.font.size = 12;
-            Chart.defaults.plugins.legend.position = 'bottom';
-            Chart.defaults.plugins.legend.labels.padding = 20;
-            
-            // Color scheme
-            const colors = {
-                ciscatPrimary: '#3498db',
-                openscapPrimary: '#e74c3c',
-                pass: '#27ae60',
-                fail: '#e74c3c',
-                manual: '#f39c12',
-                other: '#9b59b6',
-                background: 'rgba(255, 255, 255, 0.8)'
-            };
-
-            // Data sets
-            const ciscatL1Data = { pass: 135, fail: 93, manual: 21 };
-            const openscapL1Data = { pass: 132, fail: 90, other: 8 };
-            const ciscatL2Data = { pass: 146, fail: 143, manual: 21 };
-            const openscapL2Data = { pass: 134, fail: 104, other: 15 };
-
-            // Helper function to create pie chart
-            function createPieChart(ctx, data, labels, colors) {
-                return new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            data: Object.values(data),
-                            backgroundColor: colors,
-                            borderWidth: 3,
-                            borderColor: '#fff',
-                            hoverOffset: 10
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    padding: 20,
-                                    usePointStyle: true,
-                                    font: { size: 12, weight: '600' }
-                                }
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(0,0,0,0.8)',
-                                titleColor: 'white',
-                                bodyColor: 'white',
-                                borderColor: 'rgba(255,255,255,0.3)',
-                                borderWidth: 1,
-                                callbacks: {
-                                    label: function(context) {
-                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                        const percentage = ((context.parsed * 100) / total).toFixed(1);
-                                        return `${context.label}: ${context.parsed} rules (${percentage}%)`;
-                                    }
-                                }
-                            }
-                        },
-                        layout: { padding: 10 }
-                    }
-                });
-            }
-
-            // Create all charts
-            try {
-                // CIS-CAT Level 1 Chart
-                const ciscatL1Ctx = document.getElementById('ciscatLevel1Chart');
-                if (ciscatL1Ctx) {
-                    createPieChart(
-                        ciscatL1Ctx.getContext('2d'),
-                        ciscatL1Data,
-                        ['Passed', 'Failed', 'Manual Review'],
-                        [colors.pass, colors.fail, colors.manual]
-                    );
-                }
-
-                // OpenSCAP Level 1 Chart
-                const openscapL1Ctx = document.getElementById('openscapLevel1Chart');
-                if (openscapL1Ctx) {
-                    createPieChart(
-                        openscapL1Ctx.getContext('2d'),
-                        openscapL1Data,
-                        ['Passed', 'Failed', 'Other Issues'],
-                        [colors.pass, colors.fail, colors.other]
-                    );
-                }
-
-                // CIS-CAT Level 2 Chart
-                const ciscatL2Ctx = document.getElementById('ciscatLevel2Chart');
-                if (ciscatL2Ctx) {
-                    createPieChart(
-                        ciscatL2Ctx.getContext('2d'),
-                        ciscatL2Data,
-                        ['Passed', 'Failed', 'Manual Review'],
-                        [colors.pass, colors.fail, colors.manual]
-                    );
-                }
-
-                // OpenSCAP Level 2 Chart
-                const openscapL2Ctx = document.getElementById('openscapLevel2Chart');
-                if (openscapL2Ctx) {
-                    createPieChart(
-                        openscapL2Ctx.getContext('2d'),
-                        openscapL2Data,
-                        ['Passed', 'Failed', 'Other Issues'],
-                        [colors.pass, colors.fail, colors.other]
-                    );
-                }
-
-                // Category Comparison Bar Chart
-                const categoryCtx = document.getElementById('categoryComparisonChart');
-                if (categoryCtx) {
-                    new Chart(categoryCtx.getContext('2d'), {
-                        type: 'bar',
-                        data: {
-                            labels: [
-                                'Initial Setup',
-                                'Services',
-                                'Network',
-                                'Host Firewall',
-                                'Access Control',
-                                'Logging & Auditing',
-                                'System Maintenance'
-                            ],
-                            datasets: [{
-                                label: 'CIS-CAT Pass Rate (%)',
-                                data: [55, 72, 18, 20, 64, 69, 91],
-                                backgroundColor: colors.ciscatPrimary,
-                                borderColor: colors.ciscatPrimary,
-                                borderWidth: 2,
-                                borderRadius: 4,
-                                borderSkipped: false,
-                            }, {
-                                label: 'OpenSCAP Pass Rate (%)',
-                                data: [36, 78, 7, 7, 19, 56, 98],
-                                backgroundColor: colors.openscapPrimary,
-                                borderColor: colors.openscapPrimary,
-                                borderWidth: 2,
-                                borderRadius: 4,
-                                borderSkipped: false,
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            interaction: {
-                                intersect: false,
-                                mode: 'index'
-                            },
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    max: 100,
-                                    title: {
-                                        display: true,
-                                        text: 'Pass Rate (%)',
-                                        font: { size: 14, weight: 'bold' }
-                                    },
-                                    grid: {
-                                        color: 'rgba(0,0,0,0.1)'
-                                    }
-                                },
-                                x: {
-                                    title: {
-                                        display: true,
-                                        text: 'CIS Control Categories',
-                                        font: { size: 14, weight: 'bold' }
-                                    },
-                                    ticks: {
-                                        maxRotation: 45,
-                                        minRotation: 45
-                                    }
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    position: 'top',
-                                    labels: {
-                                        usePointStyle: true,
-                                        padding: 20,
-                                        font: { size: 13, weight: '600' }
-                                    }
-                                },
-                                tooltip: {
-                                    backgroundColor: 'rgba(0,0,0,0.8)',
-                                    titleColor: 'white',
-                                    bodyColor: 'white',
-                                    borderColor: 'rgba(255,255,255,0.3)',
-                                    borderWidth: 1,
-                                    callbacks: {
-                                        label: function(context) {
-                                            return `${context.dataset.label}: ${context.parsed.y}%`;
-                                        },
-                                        afterLabel: function(context) {
-                                            const ciscatValue = context.chart.data.datasets[0].data[context.dataIndex];
-                                            const openscapValue = context.chart.data.datasets[1].data[context.dataIndex];
-                                            const diff = ciscatValue - openscapValue;
-                                            return `Difference: ${diff > 0 ? '+' : ''}${diff.toFixed(1)}%`;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    });
-                }
-
-                console.log('All charts created successfully');
-                
-            } catch (error) {
-                console.error('Error creating charts:', error);
-            }
-        });
-
-        // Download Functions
-        function downloadPDF() {
-            // Hide download section for printing
-            const downloadSection = document.querySelector('.download-section');
-            if (downloadSection) downloadSection.style.display = 'none';
-            
-            // Print the page
-            window.print();
-            
-            // Restore download section
-            setTimeout(() => {
-                if (downloadSection) downloadSection.style.display = 'block';
-            }, 1000);
-        }
-
-        function exportCSV() {
-            const csvData = [
-                // Header
-                ['Tool', 'Level', 'Category', 'Passed', 'Failed', 'Manual_Other', 'Total', 'Pass_Rate'],
-                
-                // CIS-CAT Level 1 Data
-                ['CIS-CAT', '1', 'Initial Setup', '27', '22', '4', '53', '55%'],
-                ['CIS-CAT', '1', 'Services', '28', '11', '1', '40', '72%'],
-                ['CIS-CAT', '1', 'Network', '2', '9', '1', '12', '18%'],
-                ['CIS-CAT', '1', 'Host Firewall', '5', '20', '5', '30', '20%'],
-                ['CIS-CAT', '1', 'Access Control', '42', '24', '1', '67', '64%'],
-                ['CIS-CAT', '1', 'Logging Auditing', '11', '5', '6', '22', '69%'],
-                ['CIS-CAT', '1', 'System Maintenance', '20', '2', '1', '23', '91%'],
-                ['CIS-CAT', '1', 'TOTAL', '135', '93', '21', '249', '59%'],
-                
-                // CIS-CAT Level 2 Data
-                ['CIS-CAT', '2', 'TOTAL', '146', '143', '21', '310', '51%'],
-                
-                // OpenSCAP Level 1 Data (estimated breakdown)
-                ['OpenSCAP', '1', 'Initial Setup', '15', '25', '2', '42', '36%'],
-                ['OpenSCAP', '1', 'Services', '52', '13', '2', '67', '78%'],
-                ['OpenSCAP', '1', 'Network', '2', '25', '2', '29', '7%'],
-                ['OpenSCAP', '1', 'Host Firewall', '2', '25', '2', '29', '7%'],
-                ['OpenSCAP', '1', 'Access Control', '6', '26', '0', '32', '19%'],
-                ['OpenSCAP', '1', 'Logging Auditing', '5', '4', '0', '9', '56%'],
-                ['OpenSCAP', '1', 'System Maintenance', '52', '1', '0', '53', '98%'],
-                ['OpenSCAP', '1', 'TOTAL', '132', '90', '8', '230', '59.98%'],
-                
-                // OpenSCAP Level 2 Data
-                ['OpenSCAP', '2', 'TOTAL', '134', '104', '15', '253', '40.08%']
-            ];
-
-            // Convert to CSV format
-            const csvContent = csvData.map(row => row.join(',')).join('\n');
-
-            // Create and download file
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            
-            link.setAttribute('href', url);
-            link.setAttribute('download', 'ciscat_vs_openscap_comparison.csv');
-            link.style.visibility = 'hidden';
-            
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            console.log('CSV export completed');
-        }
-
-        // Add some visual feedback for interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add hover effects to cards
-            const cards = document.querySelectorAll('.tool-card, .insight-card, .stat-item');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                    this.style.transition = 'transform 0.3s ease';
-                });
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-
-            // Add click feedback to buttons
-            const buttons = document.querySelectorAll('.download-btn');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    this.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        this.style.transform = 'scale(1)';
-                    }, 150);
-                });
-            });
-        });
-
-    </script>
-</body>
-</html>
+            if (typeof Chart === 'undefined') {
+                return; //
