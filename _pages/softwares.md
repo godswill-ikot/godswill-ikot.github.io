@@ -5,7 +5,7 @@ gallery:
 ---
 Software is a set of instructions, data, or programs used to operate computers and execute specific tasks. In the world of technology research, documentation of tools, applications, and software employed is fundamental to the completeness and reproducibility of any study. 
 ### OS scan, audit and hardening
-This study entails installing, configuring, scanning, auditing and hardening for two (2) popular 'Operating Systems' which will be in four (4) parts. The 1st is the installation of OpenSCAP, CIS-CAT Lite Assessor, and Lynis on Ubuntu 20.04 workstation; the 2nd is the installation of Microsoft Security Compliance Toolkit and CIS-CAT Lite Assessor on Windows 10 Enterprise; the 3rd is the scanning and auditing of both OS's; while the 4th is remediation/hardening of discovered vulnerabilities after the scan while simultaneously gathering system performance metrics (memory usage, disk I/O, and CPU load) for (pre-scan, during scan, and post-scan) as security operation is conducted.
+This study entails installing, configuring, scanning, auditing and hardening for two (2) popular 'Operating Systems' which are in four (4) parts. The 1st is the installation of OpenSCAP, CIS-CAT Lite Assessor, and Lynis on Ubuntu 20.04 workstation; the 2nd is the installation of Microsoft Security Compliance Toolkit and CIS-CAT Lite Assessor on Windows 10 Enterprise; the 3rd is the scanning and auditing of both OS's; while the 4th is remediation/hardening of discovered vulnerabilities after the scan while simultaneously gathering system performance metrics (memory usage, disk I/O, and CPU load) for (pre-scan, during scan, and post-scan) as security operation is conducted.
 ### Phase 1: OS Audit and Hardening tools installation on Ubuntu 20.04
 #### [OpenSCAP](https://www.open-scap.org/) Installation 
 The OpenSCAP will be installed using the 'Build and install from SOURCE method' as the traditional way of installation lacks important dependencies, workbench profiles, compliance security guide and dev environment. Below is the following steps for the installation procedure.
@@ -297,8 +297,8 @@ oscap xccdf generate fix \
 chmod +x ~/openscap-results/baseline/cis-l*-workstation-remediation.sh
 ```
 ### Phase 4: Remediation of vulnerabilities
-The remediation process is divided into parts which are "Full and Selective/Manual" remediation 
-#### Option A: Run Full Generated Script (CAUTION)
+The [**REMEDIATION**](https://godswill-ikot.github.io/research/Remediation/) process is divided into parts which are "Full and Selective/Manual" remediation 
+#### Option A: Run Full Generated Script (CAUTION) for Ubuntu 20.04
 ```bash
 # BACKUP FIRST - This will make system-wide changes
 echo "WARNING: This will make significant system changes!"
@@ -314,7 +314,7 @@ sudo cp -r /etc/ssh /etc/ssh.pre-remediation
 echo "Running CIS Level 1 remediation..."
 sudo ./cis-l1-workstation-remediation.sh 2>&1 | tee remediation-log.txt
 ```
-#### Option B: Run Selective Remediation (RECOMMENDED)
+#### Option B: Run Selective Remediation (RECOMMENDED) for Ubuntu 20.04
 ```bash
 # Run the custom selective remediation
 echo "Running selective remediation..."
@@ -322,20 +322,33 @@ sudo ./custom-remediation.sh 2>&1 | tee selective-remediation-log.txt
                         OR
 # Extract specific remediation commands and run them individually
 
-# Example: Fix file permissions
+#  Fix file permissions
 echo "=== Fixing file permissions ==="
 sudo chmod 644 /etc/passwd
 sudo chmod 600 /etc/shadow
 sudo chmod 600 /etc/gshadow
 sudo chmod 644 /etc/group
 
-# Example: Configure system auditing
+# Configure SSH (if needed)
+sudo sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
+sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+sudo systemctl restart ssh
+
+# Set password policies
+sudo apt install libpam-pwquality -y
+sudo sed -i 's/# minlen = 8/minlen = 14/' /etc/security/pwquality.conf
+sudo sed -i 's/# dcredit = 0/dcredit = -1/' /etc/security/pwquality.conf
+sudo sed -i 's/# ucredit = 0/ucredit = -1/' /etc/security/pwquality.conf
+sudo sed -i 's/# lcredit = 0/lcredit = -1/' /etc/security/pwquality.conf
+sudo sed -i 's/# ocredit = 0/ocredit = -1/' /etc/security/pwquality.conf
+
+# Configure system auditing
 echo "=== Installing and configuring audit daemon ==="
 sudo apt install -y auditd audispd-plugins
 sudo systemctl enable auditd
 sudo systemctl start auditd
 
-# Example: Configure login banner
+# Configure login banner
 echo "=== Setting up login banner ==="
 sudo tee /etc/issue << 'EOF'
 WARNING: Unauthorized access to this system is prohibited.
@@ -347,7 +360,7 @@ WARNING: Unauthorized access to this system is prohibited.
 All connections are monitored and recorded.
 EOF
 ```
-Verify Remediation Results
+Verify Remediation Results for Ubuntu 20.04
 ```bash
 # Re-run the assessment to check improvements
 mkdir -p ~/openscap-results/post-remediation
@@ -361,7 +374,7 @@ oscap xccdf eval \
 
 # Compare before and after
 ```
-Rollback Procedure (If Needed)
+Rollback Procedure (If Needed) for Ubuntu 20.04
 ```bash
 # Create rollback script
 cat > rollback-remediation.sh << 'EOF'
@@ -382,7 +395,7 @@ EOF
 
 chmod +x rollback-remediation.sh
 ```
-Monitoring and Maintenance
+Monitoring and Maintenance for Ubuntu 20.04
 ```bash
 # Set up regular compliance checking
 cat > /etc/cron.weekly/openscap-check << 'EOF'
