@@ -13,12 +13,10 @@ header:
 This comprehensive analysis compares two leading security assessment tools - **CIS-CAT Lite** and **OpenSCAP** - evaluating Ubuntu 20.04 LTS against CIS (Center for Internet Security) benchmarks.
 
 #### 🎯 Key Findings Summary
-
 - **Tool Validation Success**: Both tools show nearly identical Level 1 scores (59% vs 59.98%)
 - **Critical Vulnerabilities**: Network security and firewall configuration require immediate attention
 - **Major Discrepancy**: Access Control assessment varies significantly between tools (+45% difference)
 - **Implementation Readiness**: 85% of requirements are either implemented or easily addressable
----
 <html lang="en">
 <head>
     <meta charset="UTF-8">
