@@ -17,15 +17,6 @@ This comprehensive analysis compares two leading security assessment tools - **C
 - **Critical Vulnerabilities**: Network security and firewall configuration require immediate attention
 - **Major Discrepancy**: Access Control assessment varies significantly between tools (+45% difference)
 - **Implementation Readiness**: 85% of requirements are either implemented or easily addressable
----
-title: "Microsoft SCT Installation"
-layout: single-portfolio
-excerpt: <img width="940" height="400" alt="image" src="https://github.com/user-attachments/assets/99440c02-c4ae-49d5-a8ad-e685efd48e66" />
-collection: research
-order_number: 20
-header: 
-  og_image: "research/map.png"
----
 <html lang="en">
 <head>
     <meta charset="UTF-8">
