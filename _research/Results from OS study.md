@@ -22,7 +22,14 @@ This comprehensive analysis compares two leading security assessment tools - **C
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CIS-CAT vs OpenSCAP Security Assessment Comparison</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Multiple Chart.js CDN fallbacks -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script>
+        // Fallback CDN loading
+        if (typeof Chart === 'undefined') {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"><\/script>');
+        }
+    </script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -124,6 +131,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 2px solid #ecf0f1;
+            min-height: 500px;
         }
         
         .chart-title {
@@ -143,6 +151,32 @@ This comprehensive analysis compares two leading security assessment tools - **C
             background: white;
             border-radius: 8px;
             padding: 10px;
+        }
+        
+        .chart-fallback {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px dashed #ddd;
+        }
+        
+        .chart-fallback.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .fallback-data {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .full-width {
@@ -329,42 +363,6 @@ This comprehensive analysis compares two leading security assessment tools - **C
             transform: scale(0.95);
         }
         
-        .legend {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 20px 0;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            margin-right: 8px;
-        }
-        
-        .error-notice {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px;
-            text-align: center;
-            display: none;
-        }
-        
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .charts-grid {
@@ -415,11 +413,6 @@ This comprehensive analysis compares two leading security assessment tools - **C
     </style>
 </head>
 <body>
-    <div class="error-notice" id="errorNotice">
-        <h3>⚠️ Charts Not Available</h3>
-        <p>The interactive charts require JavaScript to be enabled and Chart.js to load properly.</p>
-    </div>
-    
     <div class="container">
         <div class="header">
             <h1>Security Assessment Tool Comparison</h1>
@@ -459,7 +452,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
         <!-- Summary Statistics -->
         <div class="summary-stats">
             <div class="stat-item">
-                <div class="stat-value level1">0.98%</div>
+                <div class="stat-value">0.98%</div>
                 <div class="stat-label">Level 1 Score Difference</div>
             </div>
             <div class="stat-item">
@@ -483,6 +476,15 @@ This comprehensive analysis compares two leading security assessment tools - **C
                 <div class="chart-title">CIS-CAT Level 1 Results</div>
                 <div class="chart-wrapper">
                     <canvas id="ciscatLevel1Chart"></canvas>
+                    <div class="chart-fallback" id="fallback1">
+                        <h4>📊 CIS-CAT Level 1 Results</h4>
+                        <div class="fallback-data">
+                            <strong>135 Passed (54%)</strong><br>
+                            <strong>93 Failed (37%)</strong><br>
+                            <strong>21 Manual (9%)</strong><br>
+                            <small>Total: 249 rules</small>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -491,6 +493,15 @@ This comprehensive analysis compares two leading security assessment tools - **C
                 <div class="chart-title">OpenSCAP Level 1 Results</div>
                 <div class="chart-wrapper">
                     <canvas id="openscapLevel1Chart"></canvas>
+                    <div class="chart-fallback" id="fallback2">
+                        <h4>📊 OpenSCAP Level 1 Results</h4>
+                        <div class="fallback-data">
+                            <strong>132 Passed (57%)</strong><br>
+                            <strong>90 Failed (39%)</strong><br>
+                            <strong>8 Other (4%)</strong><br>
+                            <small>Total: 230 rules</small>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -499,6 +510,15 @@ This comprehensive analysis compares two leading security assessment tools - **C
                 <div class="chart-title">CIS-CAT Level 2 Results</div>
                 <div class="chart-wrapper">
                     <canvas id="ciscatLevel2Chart"></canvas>
+                    <div class="chart-fallback" id="fallback3">
+                        <h4>📊 CIS-CAT Level 2 Results</h4>
+                        <div class="fallback-data">
+                            <strong>146 Passed (47%)</strong><br>
+                            <strong>143 Failed (46%)</strong><br>
+                            <strong>21 Manual (7%)</strong><br>
+                            <small>Total: 310 rules</small>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -506,24 +526,38 @@ This comprehensive analysis compares two leading security assessment tools - **C
                 <div class="chart-title">OpenSCAP Level 2 Results</div>
                 <div class="chart-wrapper">
                     <canvas id="openscapLevel2Chart"></canvas>
+                    <div class="chart-fallback" id="fallback4">
+                        <h4>📊 OpenSCAP Level 2 Results</h4>
+                        <div class="fallback-data">
+                            <strong>134 Passed (53%)</strong><br>
+                            <strong>104 Failed (41%)</strong><br>
+                            <strong>15 Other (6%)</strong><br>
+                            <small>Total: 253 rules</small>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- Category Comparison Bar Chart -->
             <div class="chart-section full-width">
                 <div class="chart-title">Category Pass Rate Comparison</div>
-                <div class="legend">
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #3498db;"></div>
-                        <span>CIS-CAT Pass Rate</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #e74c3c;"></div>
-                        <span>OpenSCAP Pass Rate</span>
-                    </div>
-                </div>
                 <div class="chart-wrapper">
                     <canvas id="categoryComparisonChart"></canvas>
+                    <div class="chart-fallback" id="fallback5">
+                        <h4>📊 Category Pass Rate Comparison</h4>
+                        <div class="fallback-data">
+                            <table style="width: 100%; text-align: left;">
+                                <tr><th>Category</th><th>CIS-CAT</th><th>OpenSCAP</th></tr>
+                                <tr><td>Initial Setup</td><td>55%</td><td>36%</td></tr>
+                                <tr><td>Services</td><td>72%</td><td>78%</td></tr>
+                                <tr><td>Network</td><td>18%</td><td>7%</td></tr>
+                                <tr><td>Host Firewall</td><td>20%</td><td>7%</td></tr>
+                                <tr><td>Access Control</td><td>64%</td><td>19%</td></tr>
+                                <tr><td>Logging & Auditing</td><td>69%</td><td>56%</td></tr>
+                                <tr><td>System Maintenance</td><td>91%</td><td>98%</td></tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -706,59 +740,88 @@ This comprehensive analysis compares two leading security assessment tools - **C
                     <h4>✅ System Maintenance Strength</h4>
                     <p><strong>Both tools confirm strong system maintenance</strong>: CIS-CAT 91%, OpenSCAP 98%. This validates that basic system hygiene practices are well-implemented.</p>
                 </div>
-            </div>
+            </div
             
             <div style="margin-top: 30px; padding: 25px; background: #fff3cd; border-radius: 10px; border-left: 5px solid #f39c12;">
-                <h4 style="color: #856404; margin-top: 0;">🚀 Recommended Action Plan</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <h5 style="color: #2c3e50;">Immediate Priority (Week 1-2)</h5>
-                        <ul style="color: #856404;">
-                            <li><strong>Network Security:</strong> Both tools agree this is critical</li>
-                            <li><strong>Firewall Configuration:</strong> Implement basic UFW rules</li>
-                            <li><strong>Access Control Validation:</strong> Manual review required</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5 style="color: #2c3e50;">Tool Strategy</h5>
-                        <ul style="color: #856404;">
-                            <li><strong>Use OpenSCAP:</strong> Daily automated monitoring</li>
-                            <li><strong>Use CIS-CAT:</strong> Quarterly comprehensive audits</li>
-                            <li><strong>Cross-validate:</strong> Major discrepancies with third tool</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+               <h4 style="color: #856404; margin-top: 0;">🚀 Recommended Action Plan</h4>
+               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                   <div>
+                       <h5 style="color: #2c3e50;">Immediate Priority (Week 1-2)</h5>
+                       <ul style="color: #856404;">
+                           <li><strong>Network Security:</strong> Both tools agree this is critical</li>
+                           <li><strong>Firewall Configuration:</strong> Implement basic UFW rules</li>
+                           <li><strong>Access Control Validation:</strong> Manual review required</li>
+                       </ul>
+                   </div>
+                   <div>
+                       <h5 style="color: #2c3e50;">Tool Strategy</h5>
+                       <ul style="color: #856404;">
+                           <li><strong>Use OpenSCAP:</strong> Daily automated monitoring</li>
+                           <li><strong>Use CIS-CAT:</strong> Quarterly comprehensive audits</li>
+                           <li><strong>Cross-validate:</strong> Major discrepancies with third tool</li>
+                       </ul>
+                   </div>
+               </div>
+           </div>
+       </div>
 
-        <!-- Download Section -->
-        <div class="download-section">
-            <h3 style="margin-bottom: 20px;">📥 Export Complete Analysis</h3>
-            <button class="download-btn" onclick="downloadPDF()">
-                📄 Download PDF Report
-            </button>
-            <button class="download-btn" onclick="exportCSV()">
-                📊 Export Data (CSV)
-            </button>
-            <div style="margin-top: 15px; opacity: 0.9;">
-                Complete tool comparison with charts, analysis, and recommendations
-            </div>
-        </div>
-    </div>
+       <!-- Download Section -->
+       <div class="download-section">
+           <h3 style="margin-bottom: 20px;">📥 Export Complete Analysis</h3>
+           <button class="download-btn" onclick="downloadPDF()">
+               📄 Download PDF Report
+           </button>
+           <button class="download-btn" onclick="exportCSV()">
+               📊 Export Data (CSV)
+           </button>
+           <div style="margin-top: 15px; opacity: 0.9;">
+               Complete tool comparison with charts, analysis, and recommendations
+           </div>
+       </div>
+   </div>
 
-    <script>
-        // Check if Chart.js loaded and handle errors
-        if (typeof Chart === 'undefined') {
-            console.error('Chart.js failed to load');
-            document.getElementById('errorNotice').style.display = 'block';
-        }
+   <script>
+       // Multiple fallback strategy for Chart.js loading
+       let chartJSLoaded = false;
+       let loadAttempts = 0;
+       const maxAttempts = 3;
 
-        // Ensure Chart.js is loaded before creating charts
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof Chart === 'undefined') {
-                return; // Exit if Chart.js failed to load        
+       function checkChartJS() {
+           if (typeof Chart !== 'undefined') {
+               chartJSLoaded = true;
+               initializeCharts();
+           } else {
+               loadAttempts++;
+               if (loadAttempts < maxAttempts) {
+                   // Try alternative CDN
+                   setTimeout(() => {
+                       const script = document.createElement('script');
+                       script.src = loadAttempts === 1 ? 
+                           'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js' :
+                           'https://unpkg.com/chart.js@3.9.1/dist/chart.min.js';
+                       script.onload = checkChartJS;
+                       script.onerror = checkChartJS;
+                       document.head.appendChild(script);
+                   }, 1000);
+               } else {
+                   // Show fallback content
+                   showFallbackCharts();
+               }
            }
-           
+       }
+
+       function showFallbackCharts() {
+           console.log('Chart.js failed to load, showing fallback content');
+           const fallbacks = ['fallback1', 'fallback2', 'fallback3', 'fallback4', 'fallback5'];
+           fallbacks.forEach(id => {
+               const element = document.getElementById(id);
+               if (element) {
+                   element.classList.add('active');
+               }
+           });
+       }
+
+       function initializeCharts() {
            // Chart configuration
            Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
            Chart.defaults.font.size = 12;
@@ -772,8 +835,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
                pass: '#27ae60',
                fail: '#e74c3c',
                manual: '#f39c12',
-               other: '#9b59b6',
-               background: 'rgba(255, 255, 255, 0.8)'
+               other: '#9b59b6'
            };
 
            // Data sets
@@ -784,168 +846,29 @@ This comprehensive analysis compares two leading security assessment tools - **C
 
            // Helper function to create pie chart
            function createPieChart(ctx, data, labels, chartColors) {
-               return new Chart(ctx, {
-                   type: 'doughnut',
-                   data: {
-                       labels: labels,
-                       datasets: [{
-                           data: Object.values(data),
-                           backgroundColor: chartColors,
-                           borderWidth: 3,
-                           borderColor: '#fff',
-                           hoverOffset: 10
-                       }]
-                   },
-                   options: {
-                       responsive: true,
-                       maintainAspectRatio: false,
-                       plugins: {
-                           legend: {
-                               position: 'bottom',
-                               labels: {
-                                   padding: 20,
-                                   usePointStyle: true,
-                                   font: { size: 12, weight: '600' }
-                               }
-                           },
-                           tooltip: {
-                               backgroundColor: 'rgba(0,0,0,0.8)',
-                               titleColor: 'white',
-                               bodyColor: 'white',
-                               borderColor: 'rgba(255,255,255,0.3)',
-                               borderWidth: 1,
-                               callbacks: {
-                                   label: function(context) {
-                                       const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                       const percentage = ((context.parsed * 100) / total).toFixed(1);
-                                       return `${context.label}: ${context.parsed} rules (${percentage}%)`;
-                                   }
-                               }
-                           }
-                       },
-                       layout: { padding: 10 }
-                   }
-               });
-           }
-
-           // Create all charts with error handling
-           try {
-               // CIS-CAT Level 1 Chart
-               const ciscatL1Ctx = document.getElementById('ciscatLevel1Chart');
-               if (ciscatL1Ctx) {
-                   createPieChart(
-                       ciscatL1Ctx.getContext('2d'),
-                       ciscatL1Data,
-                       ['Passed', 'Failed', 'Manual Review'],
-                       [colors.pass, colors.fail, colors.manual]
-                   );
-               }
-
-               // OpenSCAP Level 1 Chart
-               const openscapL1Ctx = document.getElementById('openscapLevel1Chart');
-               if (openscapL1Ctx) {
-                   createPieChart(
-                       openscapL1Ctx.getContext('2d'),
-                       openscapL1Data,
-                       ['Passed', 'Failed', 'Other Issues'],
-                       [colors.pass, colors.fail, colors.other]
-                   );
-               }
-
-               // CIS-CAT Level 2 Chart
-               const ciscatL2Ctx = document.getElementById('ciscatLevel2Chart');
-               if (ciscatL2Ctx) {
-                   createPieChart(
-                       ciscatL2Ctx.getContext('2d'),
-                       ciscatL2Data,
-                       ['Passed', 'Failed', 'Manual Review'],
-                       [colors.pass, colors.fail, colors.manual]
-                   );
-               }
-
-               // OpenSCAP Level 2 Chart
-               const openscapL2Ctx = document.getElementById('openscapLevel2Chart');
-               if (openscapL2Ctx) {
-                   createPieChart(
-                       openscapL2Ctx.getContext('2d'),
-                       openscapL2Data,
-                       ['Passed', 'Failed', 'Other Issues'],
-                       [colors.pass, colors.fail, colors.other]
-                   );
-               }
-
-               // Category Comparison Bar Chart
-               const categoryCtx = document.getElementById('categoryComparisonChart');
-               if (categoryCtx) {
-                   new Chart(categoryCtx.getContext('2d'), {
-                       type: 'bar',
+               try {
+                   return new Chart(ctx, {
+                       type: 'doughnut',
                        data: {
-                           labels: [
-                               'Initial Setup',
-                               'Services',
-                               'Network',
-                               'Host Firewall',
-                               'Access Control',
-                               'Logging & Auditing',
-                               'System Maintenance'
-                           ],
+                           labels: labels,
                            datasets: [{
-                               label: 'CIS-CAT Pass Rate (%)',
-                               data: [55, 72, 18, 20, 64, 69, 91],
-                               backgroundColor: colors.ciscatPrimary,
-                               borderColor: colors.ciscatPrimary,
-                               borderWidth: 2,
-                               borderRadius: 4,
-                               borderSkipped: false,
-                           }, {
-                               label: 'OpenSCAP Pass Rate (%)',
-                               data: [36, 78, 7, 7, 19, 56, 98],
-                               backgroundColor: colors.openscapPrimary,
-                               borderColor: colors.openscapPrimary,
-                               borderWidth: 2,
-                               borderRadius: 4,
-                               borderSkipped: false,
+                               data: Object.values(data),
+                               backgroundColor: chartColors,
+                               borderWidth: 3,
+                               borderColor: '#fff',
+                               hoverOffset: 10
                            }]
                        },
                        options: {
                            responsive: true,
                            maintainAspectRatio: false,
-                           interaction: {
-                               intersect: false,
-                               mode: 'index'
-                           },
-                           scales: {
-                               y: {
-                                   beginAtZero: true,
-                                   max: 100,
-                                   title: {
-                                       display: true,
-                                       text: 'Pass Rate (%)',
-                                       font: { size: 14, weight: 'bold' }
-                                   },
-                                   grid: {
-                                       color: 'rgba(0,0,0,0.1)'
-                                   }
-                               },
-                               x: {
-                                   title: {
-                                       display: true,
-                                       text: 'CIS Control Categories',
-                                       font: { size: 14, weight: 'bold' }
-                                   },
-                                   ticks: {
-                                       maxRotation: 45,
-                                       minRotation: 45
-                                   }
-                               }
-                           },
                            plugins: {
                                legend: {
-                                   position: 'top',
+                                   position: 'bottom',
                                    labels: {
+                                       padding: 15,
                                        usePointStyle: true,
-                                       padding: 20,
-                                       font: { size: 13, weight: '600' }
+                                       font: { size: 11, weight: '600' }
                                    }
                                },
                                tooltip: {
@@ -956,48 +879,195 @@ This comprehensive analysis compares two leading security assessment tools - **C
                                    borderWidth: 1,
                                    callbacks: {
                                        label: function(context) {
-                                           return `${context.dataset.label}: ${context.parsed.y}%`;
+                                           const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                           const percentage = ((context.parsed * 100) / total).toFixed(1);
+                                           return `${context.label}: ${context.parsed} rules (${percentage}%)`;
+                                       }
+                                   }
+                               }
+                           },
+                           layout: { padding: 10 }
+                       }
+                   });
+               } catch (error) {
+                   console.error('Error creating pie chart:', error);
+                   return null;
+               }
+           }
+
+           // Create all charts with error handling
+           try {
+               // CIS-CAT Level 1 Chart
+               const ciscatL1Ctx = document.getElementById('ciscatLevel1Chart');
+               if (ciscatL1Ctx) {
+                   const chart1 = createPieChart(
+                       ciscatL1Ctx.getContext('2d'),
+                       ciscatL1Data,
+                       ['Passed', 'Failed', 'Manual Review'],
+                       [colors.pass, colors.fail, colors.manual]
+                   );
+                   if (!chart1) document.getElementById('fallback1').classList.add('active');
+               }
+
+               // OpenSCAP Level 1 Chart
+               const openscapL1Ctx = document.getElementById('openscapLevel1Chart');
+               if (openscapL1Ctx) {
+                   const chart2 = createPieChart(
+                       openscapL1Ctx.getContext('2d'),
+                       openscapL1Data,
+                       ['Passed', 'Failed', 'Other Issues'],
+                       [colors.pass, colors.fail, colors.other]
+                   );
+                   if (!chart2) document.getElementById('fallback2').classList.add('active');
+               }
+
+               // CIS-CAT Level 2 Chart
+               const ciscatL2Ctx = document.getElementById('ciscatLevel2Chart');
+               if (ciscatL2Ctx) {
+                   const chart3 = createPieChart(
+                       ciscatL2Ctx.getContext('2d'),
+                       ciscatL2Data,
+                       ['Passed', 'Failed', 'Manual Review'],
+                       [colors.pass, colors.fail, colors.manual]
+                   );
+                   if (!chart3) document.getElementById('fallback3').classList.add('active');
+               }
+
+               // OpenSCAP Level 2 Chart
+               const openscapL2Ctx = document.getElementById('openscapLevel2Chart');
+               if (openscapL2Ctx) {
+                   const chart4 = createPieChart(
+                       openscapL2Ctx.getContext('2d'),
+                       openscapL2Data,
+                       ['Passed', 'Failed', 'Other Issues'],
+                       [colors.pass, colors.fail, colors.other]
+                   );
+                   if (!chart4) document.getElementById('fallback4').classList.add('active');
+               }
+
+               // Category Comparison Bar Chart
+               const categoryCtx = document.getElementById('categoryComparisonChart');
+               if (categoryCtx) {
+                   try {
+                       new Chart(categoryCtx.getContext('2d'), {
+                           type: 'bar',
+                           data: {
+                               labels: [
+                                   'Initial Setup',
+                                   'Services',
+                                   'Network',
+                                   'Host Firewall',
+                                   'Access Control',
+                                   'Logging & Auditing',
+                                   'System Maintenance'
+                               ],
+                               datasets: [{
+                                   label: 'CIS-CAT Pass Rate (%)',
+                                   data: [55, 72, 18, 20, 64, 69, 91],
+                                   backgroundColor: colors.ciscatPrimary,
+                                   borderColor: colors.ciscatPrimary,
+                                   borderWidth: 2,
+                                   borderRadius: 4,
+                                   borderSkipped: false,
+                               }, {
+                                   label: 'OpenSCAP Pass Rate (%)',
+                                   data: [36, 78, 7, 7, 19, 56, 98],
+                                   backgroundColor: colors.openscapPrimary,
+                                   borderColor: colors.openscapPrimary,
+                                   borderWidth: 2,
+                                   borderRadius: 4,
+                                   borderSkipped: false,
+                               }]
+                           },
+                           options: {
+                               responsive: true,
+                               maintainAspectRatio: false,
+                               interaction: {
+                                   intersect: false,
+                                   mode: 'index'
+                               },
+                               scales: {
+                                   y: {
+                                       beginAtZero: true,
+                                       max: 100,
+                                       title: {
+                                           display: true,
+                                           text: 'Pass Rate (%)',
+                                           font: { size: 14, weight: 'bold' }
                                        },
-                                       afterLabel: function(context) {
-                                           const ciscatValue = context.chart.data.datasets[0].data[context.dataIndex];
-                                           const openscapValue = context.chart.data.datasets[1].data[context.dataIndex];
-                                           const diff = ciscatValue - openscapValue;
-                                           return `Difference: ${diff > 0 ? '+' : ''}${diff.toFixed(1)}%`;
+                                       grid: {
+                                           color: 'rgba(0,0,0,0.1)'
+                                       }
+                                   },
+                                   x: {
+                                       title: {
+                                           display: true,
+                                           text: 'CIS Control Categories',
+                                           font: { size: 14, weight: 'bold' }
+                                       },
+                                       ticks: {
+                                           maxRotation: 45,
+                                           minRotation: 45
+                                       }
+                                   }
+                               },
+                               plugins: {
+                                   legend: {
+                                       position: 'top',
+                                       labels: {
+                                           usePointStyle: true,
+                                           padding: 20,
+                                           font: { size: 13, weight: '600' }
+                                       }
+                                   },
+                                   tooltip: {
+                                       backgroundColor: 'rgba(0,0,0,0.8)',
+                                       titleColor: 'white',
+                                       bodyColor: 'white',
+                                       borderColor: 'rgba(255,255,255,0.3)',
+                                       borderWidth: 1,
+                                       callbacks: {
+                                           label: function(context) {
+                                               return `${context.dataset.label}: ${context.parsed.y}%`;
+                                           },
+                                           afterLabel: function(context) {
+                                               const ciscatValue = context.chart.data.datasets[0].data[context.dataIndex];
+                                               const openscapValue = context.chart.data.datasets[1].data[context.dataIndex];
+                                               const diff = ciscatValue - openscapValue;
+                                               return `Difference: ${diff > 0 ? '+' : ''}${diff.toFixed(1)}%`;
+                                           }
                                        }
                                    }
                                }
                            }
-                       }
-                   });
+                       });
+                   } catch (error) {
+                       console.error('Error creating bar chart:', error);
+                       document.getElementById('fallback5').classList.add('active');
+                   }
                }
 
-               console.log('All charts created successfully');
+               console.log('Charts initialized successfully');
                
            } catch (error) {
-               console.error('Error creating charts:', error);
-               document.getElementById('errorNotice').style.display = 'block';
+               console.error('Error initializing charts:', error);
+               showFallbackCharts();
            }
-       });
+       }
 
        // Download Functions
        function downloadPDF() {
            try {
-               // Hide download section and error notice for printing
+               // Hide download section for printing
                const downloadSection = document.querySelector('.download-section');
-               const errorNotice = document.getElementById('errorNotice');
-               
                if (downloadSection) downloadSection.style.display = 'none';
-               if (errorNotice) errorNotice.style.display = 'none';
                
                // Print the page
                window.print();
                
-               // Restore sections after printing
+               // Restore download section
                setTimeout(() => {
                    if (downloadSection) downloadSection.style.display = 'block';
-                   if (errorNotice && typeof Chart === 'undefined') {
-                       errorNotice.style.display = 'block';
-                   }
                }, 1000);
            } catch (error) {
                console.error('Error downloading PDF:', error);
@@ -1008,10 +1078,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
        function exportCSV() {
            try {
                const csvData = [
-                   // Header
                    ['Tool', 'Level', 'Category', 'Passed', 'Failed', 'Manual_Other', 'Total', 'Pass_Rate'],
-                   
-                   // CIS-CAT Level 1 Data
                    ['CIS-CAT', '1', 'Initial Setup', '27', '22', '4', '53', '55%'],
                    ['CIS-CAT', '1', 'Services', '28', '11', '1', '40', '72%'],
                    ['CIS-CAT', '1', 'Network', '2', '9', '1', '12', '18%'],
@@ -1020,11 +1087,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
                    ['CIS-CAT', '1', 'Logging Auditing', '11', '5', '6', '22', '69%'],
                    ['CIS-CAT', '1', 'System Maintenance', '20', '2', '1', '23', '91%'],
                    ['CIS-CAT', '1', 'TOTAL', '135', '93', '21', '249', '59%'],
-                   
-                   // CIS-CAT Level 2 Data
                    ['CIS-CAT', '2', 'TOTAL', '146', '143', '21', '310', '51%'],
-                   
-                   // OpenSCAP Level 1 Data (estimated breakdown)
                    ['OpenSCAP', '1', 'Initial Setup', '15', '25', '2', '42', '36%'],
                    ['OpenSCAP', '1', 'Services', '52', '13', '2', '67', '78%'],
                    ['OpenSCAP', '1', 'Network', '2', '25', '2', '29', '7%'],
@@ -1033,15 +1096,10 @@ This comprehensive analysis compares two leading security assessment tools - **C
                    ['OpenSCAP', '1', 'Logging Auditing', '5', '4', '0', '9', '56%'],
                    ['OpenSCAP', '1', 'System Maintenance', '52', '1', '0', '53', '98%'],
                    ['OpenSCAP', '1', 'TOTAL', '132', '90', '8', '230', '59.98%'],
-                   
-                   // OpenSCAP Level 2 Data
                    ['OpenSCAP', '2', 'TOTAL', '134', '104', '15', '253', '40.08%']
                ];
 
-               // Convert to CSV format
                const csvContent = csvData.map(row => row.join(',')).join('\n');
-
-               // Create and download file
                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
                const link = document.createElement('a');
                const url = URL.createObjectURL(blob);
@@ -1063,15 +1121,14 @@ This comprehensive analysis compares two leading security assessment tools - **C
            }
        }
 
-       // Add visual feedback for interactions
+       // Initialize everything when DOM is ready
        document.addEventListener('DOMContentLoaded', function() {
-           // Add hover effects to interactive elements
-           const interactiveElements = document.querySelectorAll('.tool-card, .insight-card, .stat-item, .download-btn');
+           console.log('DOM loaded, checking Chart.js...');
+           checkChartJS();
            
+           // Add interaction effects
+           const interactiveElements = document.querySelectorAll('.tool-card, .insight-card, .stat-item');
            interactiveElements.forEach(element => {
-               // Skip if already has hover styles
-               if (element.classList.contains('download-btn')) return;
-               
                element.addEventListener('mouseenter', function() {
                    if (!this.style.transform.includes('translateY')) {
                        this.style.transform = 'translateY(-5px)';
@@ -1084,18 +1141,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
                });
            });
 
-           // Add click feedback to buttons
-           const buttons = document.querySelectorAll('.download-btn');
-           buttons.forEach(button => {
-               button.addEventListener('click', function() {
-                   this.style.transform = 'scale(0.95)';
-                   setTimeout(() => {
-                       this.style.transform = 'scale(1)';
-                   }, 150);
-               });
-           });
-
-           console.log('Interactive elements initialized successfully');
+           console.log('Interactive elements initialized');
        });
 
    </script>
@@ -1124,3 +1170,9 @@ Based on this comprehensive security assessment, the following **immediate actio
 - **Combined Approach**: Leverage strengths of both tools for complete coverage
 
 This assessment provides a solid foundation for systematic security improvement with validated findings from two independent professional security assessment tools.
+
+
+
+
+
+            
