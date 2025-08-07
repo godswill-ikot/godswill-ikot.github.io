@@ -938,7 +938,7 @@ header:
                     📋 Export Detailed Analysis (CSV)
                 </button>
                 <button class="download-btn" onclick="generateRemediationScript()">
-                    🔧 Download Remediation Script
+                    [🔧 Download Remediation Script](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/_research/Remediation.md)
                 </button>
             </div>
             <div style="margin-top: 20px; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto;">
