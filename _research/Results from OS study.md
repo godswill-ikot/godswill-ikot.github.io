@@ -437,7 +437,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
             </div>
             
             <!-- Category Comparison Bar Chart -->
-            <img src="https://github.com/user-attachments/assets/f4b7e8a9-2c1d-4e5f-8b6c-1a2b3c4d5e6f" 
+            <img width="1281" height="525" alt="image" src="https://github.com/user-attachments/assets/b09959bf-b509-4adb-834a-486d35be3a86" />
                  alt="Category Pass Rate Comparison Between CIS-CAT and OpenSCAP" 
                  class="chart-image">
             <div class="chart-description">
