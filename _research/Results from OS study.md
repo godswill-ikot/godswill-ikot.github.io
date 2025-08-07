@@ -17,7 +17,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
 - **Critical Vulnerabilities**: Network security and firewall configuration require immediate attention
 - **Major Discrepancy**: Access Control assessment varies significantly between tools (+45% difference)
 - **Implementation Readiness**: 85% of requirements are either implemented or easily addressable
-![BAR CHART](research/0....png)
+![BAR CHART](_research/0....png)
 <html lang="en">
 <head>
     <meta charset="UTF-8">
