@@ -428,7 +428,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
             <div class="charts-title">📊 Security Assessment Visualization</div>
             
             <!-- Level 1 & Level 2 Pie Charts -->
-            <img src="images/0....png"
+            <img src="images/comparison.png"
                  alt="CIS-CAT vs OpenSCAP Level 1 and Level 2 Results Comparison" 
                  class="chart-image">
             <div class="chart-description">
@@ -437,7 +437,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
             </div>
             
             <!-- Category Comparison Bar Chart -->
-            <img src="_research/0....png"
+            <img src="images/comparison.png"
                  alt="Category Pass Rate Comparison Between CIS-CAT and OpenSCAP" 
                  class="chart-image">
             <div class="chart-description">
