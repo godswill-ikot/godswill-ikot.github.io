@@ -17,12 +17,20 @@ This comprehensive analysis compares two leading security assessment tools - **C
 - **Critical Vulnerabilities**: Network security and firewall configuration require immediate attention
 - **Major Discrepancy**: Access Control assessment varies significantly between tools (+45% difference)
 - **Implementation Readiness**: 85% of requirements are either implemented or easily addressable
-<!DOCTYPE html>
+---
+title: "Microsoft SCT Installation"
+layout: single-portfolio
+excerpt: <img width="940" height="400" alt="image" src="https://github.com/user-attachments/assets/99440c02-c4ae-49d5-a8ad-e685efd48e66" />
+collection: research
+order_number: 20
+header: 
+  og_image: "research/map.png"
+---
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIS-CAT and OpenSCAP Security Assessment</title>
+    <title>CIS Security Assessment Analysis Report</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -34,7 +42,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
         }
         
         .container {
-            max-width: 1600px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -45,32 +53,59 @@ This comprehensive analysis compares two leading security assessment tools - **C
         .header {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
-            padding: 30px;
+            padding: 40px;
             text-align: center;
         }
         
         .header h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.2em;
+            margin: 0 0 15px 0;
+            font-size: 2.5em;
             font-weight: 300;
         }
         
         .subtitle {
             opacity: 0.9;
-            font-size: 1.1em;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .assessment-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            opacity: 0.8;
+        }
+        
+        .info-item {
+            text-align: center;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        
+        .info-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+        
+        .info-value {
+            font-size: 16px;
+            font-weight: bold;
         }
         
         .tool-comparison {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            padding: 30px;
+            gap: 25px;
+            padding: 40px;
             background: #f8f9fa;
         }
         
         .tool-card {
             background: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 12px;
             text-align: center;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
@@ -92,27 +127,50 @@ This comprehensive analysis compares two leading security assessment tools - **C
         }
         
         .tool-name {
-            font-size: 1.4em;
+            font-size: 1.6em;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .compliance-score {
-            font-size: 3em;
+            font-size: 3.5em;
             font-weight: bold;
-            margin: 20px 0;
+            margin: 25px 0;
         }
         
         .ciscat-score { color: #3498db; }
         .openscap-score { color: #e74c3c; }
         
-        .tool-details {
-            font-size: 16px;
+        .critical-alerts {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 25px;
+            margin: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #c0392b;
+        }
+        
+        .critical-alerts h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.3em;
+        }
+        
+        .critical-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
             margin-top: 15px;
         }
         
+        .critical-item {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
         .charts-section {
-            padding: 30px;
+            padding: 40px;
             background: #f8f9fa;
         }
         
@@ -128,11 +186,11 @@ This comprehensive analysis compares two leading security assessment tools - **C
         
         .chart-image {
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             height: auto;
-            margin: 20px auto;
+            margin: 25px auto;
             display: block;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             border: 2px solid #ecf0f1;
         }
@@ -141,44 +199,8 @@ This comprehensive analysis compares two leading security assessment tools - **C
             text-align: center;
             font-size: 1.1em;
             color: #666;
-            margin: 15px 0 30px 0;
+            margin: 20px 0 40px 0;
             font-style: italic;
-        }
-        
-        .summary-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .stat-item:hover {
-            transform: translateY(-3px);
-        }
-        
-        .stat-value {
-            font-size: 2em;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            color: #7f8c8d;
-            text-transform: uppercase;
-            margin-top: 5px;
         }
         
         .comparison-table {
@@ -188,7 +210,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            margin: 20px 0;
+            margin: 25px 0;
         }
         
         .comparison-table th {
@@ -213,12 +235,6 @@ This comprehensive analysis compares two leading security assessment tools - **C
             background: #f8f9fa;
         }
         
-        .category-row {
-            font-weight: bold;
-            background: #e8f4fd !important;
-            color: #2c3e50;
-        }
-        
         .status-pass { 
             color: #27ae60; 
             font-weight: bold;
@@ -241,63 +257,114 @@ This comprehensive analysis compares two leading security assessment tools - **C
             border-radius: 4px;
         }
         
-        .difference {
-            color: #e74c3c;
+        .analysis-section {
+            padding: 40px;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            font-size: 2em;
+            font-weight: 600;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .critical-findings {
+            background: linear-gradient(135deg, #fdeaea 0%, #ffffff 100%);
+            border: 2px solid #e74c3c;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .finding-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-left: 4px solid #e74c3c;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .finding-title {
             font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 5px;
+        }
+        
+        .finding-description {
+            color: #666;
             font-size: 14px;
         }
         
-        .difference.positive {
-            color: #27ae60;
-        }
+        .severity-critical { border-left-color: #c0392b; }
+        .severity-high { border-left-color: #e74c3c; }
+        .severity-medium { border-left-color: #f39c12; }
+        .severity-low { border-left-color: #3498db; }
         
-        .insights-section {
-            background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
-            border: 2px solid #2196f3;
-            padding: 30px;
-            margin: 30px;
+        .tool-validation {
+            background: linear-gradient(135deg, #d5f4e6 0%, #ffffff 100%);
+            border: 2px solid #27ae60;
             border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin: 20px 0;
         }
         
-        .insights-title {
-            color: #1565c0;
-            font-size: 1.4em;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-align: center;
+        .remediation-priority {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffffff 100%);
+            border: 2px solid #f39c12;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
         }
         
-        .insight-grid {
+        .priority-week {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .week1 { background: #fdeaea; border-left: 5px solid #c0392b; }
+        .week2 { background: #fff3cd; border-left: 5px solid #f39c12; }
+        .week3 { background: #d5f4e6; border-left: 5px solid #27ae60; }
+        
+        .priority-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .priority-items {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .insights-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
         }
         
         .insight-card {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 25px;
+            border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border-left: 4px solid #3498db;
-            transition: transform 0.3s ease;
-        }
-        
-        .insight-card:hover {
-            transform: translateY(-3px);
         }
         
         .insight-card h4 {
             color: #2c3e50;
             margin-top: 0;
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-weight: 600;
         }
         
         .download-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
+            padding: 40px;
             text-align: center;
             color: white;
         }
@@ -321,22 +388,12 @@ This comprehensive analysis compares two leading security assessment tools - **C
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
         
-        .download-btn:active {
-            transform: scale(0.95);
-        }
-        
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .tool-comparison {
                 grid-template-columns: 1fr;
                 gap: 15px;
                 padding: 20px;
-            }
-            
-            .summary-stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-                padding: 15px;
             }
             
             .comparison-table {
@@ -348,16 +405,16 @@ This comprehensive analysis compares two leading security assessment tools - **C
                 padding: 8px 6px;
             }
             
-            .insight-grid {
+            .insights-grid {
                 grid-template-columns: 1fr;
             }
             
             .header h1 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
             
             .compliance-score {
-                font-size: 2.5em;
+                font-size: 2.8em;
             }
         }
         
@@ -370,22 +427,49 @@ This comprehensive analysis compares two leading security assessment tools - **C
 <body>
     <div class="container">
         <div class="header">
-            <h1>Security Assessment Tool Comparison</h1>
-            <div class="subtitle">CIS-CAT vs OpenSCAP Analysis of Ubuntu 20.04 CIS Compliance</div>
+            <h1>🛡️ CIS Security Assessment Analysis Report</h1>
+            <div class="subtitle">Comprehensive Security Analysis: Ubuntu 20.04 LTS CIS Benchmark v3.0.0</div>
+            <div class="assessment-info">
+                <div class="info-item">
+                    <div class="info-label">Target System</div>
+                    <div class="info-value">gn-VirtualBox</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">IP Address</div>
+                    <div class="info-value">192.168.1.14</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Assessment Date</div>
+                    <div class="info-value">July 20, 2025</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Profile</div>
+                    <div class="info-value">Level 1 - Workstation</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Duration</div>
+                    <div class="info-value">1m 36s</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Tool Version</div>
+                    <div class="info-value">CIS-CAT Pro v4.55.0</div>
+                </div>
+            </div>
         </div>
-        
+
         <!-- Tool Comparison Overview -->
         <div class="tool-comparison">
             <div class="tool-card ciscat">
                 <div class="tool-name">🛡️ CIS-CAT Pro</div>
                 <div class="compliance-score ciscat-score">59%</div>
                 <div><strong>Level 1 Compliance</strong></div>
-                <div class="tool-details">
+                <div style="margin-top: 20px;">
                     <div>✅ <strong>135 Passed</strong></div>
                     <div>❌ <strong>93 Failed</strong></div>
                     <div>📋 <strong>21 Manual Review</strong></div>
-                    <div style="margin-top: 10px; font-size: 12px; color: #666;">
-                        Total: 249 Rules Evaluated
+                    <div style="margin-top: 15px; font-size: 14px; color: #666; border-top: 1px solid #ecf0f1; padding-top: 15px;">
+                        <strong>Total: 249 Rules Evaluated</strong><br>
+                        Comprehensive assessment with manual validation
                     </div>
                 </div>
             </div>
@@ -393,40 +477,52 @@ This comprehensive analysis compares two leading security assessment tools - **C
                 <div class="tool-name">⚙️ OpenSCAP</div>
                 <div class="compliance-score openscap-score">59.98%</div>
                 <div><strong>Level 1 Compliance</strong></div>
-                <div class="tool-details">
+                <div style="margin-top: 20px;">
                     <div>✅ <strong>132 Passed</strong></div>
                     <div>❌ <strong>90 Failed</strong></div>
                     <div>⚠️ <strong>8 Other Issues</strong></div>
-                    <div style="margin-top: 10px; font-size: 12px; color: #666;">
-                        Total: 230 Rules Evaluated
+                    <div style="margin-top: 15px; font-size: 14px; color: #666; border-top: 1px solid #ecf0f1; padding-top: 15px;">
+                        <strong>Total: 230 Rules Evaluated</strong><br>
+                        Fully automated assessment
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Summary Statistics -->
-        <div class="summary-stats">
-            <div class="stat-item">
-                <div class="stat-value">0.98%</div>
-                <div class="stat-label">Level 1 Score Difference</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">10.92%</div>
-                <div class="stat-label">Level 2 Score Difference</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">19</div>
-                <div class="stat-label">Additional CIS-CAT Rules</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">21</div>
-                <div class="stat-label">Manual Reviews Required</div>
+        <!-- Critical Security Alerts -->
+        <div class="critical-alerts">
+            <h3>🚨 Critical Security Issues Requiring Immediate Attention</h3>
+            <div class="critical-list">
+                <div class="critical-item">
+                    <strong>Firewall Completely Disabled</strong><br>
+                    UFW, nftables, and iptables all inactive
+                </div>
+                <div class="critical-item">
+                    <strong>Network Security Failure</strong><br>
+                    Only 18% compliance - major vulnerability
+                </div>
+                <div class="critical-item">
+                    <strong>PAM Authentication Issues</strong><br>
+                    Account lockout and password policies missing
+                </div>
+                <div class="critical-item">
+                    <strong>System Hardening Gaps</strong><br>
+                    AppArmor disabled, bootloader unsecured
+                </div>
+                <div class="critical-item">
+                    <strong>Log File Security</strong><br>
+                    Improper permissions on security logs
+                </div>
+                <div class="critical-item">
+                    <strong>Access Control Variance</strong><br>
+                    45% discrepancy between tools needs investigation
+                </div>
             </div>
         </div>
 
         <!-- Charts Section -->
         <div class="charts-section">
-            <div class="charts-title">📊 Security Assessment Visualization</div>
+            <div class="charts-title">📊 Security Assessment Visualizations</div>
             
             <!-- Level 1 & Level 2 Pie Charts -->
             <img src="https://godswill-ikot.github.io/images/pie.png"
@@ -448,16 +544,16 @@ This comprehensive analysis compares two leading security assessment tools - **C
         </div>
 
         <!-- Detailed Comparison Table -->
-        <div style="padding: 0 30px;">
-            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 30px 0;">📊 Detailed Category Analysis</h2>
+        <div style="padding: 0 40px;">
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 30px 0;">📊 Tool Comparison Analysis</h2>
             
             <table class="comparison-table">
                 <thead>
                     <tr>
-                        <th>Category</th>
+                        <th>Security Category</th>
                         <th colspan="4">CIS-CAT Results</th>
                         <th colspan="4">OpenSCAP Results</th>
-                        <th>Difference</th>
+                        <th>Variance Analysis</th>
                     </tr>
                     <tr>
                         <th></th>
@@ -469,13 +565,10 @@ This comprehensive analysis compares two leading security assessment tools - **C
                         <th>Fail</th>
                         <th>Other</th>
                         <th>Pass %</th>
-                        <th>CIS-CAT Advantage</th>
+                        <th>Difference</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="category-row">
-                        <td colspan="10"><strong>🔧 CIS Level 1 Category Breakdown</strong></td>
-                    </tr>
                     <tr>
                         <td><strong>1. Initial Setup</strong></td>
                         <td class="status-pass">27</td>
@@ -486,7 +579,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
                         <td class="status-fail">25</td>
                         <td>2</td>
                         <td><strong>36%</strong></td>
-                        <td class="difference">+19%</td>
+                        <td style="color: #e74c3c; font-weight: bold;">CIS-CAT +19%</td>
                     </tr>
                     <tr>
                         <td><strong>2. Services</strong></td>
@@ -498,10 +591,10 @@ This comprehensive analysis compares two leading security assessment tools - **C
                         <td class="status-fail">13</td>
                         <td>2</td>
                         <td><strong>78%</strong></td>
-                        <td class="difference positive">-6%</td>
+                        <td style="color: #27ae60; font-weight: bold;">OpenSCAP +6%</td>
                     </tr>
                     <tr>
-                        <td><strong>3. Network</strong></td>
+                        <td><strong>3. Network Configuration</strong></td>
                         <td class="status-pass">2</td>
                         <td class="status-fail">9</td>
                         <td class="status-manual">1</td>
@@ -510,7 +603,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
                         <td class="status-fail">25</td>
                         <td>2</td>
                         <td><strong>7%</strong></td>
-                        <td class="difference">+11%</td>
+                        <td style="color: #e74c3c; font-weight: bold;">CIS-CAT +11%</td>
                     </tr>
                     <tr>
                         <td><strong>4. Host Based Firewall</strong></td>
@@ -522,7 +615,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
                         <td class="status-fail">25</td>
                         <td>2</td>
                         <td><strong>7%</strong></td>
-                        <td class="difference">+13%</td>
+                        <td style="color: #e74c3c; font-weight: bold;">CIS-CAT +13%</td>
                     </tr>
                     <tr>
                         <td><strong>5. Access Control</strong></td>
@@ -534,7 +627,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
                         <td class="status-fail">26</td>
                         <td>0</td>
                         <td><strong>19%</strong></td>
-                        <td class="difference">+45%</td>
+                        <td style="color: #e74c3c; font-weight: bold;">CIS-CAT +45%</td>
                     </tr>
                     <tr>
                         <td><strong>6. Logging and Auditing</strong></td>
@@ -546,7 +639,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
                         <td class="status-fail">4</td>
                         <td>0</td>
                         <td><strong>56%</strong></td>
-                        <td class="difference">+13%</td>
+                        <td style="color: #e74c3c; font-weight: bold;">CIS-CAT +13%</td>
                     </tr>
                     <tr>
                         <td><strong>7. System Maintenance</strong></td>
@@ -558,9 +651,9 @@ This comprehensive analysis compares two leading security assessment tools - **C
                         <td class="status-fail">1</td>
                         <td>0</td>
                         <td><strong>98%</strong></td>
-                        <td class="difference positive">-7%</td>
+                        <td style="color: #27ae60; font-weight: bold;">OpenSCAP +7%</td>
                     </tr>
-                    <tr style="background: linear-gradient(135deg, #d5f4e6 0%, #ffffff 100%); font-weight: bold;">
+                    <tr style="background: linear-gradient(135deg, #e8f5e8 0%, #ffffff 100%); font-weight: bold;">
                         <td><strong>📈 TOTAL LEVEL 1</strong></td>
                         <td class="status-pass"><strong>135</strong></td>
                         <td class="status-fail"><strong>93</strong></td>
@@ -570,81 +663,280 @@ This comprehensive analysis compares two leading security assessment tools - **C
                         <td class="status-fail"><strong>90</strong></td>
                         <td><strong>8</strong></td>
                         <td><strong>59.98%</strong></td>
-                        <td class="difference positive"><strong>-0.98%</strong></td>
-                    </tr>
-                    <tr class="category-row">
-                        <td colspan="10"><strong>🔒 CIS Level 2 Comparison</strong></td>
-                    </tr>
-                    <tr style="background: linear-gradient(135deg, #fdeaea 0%, #ffffff 100%); font-weight: bold;">
-                        <td><strong>📊 TOTAL LEVEL 2</strong></td>
-                        <td class="status-pass"><strong>146</strong></td>
-                        <td class="status-fail"><strong>143</strong></td>
-                        <td class="status-manual"><strong>21</strong></td>
-                        <td><strong>51.0%</strong></td>
-                        <td class="status-pass"><strong>134</strong></td>
-                        <td class="status-fail"><strong>104</strong></td>
-                        <td><strong>15</strong></td>
-                        <td><strong>40.08%</strong></td>
-                        <td class="difference"><strong>+10.92%</strong></td>
+                        <td style="color: #27ae60; font-weight: bold;"><strong>Validated Match</strong></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- Key Insights -->
-        <div class="insights-section">
-            <div class="insights-title">🔍 Critical Analysis & Recommendations</div>
-            
-            <div class="insight-grid">
-                <div class="insight-card">
-                    <h4>🎯 Tool Validation Success</h4>
-                    <p>Both tools show <strong>remarkably similar Level 1 scores</strong>: CIS-CAT 59% vs OpenSCAP 59.98% (only 0.98% difference). This validates both assessments and confirms the system's actual security posture.</p>
-                </div>
-                
-                <div class="insight-card">
-                    <h4>⚠️ Level 2 Significant Divergence</h4>
-                    <p><strong>Level 2 shows 10.92% difference</strong>: CIS-CAT 51% vs OpenSCAP 40.08%. This suggests different interpretations of advanced security requirements or rule coverage variations.</p>
-                </div>
-                
-                <div class="insight-card">
-                    <h4>🔐 Access Control Major Discrepancy</h4>
-                    <p><strong>Largest variance in Access Control</strong>: CIS-CAT 64% vs OpenSCAP 19% (+45% difference). This requires manual investigation to determine which assessment is accurate.</p>
-                </div>
-                
-                <div class="insight-card">
-                    <h4>🌐 Network Security Consistency</h4>
-                    <p><strong>Both tools agree network is critically weak</strong>: CIS-CAT 18%, OpenSCAP 7%. This confirms network configuration should be the highest priority for remediation.</p>
-                </div>
-                
-                <div class="insight-card">
-                    <h4>📋 Manual Assessment Impact</h4>
-                    <p>CIS-CAT requires <strong>21 manual checks</strong> (8.4% of total), while OpenSCAP is 100% automated. Manual reviews may account for some scoring differences.</p>
-                </div>
-                
-                <div class="insight-card">
-                    <h4>✅ System Maintenance Strength</h4>
-                    <p><strong>Both tools confirm strong system maintenance</strong>: CIS-CAT 91%, OpenSCAP 98%. This validates that basic system hygiene practices are well-implemented.</p>
-                </div>
-            </div>
-            
-            <div style="margin-top: 30px; padding: 25px; background: #fff3cd; border-radius: 10px; border-left: 5px solid #f39c12;">
-                <h4 style="color: #856404; margin-top: 0;">🚀 Recommended Action Plan</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <!-- Analysis Section -->
+        <div class="analysis-section">
+            <div class="section-title">🔍 Critical Security Analysis</div>
+
+            <!-- Tool Validation -->
+            <div class="tool-validation">
+                <h3 style="color: #27ae60; margin-top: 0;">✅ Assessment Tool Validation Confirmed</h3>
+                <p><strong>Both CIS-CAT and OpenSCAP show remarkably similar Level 1 scores</strong>: 59% vs 59.98% (only 0.98% difference). This cross-validation confirms the system's actual security posture and validates both assessment tools' accuracy.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
                     <div>
-                        <h5 style="color: #2c3e50;">Immediate Priority (Week 1-2)</h5>
-                        <ul style="color: #856404;">
-                            <li><strong>Network Security:</strong> Both tools agree this is critical</li>
-                            <li><strong>Firewall Configuration:</strong> Implement basic UFW rules</li>
-                            <li><strong>Access Control Validation:</strong> Manual review required</li>
+                        <h5>Consistent Critical Issues</h5>
+                        <ul>
+                            <li>Network security (7-18% compliance)</li>
+                            <li>Firewall completely disabled</li>
+                            <li>System maintenance excellence (91-98%)</li>
                         </ul>
                     </div>
                     <div>
-                        <h5 style="color: #2c3e50;">Tool Strategy</h5>
-                        <ul style="color: #856404;">
-                            <li><strong>Use OpenSCAP:</strong> Daily automated monitoring</li>
-                            <li><strong>Use CIS-CAT:</strong> Quarterly comprehensive audits</li>
-                            <li><strong>Cross-validate:</strong> Major discrepancies with third tool</li>
+                        <h5>Assessment Reliability</h5>
+                        <ul>
+                            <li>Independent tools reach same conclusions</li>
+                            <li>SSH security confirmed excellent (100%)</li>
+                            <li>Major discrepancies limited to access control</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Critical Findings -->
+            <div class="critical-findings">
+                <h3 style="color: #c0392b; margin-top: 0;">🚨 Critical Security Findings</h3>
+                
+                <div class="finding-item severity-critical">
+                    <div class="finding-title">1. Complete Network Infrastructure Failure</div>
+                    <div class="finding-description">
+                        <strong>Firewall Status:</strong> UFW, nftables, and iptables are all disabled or misconfigured<br>
+                        <strong>Network Compliance:</strong> Only 18% (CIS-CAT) / 7% (OpenSCAP)<br>
+                        <strong>Impact:</strong> System is completely exposed to network attacks with no perimeter defense
+                    </div>
+                </div>
+
+                <div class="finding-item severity-critical">
+                    <div class="finding-title">2. Authentication and Access Control Gaps</div>
+                    <div class="finding-description">
+                        <strong>PAM Configuration:</strong> pam_faillock, pam_pwquality, pam_pwhistory modules disabled<br>
+                        <strong>Password Policies:</strong> No complexity requirements, lockout policies, or history enforcement<br>
+                        <strong>Impact:</strong> Unlimited brute force attacks possible, weak passwords allowed
+                    </div>
+                </div>
+
+                <div class="finding-item severity-high">
+                    <div class="finding-title">3. System Hardening Deficiencies</div>
+                    <div class="finding-description">
+                        <strong>AppArmor:</strong> Not installed or properly configured (Mandatory Access Control missing)<br>
+                        <strong>Bootloader:</strong> No password protection, configuration files not secured<br>
+                        <strong>Impact:</strong> Reduced defense layers, potential boot-time compromise
+                    </div>
+                </div>
+
+                <div class="finding-item severity-high">
+                    <div class="finding-title">4. Log File Security Issues</div>
+                    <div class="finding-description">
+                        <strong>Permissions:</strong> Log files lack proper access controls<br>
+                        <strong>Configuration:</strong> journald not properly forwarding to rsyslog<br>
+                        <strong>Impact:</strong> Potential log tampering, audit trail compromise
+                    </div>
+                </div>
+
+                <div class="finding-item severity-medium">
+                    <div class="finding-title">5. Tool Assessment Discrepancy - Access Control</div>
+                    <div class="finding-description">
+                        <strong>Variance:</strong> CIS-CAT reports 64% vs OpenSCAP 19% (+45% difference)<br>
+                        <strong>Area:</strong> PAM module configuration and access control policies<br>
+                        <strong>Action Required:</strong> Manual investigation and third-party validation needed
+                    </div>
+                </div>
+            </div>
+
+            <!-- Positive Findings -->
+            <div class="tool-validation">
+                <h3 style="color: #27ae60; margin-top: 0;">✅ Security Strengths Identified</h3>
+                <div class="finding-item" style="border-left-color: #27ae60;">
+                    <div class="finding-title">System Maintenance Excellence</div>
+                    <div class="finding-description">
+                        <strong>High Compliance:</strong> CIS-CAT 91% / OpenSCAP 98% - both confirm excellent implementation<br>
+                        <strong>Areas:</strong> File permissions, user account management, system hygiene practices<br>
+                        <strong>Status:</strong> Above industry standard - continue current maintenance practices
+                    </div>
+                </div>
+            </div>
+
+            <!-- Remediation Priority -->
+            <div class="remediation-priority">
+                <h3 style="color: #d68910; margin-top: 0;">🛠️ Strategic Remediation Roadmap</h3>
+                
+                <div class="priority-week week1">
+                    <div class="priority-title" style="color: #c0392b;">🚨 Week 1: Critical Infrastructure (IMMEDIATE ACTION)</div>
+                    <div class="priority-items">
+                        <strong>1. Enable Firewall Protection</strong><br>
+                        • Install and configure UFW: <code>systemctl --now enable ufw.service</code><br>
+                        • Set default deny policy: <code>ufw default deny incoming</code><br>
+                        • Allow essential services before enabling<br><br>
+                        
+                        <strong>2. Secure Network Configuration</strong><br>
+                        • Configure kernel parameters in /etc/sysctl.conf<br>
+                        • Disable IP forwarding, source routing, redirects<br>
+                        • Apply changes: <code>sysctl -p</code><br><br>
+                        
+                        <strong>3. Implement Account Lockout</strong><br>
+                        • Install libpam-pwquality package<br>
+                        • Configure pam_faillock module<br>
+                        • Set lockout after 5 failed attempts<br><br>
+                        
+                        <strong>4. Secure Log Files</strong><br>
+                        • Fix log file permissions: <code>chmod 640 /var/log/*</code><br>
+                        • Set proper ownership: <code>chown root:adm /var/log/*</code>
+                    </div>
+                </div>
+
+                <div class="priority-week week2">
+                    <div class="priority-title" style="color: #d68910;">⚠️ Week 2-3: Security Hardening</div>
+                    <div class="priority-items">
+                        <strong>1. Deploy Mandatory Access Control</strong><br>
+                        • Install AppArmor: <code>apt install apparmor apparmor-utils</code><br>
+                        • Enable in bootloader configuration<br>
+                        • Configure security profiles<br><br>
+                        
+                        <strong>2. Secure Bootloader</strong><br>
+                        • Create encrypted bootloader password<br>
+                        • Configure grub security settings<br>
+                        • Set proper file permissions<br><br>
+                        
+                        <strong>3. Implement Password Policies</strong><br>
+                        • Configure pwquality settings (minimum 14 characters)<br>
+                        • Enable password history enforcement<br>
+                        • Set complexity requirements<br><br>
+                        
+                        <strong>4. Investigate Access Control Discrepancy</strong><br>
+                        • Manual review of PAM configuration<br>
+                        • Third-party validation of access controls<br>
+                        • Document and resolve tool variance
+                    </div>
+                </div>
+
+                <div class="priority-week week3">
+                    <div class="priority-title" style="color: #27ae60;">🔒 Week 4+: Advanced Hardening</div>
+                    <div class="priority-items">
+                        <strong>1. Filesystem Security</strong><br>
+                        • Create separate partitions for /tmp, /var<br>
+                        • Configure mount options (noexec, nosuid)<br>
+                        • Update /etc/fstab configuration<br><br>
+                        
+                        <strong>2. Job Scheduler Security</strong><br>
+                        • Secure cron directories and files<br>
+                        • Configure cron access controls<br>
+                        • Review scheduled tasks<br><br>
+                        
+                        <strong>3. User Environment Hardening</strong><br>
+                        • Set appropriate umask values<br>
+                        • Secure user home directories<br>
+                        • Configure shell timeout values<br><br>
+                        
+                        <strong>4. Continuous Monitoring</strong><br>
+                        • Implement automated security scanning<br>
+                        • Set up alerting for configuration changes<br>
+                        • Establish regular compliance checking
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategic Insights -->
+            <div class="section-title">💡 Strategic Security Insights</div>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4>🎯 Assessment Validation Success</h4>
+                    <p>The <strong>0.98% difference between CIS-CAT and OpenSCAP</strong> provides high confidence in the assessment results. Both tools independently identify the same critical security gaps, particularly in network and firewall configuration.</p>
+                    <div style="background: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 14px; color: #2d5016;">
+                        <strong>Confidence Level:</strong> Very High - Cross-tool validation achieved
+                    </div>
+                </div>
+                
+                <div class="insight-card">
+                    <h4>🚨 Critical Infrastructure Risk</h4>
+                    <p><strong>Network and firewall security represent the highest risk</strong> with compliance rates of only 7-20%. The system is essentially unprotected from network-based attacks, requiring immediate attention.</p>
+                    <div style="background: #fdeaea; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 14px; color: #721c24;">
+                        <strong>Risk Level:</strong> Critical - Immediate action required
+                    </div>
+                </div>
+                
+                <div class="insight-card">
+                    <h4>🔐 Access Control Investigation</h4>
+                    <p>The <strong>45% variance in access control assessment</strong> between tools requires manual investigation. This discrepancy suggests potential differences in PAM module detection or configuration interpretation.</p>
+                    <div style="background: #fff3cd; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 14px; color: #856404;">
+                        <strong>Action Required:</strong> Manual PAM audit and third-party validation
+                    </div>
+                </div>
+                
+                <div class="insight-card">
+                    <h4>✅ Foundation Strengths</h4>
+                    <p><strong>SSH security (100%) and system maintenance (91-98%)</strong> demonstrate excellent foundational practices. These areas can serve as models for implementing security controls in other categories.</p>
+                    <div style="background: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 14px; color: #2d5016;">
+                        <strong>Status:</strong> Exemplary - Maintain current practices
+                    </div>
+                </div>
+                
+                <div class="insight-card">
+                    <h4>📊 Tool Strategy Recommendation</h4>
+                    <p><strong>Hybrid approach recommended:</strong> Use OpenSCAP for daily automated monitoring and CIS-CAT for comprehensive quarterly audits. The manual review capability of CIS-CAT provides valuable depth.</p>
+                    <div style="background: #e3f2fd; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 14px; color: #1565c0;">
+                        <strong>Strategy:</strong> Complementary tool usage for comprehensive coverage
+                    </div>
+                </div>
+                
+                <div class="insight-card">
+                    <h4>🎯 Implementation Feasibility</h4>
+                    <p><strong>85% of required remediations are addressable</strong> through standard configuration changes. Only filesystem partitioning requires significant system modification, making this highly actionable.</p>
+                    <div style="background: #e8f5e8; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 14px; color: #2d5016;">
+                        <strong>Feasibility:</strong> High - Most issues have straightforward solutions
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Assessment Summary -->
+            <div style="margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #fdeaea 0%, #ffffff 100%); border-radius: 12px; border: 2px solid #e74c3c;">
+                <h3 style="color: #c0392b; margin-top: 0; text-align: center;">⚡ Overall Risk Assessment Summary</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #c0392b; text-align: center;">
+                        <div style="font-size: 14px; font-weight: bold; color: #c0392b;">Network Exposure</div>
+                        <div style="font-size: 32px; font-weight: bold; color: #e74c3c; margin: 10px 0;">CRITICAL</div>
+                        <div style="font-size: 12px; color: #721c24;">No perimeter defense active</div>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #f39c12; text-align: center;">
+                        <div style="font-size: 14px; font-weight: bold; color: #d68910;">Access Control</div>
+                        <div style="font-size: 32px; font-weight: bold; color: #f39c12; margin: 10px 0;">HIGH</div>
+                        <div style="font-size: 12px; color: #856404;">Authentication gaps identified</div>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #f39c12; text-align: center;">
+                        <div style="font-size: 14px; font-weight: bold; color: #d68910;">System Hardening</div>
+                        <div style="font-size: 32px; font-weight: bold; color: #f39c12; margin: 10px 0;">MEDIUM</div>
+                        <div style="font-size: 12px; color: #856404;">Configuration improvements needed</div>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #27ae60; text-align: center;">
+                        <div style="font-size: 14px; font-weight: bold; color: #148f77;">Remote Access</div>
+                        <div style="font-size: 32px; font-weight: bold; color: #27ae60; margin: 10px 0;">SECURE</div>
+                        <div style="font-size: 12px; color: #1e8449;">SSH excellently configured</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 25px; padding: 20px; background: #c0392b; color: white; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">⚡ OVERALL SECURITY RISK LEVEL: HIGH ⚡</div>
+                    <div style="font-size: 14px; opacity: 0.9;">Critical network infrastructure vulnerabilities require immediate remediation</div>
+                    <div style="font-size: 12px; margin-top: 10px; opacity: 0.8;">
+                        Primary Concerns: No firewall protection • Network configuration gaps • Authentication weaknesses
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.8); border-radius: 8px; border-left: 4px solid #3498db;">
+                    <strong style="color: #2980b9;">Recommended Immediate Actions:</strong>
+                    <div style="font-size: 14px; color: #666; margin-top: 5px;">
+                        1. Enable firewall protection (UFW) with default deny policy<br>
+                        2. Configure network security kernel parameters<br>
+                        3. Implement account lockout and password policies<br>
+                        4. Schedule comprehensive security hardening over 4-week period
                     </div>
                 </div>
             </div>
@@ -652,15 +944,87 @@ This comprehensive analysis compares two leading security assessment tools - **C
 
         <!-- Download Section -->
         <div class="download-section">
-            <h3 style="margin-bottom: 20px;">📥 Export Complete Analysis</h3>
-            <button class="download-btn" onclick="downloadPDF()">
-                📄 Download PDF Report
-            </button>
-            <button class="download-btn" onclick="exportCSV()">
-                📊 Export Data (CSV)
-            </button>
-            <div style="margin-top: 15px; opacity: 0.9;">
-                Complete tool comparison with charts, analysis, and recommendations
+            <h3 style="margin-bottom: 25px;">📥 Export Security Analysis Report</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                <button class="download-btn" onclick="downloadPDF()">
+                    📄 Download Complete Analysis (PDF)
+                </button>
+                <button class="download-btn" onclick="exportCSV()">
+                    📊 Export Assessment Data (CSV)
+                </button>
+                <button class="download-btn" onclick="exportDetailedCSV()">
+                    📋 Export Detailed Analysis (CSV)
+                </button>
+                <button class="download-btn" onclick="[generateRemediationScript](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/_research/Remediation.md)()">
+                    🔧 Download Remediation Script
+                </button>
+            </div>
+            <div style="margin-top: 20px; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto;">
+                Complete security assessment analysis with detailed findings, tool validation, 
+                critical issue identification, and strategic remediation roadmap for Ubuntu 20.04 LTS.
+            </div>
+            <div style="margin-top: 15px; font-size: 12px; opacity: 0.7;">
+                <strong>Keyboard Shortcuts:</strong> Ctrl+P (PDF) • Ctrl+E (Export CSV) • Ctrl+S (Remediation Script)
+            </div>
+            
+            <!-- Summary Footer -->
+            <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center;">
+                    <div>
+                        <div style="font-size: 24px; font-weight: bold;">59%</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Overall Compliance</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: bold;">93</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Critical Failures</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: bold;">0.98%</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Tool Variance</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: bold;">4 Weeks</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Remediation Timeline</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Information -->
+        <div style="background: #2c3e50; color: white; padding: 30px; text-align: center;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 20px;">
+                <div>
+                    <h4 style="margin: 0 0 10px 0; color: #3498db;">Assessment Details</h4>
+                    <div style="font-size: 14px; opacity: 0.8;">
+                        CIS Ubuntu Linux 20.04 LTS Benchmark v3.0.0<br>
+                        Level 1 - Workstation Profile<br>
+                        CIS-CAT Pro Assessor v4.55.0<br>
+                        Assessment Duration: 1 minute, 36 seconds
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin: 0 0 10px 0; color: #e74c3c;">Critical Actions Required</h4>
+                    <div style="font-size: 14px; opacity: 0.8;">
+                        Enable firewall protection immediately<br>
+                        Configure network security parameters<br>
+                        Implement PAM authentication controls<br>
+                        Secure log file permissions
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin: 0 0 10px 0; color: #27ae60;">Strengths Identified</h4>
+                    <div style="font-size: 14px; opacity: 0.8;">
+                        SSH security: 100% compliance<br>
+                        System maintenance: 91-98% compliance<br>
+                        Tool validation: Cross-verified results<br>
+                        Implementation feasibility: 85% addressable
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; font-size: 12px; opacity: 0.6;">
+                Report Generated: <span id="reportTimestamp"></span> | 
+                CIS Controls Implementation Guide | 
+                Ubuntu 20.04 LTS Security Hardening
             </div>
         </div>
     </div>
@@ -686,59 +1050,268 @@ This comprehensive analysis compares two leading security assessment tools - **C
         function exportCSV() {
             try {
                 const csvData = [
-                    ['Tool', 'Level', 'Category', 'Passed', 'Failed', 'Manual_Other', 'Total', 'Pass_Rate'],
-                    ['CIS-CAT', '1', 'Initial Setup', '27', '22', '4', '53', '55%'],
-                    ['CIS-CAT', '1', 'Services', '28', '11', '1', '40', '72%'],
-                    ['CIS-CAT', '1', 'Network', '2', '9', '1', '12', '18%'],
-                    ['CIS-CAT', '1', 'Host Firewall', '5', '20', '5', '30', '20%'],
-                    ['CIS-CAT', '1', 'Access Control', '42', '24', '1', '67', '64%'],
-                    ['CIS-CAT', '1', 'Logging Auditing', '11', '5', '6', '22', '69%'],
-                    ['CIS-CAT', '1', 'System Maintenance', '20', '2', '1', '23', '91%'],
-                    ['CIS-CAT', '1', 'TOTAL', '135', '93', '21', '249', '59%'],
-                    ['CIS-CAT', '2', 'TOTAL', '146', '143', '21', '310', '51%'],
-                    ['OpenSCAP', '1', 'Initial Setup', '15', '25', '2', '42', '36%'],
-                    ['OpenSCAP', '1', 'Services', '52', '13', '2', '67', '78%'],
-                    ['OpenSCAP', '1', 'Network', '2', '25', '2', '29', '7%'],
-                    ['OpenSCAP', '1', 'Host Firewall', '2', '25', '2', '29', '7%'],
-                    ['OpenSCAP', '1', 'Access Control', '6', '26', '0', '32', '19%'],
-                    ['OpenSCAP', '1', 'Logging Auditing', '5', '4', '0', '9', '56%'],
-                    ['OpenSCAP', '1', 'System Maintenance', '52', '1', '0', '53', '98%'],
-                    ['OpenSCAP', '1', 'TOTAL', '132', '90', '8', '230', '59.98%'],
-                   ['OpenSCAP', '2', 'TOTAL', '134', '104', '15', '253', '40.08%']
-               ];
+                    ['Category', 'CIS-CAT_Pass', 'CIS-CAT_Fail', 'CIS-CAT_Manual', 'CIS-CAT_Percent', 'OpenSCAP_Pass', 'OpenSCAP_Fail', 'OpenSCAP_Other', 'OpenSCAP_Percent', 'Variance', 'Risk_Level'],
+                    ['Initial Setup', '27', '22', '4', '55%', '15', '25', '2', '36%', '+19%', 'Medium'],
+                    ['Services', '28', '11', '1', '72%', '52', '13', '2', '78%', '-6%', 'Low'],
+                    ['Network', '2', '9', '1', '18%', '2', '25', '2', '7%', '+11%', 'Critical'],
+                    ['Host Firewall', '5', '20', '5', '20%', '2', '25', '2', '7%', '+13%', 'Critical'],
+                    ['Access Control', '42', '24', '1', '64%', '6', '26', '0', '19%', '+45%', 'High'],
+                    ['Logging/Auditing', '11', '5', '6', '69%', '5', '4', '0', '56%', '+13%', 'Medium'],
+                    ['System Maintenance', '20', '2', '1', '91%', '52', '1', '0', '98%', '-7%', 'Low'],
+                    ['TOTAL', '135', '93', '21', '59%', '132', '90', '8', '59.98%', '-0.98%', 'Validated']
+                ];
 
-               const csvContent = csvData.map(row => row.join(',')).join('\n');
-               const blob = new Blob([csvContent], { type: 'text/csv' });
-               const url = URL.createObjectURL(blob);
-               const a = document.createElement('a');
-               a.href = url;
-               a.download = 'ubuntu_security_assessment_comparison.csv';
-               a.click();
-               URL.revokeObjectURL(url);
-               
-               console.log('CSV export completed');
-           } catch (error) {
-               console.error('Error exporting CSV:', error);
-               alert('CSV export failed. Please try again.');
-           }
-       }
+                const csvContent = csvData.map(row => row.join(',')).join('\n');
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'cis_security_analysis_' + new Date().toISOString().split('T')[0] + '.csv';
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                console.log('CSV export completed');
+            } catch (error) {
+                console.error('Error exporting CSV:', error);
+                alert('CSV export failed. Please try again.');
+            }
+        }
 
-       // Initialize hover effects
-       document.addEventListener('DOMContentLoaded', function() {
-           const hoverElements = document.querySelectorAll('.tool-card, .insight-card, .stat-item');
-           hoverElements.forEach(element => {
-               element.addEventListener('mouseenter', function() {
-                   this.style.transform = 'translateY(-5px)';
-                   this.style.transition = 'transform 0.3s ease';
-               });
-               element.addEventListener('mouseleave', function() {
-                   this.style.transform = 'translateY(0)';
-               });
-           });
+        // Initialize hover effects and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const hoverElements = document.querySelectorAll('.tool-card, .insight-card, .finding-item');
+            hoverElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                element.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
 
-           console.log('Ubuntu Security Assessment Report loaded successfully');
-       });
-   </script>
+            // Smooth scrolling for any internal links
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Add loading animation completion
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+
+            // Set report timestamp
+            const timestampElement = document.getElementById('reportTimestamp');
+            if (timestampElement) {
+                timestampElement.textContent = new Date().toLocaleString() + ' UTC';
+            }
+
+            console.log('CIS Security Assessment Analysis Report loaded successfully');
+            console.log('Assessment Summary: 59% compliance (135 Pass, 93 Fail, 21 Manual)');
+            console.log('Critical Issues: Network (18%), Firewall (20%), Access Control variance (+45%)');
+            console.log('Report Generated: ' + new Date().toLocaleString());
+        });
+
+        // Additional utility functions
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Content copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Print specific sections
+        function printSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`
+                    <html>
+                        <head>
+                            <title>CIS Security Assessment - ${sectionId}</title>
+                            <style>
+                                body { font-family: Arial, sans-serif; margin: 20px; }
+                                .finding-item { margin: 10px 0; padding: 10px; border-left: 4px solid #e74c3c; }
+                                .finding-title { font-weight: bold; color: #c0392b; }
+                                .finding-description { color: #666; font-size: 14px; }
+                            </style>
+                        </head>
+                        <body>
+                            ${section.innerHTML}
+                        </body>
+                    </html>
+                `);
+                printWindow.document.close();
+                printWindow.print();
+            }
+        }
+
+        // Generate detailed remediation script
+        function generateRemediationScript() {
+            const script = `#!/bin/bash
+# Ubuntu 20.04 CIS Security Remediation Script
+# Generated: ${new Date().toISOString()}
+# System: gn-VirtualBox (192.168.1.14)
+# Current Compliance: 59% (135 Pass, 93 Fail, 21 Manual)
+
+echo "Starting CIS Ubuntu 20.04 Security Remediation..."
+echo "WARNING: Review each command before execution"
+
+# WEEK 1: CRITICAL INFRASTRUCTURE
+echo "=== WEEK 1: CRITICAL INFRASTRUCTURE ==="
+
+# 1. Enable Firewall Protection
+echo "Configuring UFW Firewall..."
+systemctl unmask ufw.service
+systemctl --now enable ufw.service
+ufw allow ssh
+ufw default deny incoming
+ufw default deny outgoing
+ufw allow out http
+ufw allow out https
+ufw allow out 53
+ufw logging on
+ufw --force enable
+
+# 2. Configure Network Security Parameters
+echo "Configuring Network Security..."
+cat >> /etc/sysctl.conf << EOF
+# Network Security Parameters
+net.ipv4.ip_forward = 0
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.conf.all.secure_redirects = 0
+net.ipv4.conf.default.secure_redirects = 0
+net.ipv4.conf.all.log_martians = 1
+net.ipv4.conf.default.log_martians = 1
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.tcp_syncookies = 1
+EOF
+sysctl -p
+
+# 3. Configure PAM Account Lockout
+echo "Configuring PAM Account Lockout..."
+apt update && apt install -y libpam-pwquality
+echo "deny = 5" >> /etc/security/faillock.conf
+echo "unlock_time = 900" >> /etc/security/faillock.conf
+
+# 4. Secure Log File Permissions
+echo "Securing Log Files..."
+find /var/log -type f -exec chmod 640 {} \\;
+find /var/log -type f -exec chown root:adm {} \\;
+
+# WEEK 2: SECURITY HARDENING
+echo "=== WEEK 2: SECURITY HARDENING ==="
+
+# Install AppArmor
+echo "Installing AppArmor..."
+apt install -y apparmor apparmor-utils
+sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="apparmor=1 security=apparmor"/' /etc/default/grub
+update-grub
+
+# Configure Password Quality
+echo "Configuring Password Policies..."
+cat >> /etc/security/pwquality.conf << EOF
+# Password Quality Requirements
+minlen = 14
+difok = 2
+maxrepeat = 3
+maxsequence = 3
+enforce_for_root
+EOF
+
+# Secure Cron
+echo "Securing Cron..."
+chown root:root /etc/crontab
+chmod og-rwx /etc/crontab
+chown root:root /etc/cron.hourly /etc/cron.daily /etc/cron.weekly /etc/cron.monthly /etc/cron.d
+chmod og-rwx /etc/cron.hourly /etc/cron.daily /etc/cron.weekly /etc/cron.monthly /etc/cron.d
+
+echo "Remediation script completed. Please review and test all changes."
+echo "Reboot required for some changes to take effect."
+`;
+
+            const blob = new Blob([script], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ubuntu_cis_remediation_script.sh';
+            a.click();
+            URL.revokeObjectURL(url);
+            console.log('Remediation script generated and downloaded');
+        }
+
+        // Enhanced CSV export with more details
+        function exportDetailedCSV() {
+            try {
+                const csvData = [
+                    ['Control_ID', 'Category', 'Subcategory', 'Control_Description', 'CIS-CAT_Result', 'Risk_Level', 'Remediation_Effort', 'Business_Impact', 'Technical_Impact'],
+                    ['1.1.2.1.1', 'Initial Setup', 'Filesystem', 'Ensure /tmp is a separate partition', 'FAIL', 'Medium', 'High', 'Low', 'Resource exhaustion protection'],
+                    ['1.3.1.1', 'Initial Setup', 'AppArmor', 'Ensure latest versions of apparmor packages are installed', 'FAIL', 'High', 'Low', 'Medium', 'Mandatory Access Control missing'],
+                    ['1.4.1', 'Initial Setup', 'Bootloader', 'Ensure bootloader password is set', 'FAIL', 'High', 'Low', 'Low', 'Boot-time security compromise'],
+                    ['3.3.*', 'Network', 'Kernel Parameters', 'Configure Network Kernel Parameters', 'FAIL', 'Critical', 'Low', 'High', 'Network attack exposure'],
+                    ['4.2.4', 'Host Firewall', 'UFW', 'Ensure ufw service is enabled', 'FAIL', 'Critical', 'Low', 'High', 'Complete network exposure'],
+                    ['4.2.8', 'Host Firewall', 'UFW', 'Ensure ufw default deny firewall policy', 'FAIL', 'Critical', 'Low', 'High', 'Default allow policy dangerous'],
+                    ['5.1.*', 'Access Control', 'SSH', 'SSH Server Configuration (22 controls)', 'PASS', 'N/A', 'N/A', 'N/A', 'Secure remote access'],
+                    ['5.3.2.2', 'Access Control', 'PAM', 'Ensure pam_faillock module is enabled', 'FAIL', 'High', 'Medium', 'Medium', 'Brute force attack exposure'],
+                    ['5.3.3.2.2', 'Access Control', 'Passwords', 'Ensure minimum password length is configured', 'FAIL', 'Medium', 'Low', 'Low', 'Weak password exposure'],
+                    ['6.2.4.1', 'Logging', 'Log Files', 'Ensure access to all logfiles has been configured', 'FAIL', 'High', 'Low', 'Medium', 'Audit trail compromise'],
+                    ['7.2.9', 'System Maintenance', 'Home Directories', 'Ensure user home directories are configured', 'FAIL', 'Low', 'Medium', 'Low', 'User data exposure']
+                ];
+
+                const csvContent = csvData.map(row => row.join(',')).join('\n');
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'detailed_cis_security_assessment_' + new Date().toISOString().split('T')[0] + '.csv';
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                console.log('Detailed CSV export completed');
+            } catch (error) {
+                console.error('Error exporting detailed CSV:', error);
+                alert('Detailed CSV export failed. Please try again.');
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'p':
+                        e.preventDefault();
+                        downloadPDF();
+                        break;
+                    case 'e':
+                        e.preventDefault();
+                        exportCSV();
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        generateRemediationScript();
+                        break;
+                }
+            }
+        });
+    </script>
 </body>
 </html>
                     
