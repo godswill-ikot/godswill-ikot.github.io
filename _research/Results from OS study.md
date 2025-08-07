@@ -17,11 +17,12 @@ This comprehensive analysis compares two leading security assessment tools - **C
 - **Critical Vulnerabilities**: Network security and firewall configuration require immediate attention
 - **Major Discrepancy**: Access Control assessment varies significantly between tools (+45% difference)
 - **Implementation Readiness**: 85% of requirements are either implemented or easily addressable
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIS-CAT and OpenSCAP Security Assessment </title>
+    <title>CIS-CAT and OpenSCAP Security Assessment</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -428,7 +429,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
             <div class="charts-title">📊 Security Assessment Visualization</div>
             
             <!-- Level 1 & Level 2 Pie Charts -->
-            <img src="images/comparison.png"
+            <img src="https://godswill-ikot.github.io/images/pie.png"
                  alt="CIS-CAT vs OpenSCAP Level 1 and Level 2 Results Comparison" 
                  class="chart-image">
             <div class="chart-description">
@@ -437,7 +438,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
             </div>
             
             <!-- Category Comparison Bar Chart -->
-            <img src="images/comparison.png"
+            <img src="https://godswill-ikot.github.io/images/comparison.png"
                  alt="Category Pass Rate Comparison Between CIS-CAT and OpenSCAP" 
                  class="chart-image">
             <div class="chart-description">
@@ -740,30 +741,6 @@ This comprehensive analysis compares two leading security assessment tools - **C
    </script>
 </body>
 </html>
-
----
-
-## 🎯 Summary & Next Steps
-
-Based on this comprehensive security assessment, the following **immediate actions** are recommended:
-
-### 🚨 **Critical Priority (Week 1)**
-1. **Network Security Configuration**: Both tools agree this is the highest priority
-2. **Firewall Implementation**: Basic UFW rules to secure network perimeter  
-3. **Access Control Investigation**: Manual review needed due to tool discrepancy
-
-### 📊 **Assessment Validation**
-- **Tool Accuracy Confirmed**: 0.98% difference validates both assessments
-- **Consistent Findings**: Network and firewall identified as critical by both tools
-- **Reliable Baseline**: Use this assessment as foundation for security improvements
-
-### 🔄 **Continuous Monitoring Strategy**
-- **OpenSCAP**: Daily automated monitoring and CI/CD integration
-- **CIS-CAT**: Quarterly comprehensive compliance audits
-- **Combined Approach**: Leverage strengths of both tools for complete coverage
-
-This assessment provides a solid foundation for systematic security improvement with validated findings from two independent professional security assessment tools.
-
                     
 
 
