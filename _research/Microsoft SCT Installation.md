@@ -7,6 +7,7 @@ order_number: 20
 header: 
   og_image: "research/map.png"
 ---
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -682,6 +683,55 @@ header:
             <div class="critical-findings">
                 <h3 style="color: #c0392b; margin-top: 0;">🚨 Critical Security Findings</h3>
                 
+                <div class="finding-item severity-critical">
+                    <div class="finding-title">1. Complete Network Infrastructure Failure</div>
+                    <div class="finding-description">
+                        <strong>Firewall Status:</strong> UFW, nftables, and iptables are all disabled or misconfigured<br>
+                        <strong>Network Compliance:</strong> Only 18% (CIS-CAT) / 7% (OpenSCAP)<br>
+                        <strong>Impact:</strong> System is completely exposed to network attacks with no perimeter defense
+                    </div>
+                </div>
+
+                <div class="finding-item severity-critical">
+                    <div class="finding-title">2. Authentication and Access Control Gaps</div>
+                    <div class="finding-description">
+                        <strong>PAM Configuration:</strong> pam_faillock, pam_pwquality, pam_pwhistory modules disabled<br>
+                        <strong>Password Policies:</strong> No complexity requirements, lockout policies, or history enforcement<br>
+                        <strong>Impact:</strong> Unlimited brute force attacks possible, weak passwords allowed
+                    </div>
+                </div>
+
+                <div class="finding-item severity-high">
+                    <div class="finding-title">3. System Hardening Deficiencies</div>
+                    <div class="finding-description">
+                        <strong>AppArmor:</strong> Not installed or properly configured (Mandatory Access Control missing)<br>
+                        <strong>Bootloader:</strong> No password protection, configuration files not secured<br>
+                        <strong>Impact:</strong> Reduced defense layers, potential boot-time compromise
+                    </div>
+                </div>
+
+                <div class="finding-item severity-high">
+                    <div class="finding-title">4. Log File Security Issues</div>
+                    <div class="finding-description">
+                        <strong>Permissions:</strong> Log files lack proper access controls<br>
+                        <strong>Configuration:</strong> journald not properly forwarding to rsyslog<br>
+                        <strong>Impact:</strong> Potential log tampering, audit trail compromise
+                    </div>
+                </div>
+
+                <div class="finding-item severity-medium">
+                    <div class="finding-title">5. Tool Assessment Discrepancy - Access Control</div>
+                    <div class="finding-description">
+                        <strong>Variance:</strong> CIS-CAT reports 64% vs OpenSCAP 19% (+45% difference)<br>
+                        <strong>Area:</strong> PAM module configuration and access control policies<br>
+                        <strong>Action Required:</strong> Manual investigation and third-party validation needed
+                    </div>
+                </div>
+            </div>
+
+            <!-- Positive Findings -->
+            <div class="tool-validation">
+                <h3 style="color: #27ae60; margin-top: 0;">✅ Security Strengths Identified</h3>
                 <div class="finding-item" style="border-left-color: #27ae60;">
                     <div class="finding-title">System Maintenance Excellence</div>
                     <div class="finding-description">
@@ -877,15 +927,86 @@ header:
         <!-- Download Section -->
         <div class="download-section">
             <h3 style="margin-bottom: 25px;">📥 Export Security Analysis Report</h3>
-            <button class="download-btn" onclick="downloadPDF()">
-                📄 Download Complete Analysis (PDF)
-            </button>
-            <button class="download-btn" onclick="exportCSV()">
-                📊 Export Assessment Data (CSV)
-            </button>
-            <div style="margin-top: 20px; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                <button class="download-btn" onclick="downloadPDF()">
+                    📄 Download Complete Analysis (PDF)
+                </button>
+                <button class="download-btn" onclick="exportCSV()">
+                    📊 Export Assessment Data (CSV)
+                </button>
+                <button class="download-btn" onclick="exportDetailedCSV()">
+                    📋 Export Detailed Analysis (CSV)
+                </button>
+                <button class="download-btn" onclick="generateRemediationScript()">
+                    🔧 Download Remediation Script
+                </button>
+            </div>
+            <div style="margin-top: 20px; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto;">
                 Complete security assessment analysis with detailed findings, tool validation, 
                 critical issue identification, and strategic remediation roadmap for Ubuntu 20.04 LTS.
+            </div>
+            <div style="margin-top: 15px; font-size: 12px; opacity: 0.7;">
+                <strong>Keyboard Shortcuts:</strong> Ctrl+P (PDF) • Ctrl+E (Export CSV) • Ctrl+S (Remediation Script)
+            </div>
+            
+            <!-- Summary Footer -->
+            <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center;">
+                    <div>
+                        <div style="font-size: 24px; font-weight: bold;">59%</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Overall Compliance</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: bold;">93</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Critical Failures</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: bold;">0.98%</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Tool Variance</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: bold;">4 Weeks</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Remediation Timeline</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Information -->
+        <div style="background: #2c3e50; color: white; padding: 30px; text-align: center;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 20px;">
+                <div>
+                    <h4 style="margin: 0 0 10px 0; color: #3498db;">Assessment Details</h4>
+                    <div style="font-size: 14px; opacity: 0.8;">
+                        CIS Ubuntu Linux 20.04 LTS Benchmark v3.0.0<br>
+                        Level 1 - Workstation Profile<br>
+                        CIS-CAT Pro Assessor v4.55.0<br>
+                        Assessment Duration: 1 minute, 36 seconds
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin: 0 0 10px 0; color: #e74c3c;">Critical Actions Required</h4>
+                    <div style="font-size: 14px; opacity: 0.8;">
+                        Enable firewall protection immediately<br>
+                        Configure network security parameters<br>
+                        Implement PAM authentication controls<br>
+                        Secure log file permissions
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin: 0 0 10px 0; color: #27ae60;">Strengths Identified</h4>
+                    <div style="font-size: 14px; opacity: 0.8;">
+                        SSH security: 100% compliance<br>
+                        System maintenance: 91-98% compliance<br>
+                        Tool validation: Cross-verified results<br>
+                        Implementation feasibility: 85% addressable
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; font-size: 12px; opacity: 0.6;">
+                Report Generated: <span id="reportTimestamp"></span> | 
+                CIS Controls Implementation Guide | 
+                Ubuntu 20.04 LTS Security Hardening
             </div>
         </div>
     </div>
@@ -938,7 +1059,7 @@ header:
             }
         }
 
-        // Initialize hover effects
+        // Initialize hover effects and animations
         document.addEventListener('DOMContentLoaded', function() {
             const hoverElements = document.querySelectorAll('.tool-card, .insight-card, .finding-item');
             hoverElements.forEach(element => {
@@ -951,67 +1072,227 @@ header:
                 });
             });
 
+            // Smooth scrolling for any internal links
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Add loading animation completion
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+
+            // Set report timestamp
+            const timestampElement = document.getElementById('reportTimestamp');
+            if (timestampElement) {
+                timestampElement.textContent = new Date().toLocaleString() + ' UTC';
+            }
+
             console.log('CIS Security Assessment Analysis Report loaded successfully');
             console.log('Assessment Summary: 59% compliance (135 Pass, 93 Fail, 21 Manual)');
             console.log('Critical Issues: Network (18%), Firewall (20%), Access Control variance (+45%)');
+            console.log('Report Generated: ' + new Date().toLocaleString());
+        });
+
+        // Additional utility functions
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Content copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Print specific sections
+        function printSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`
+                    <html>
+                        <head>
+                            <title>CIS Security Assessment - ${sectionId}</title>
+                            <style>
+                                body { font-family: Arial, sans-serif; margin: 20px; }
+                                .finding-item { margin: 10px 0; padding: 10px; border-left: 4px solid #e74c3c; }
+                                .finding-title { font-weight: bold; color: #c0392b; }
+                                .finding-description { color: #666; font-size: 14px; }
+                            </style>
+                        </head>
+                        <body>
+                            ${section.innerHTML}
+                        </body>
+                    </html>
+                `);
+                printWindow.document.close();
+                printWindow.print();
+            }
+        }
+
+        // Generate detailed remediation script
+        function generateRemediationScript() {
+            const script = `#!/bin/bash
+# Ubuntu 20.04 CIS Security Remediation Script
+# Generated: ${new Date().toISOString()}
+# System: gn-VirtualBox (192.168.1.14)
+# Current Compliance: 59% (135 Pass, 93 Fail, 21 Manual)
+
+echo "Starting CIS Ubuntu 20.04 Security Remediation..."
+echo "WARNING: Review each command before execution"
+
+# WEEK 1: CRITICAL INFRASTRUCTURE
+echo "=== WEEK 1: CRITICAL INFRASTRUCTURE ==="
+
+# 1. Enable Firewall Protection
+echo "Configuring UFW Firewall..."
+systemctl unmask ufw.service
+systemctl --now enable ufw.service
+ufw allow ssh
+ufw default deny incoming
+ufw default deny outgoing
+ufw allow out http
+ufw allow out https
+ufw allow out 53
+ufw logging on
+ufw --force enable
+
+# 2. Configure Network Security Parameters
+echo "Configuring Network Security..."
+cat >> /etc/sysctl.conf << EOF
+# Network Security Parameters
+net.ipv4.ip_forward = 0
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.conf.all.secure_redirects = 0
+net.ipv4.conf.default.secure_redirects = 0
+net.ipv4.conf.all.log_martians = 1
+net.ipv4.conf.default.log_martians = 1
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.tcp_syncookies = 1
+EOF
+sysctl -p
+
+# 3. Configure PAM Account Lockout
+echo "Configuring PAM Account Lockout..."
+apt update && apt install -y libpam-pwquality
+echo "deny = 5" >> /etc/security/faillock.conf
+echo "unlock_time = 900" >> /etc/security/faillock.conf
+
+# 4. Secure Log File Permissions
+echo "Securing Log Files..."
+find /var/log -type f -exec chmod 640 {} \\;
+find /var/log -type f -exec chown root:adm {} \\;
+
+# WEEK 2: SECURITY HARDENING
+echo "=== WEEK 2: SECURITY HARDENING ==="
+
+# Install AppArmor
+echo "Installing AppArmor..."
+apt install -y apparmor apparmor-utils
+sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="apparmor=1 security=apparmor"/' /etc/default/grub
+update-grub
+
+# Configure Password Quality
+echo "Configuring Password Policies..."
+cat >> /etc/security/pwquality.conf << EOF
+# Password Quality Requirements
+minlen = 14
+difok = 2
+maxrepeat = 3
+maxsequence = 3
+enforce_for_root
+EOF
+
+# Secure Cron
+echo "Securing Cron..."
+chown root:root /etc/crontab
+chmod og-rwx /etc/crontab
+chown root:root /etc/cron.hourly /etc/cron.daily /etc/cron.weekly /etc/cron.monthly /etc/cron.d
+chmod og-rwx /etc/cron.hourly /etc/cron.daily /etc/cron.weekly /etc/cron.monthly /etc/cron.d
+
+echo "Remediation script completed. Please review and test all changes."
+echo "Reboot required for some changes to take effect."
+`;
+
+            const blob = new Blob([script], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ubuntu_cis_remediation_script.sh';
+            a.click();
+            URL.revokeObjectURL(url);
+            console.log('Remediation script generated and downloaded');
+        }
+
+        // Enhanced CSV export with more details
+        function exportDetailedCSV() {
+            try {
+                const csvData = [
+                    ['Control_ID', 'Category', 'Subcategory', 'Control_Description', 'CIS-CAT_Result', 'Risk_Level', 'Remediation_Effort', 'Business_Impact', 'Technical_Impact'],
+                    ['1.1.2.1.1', 'Initial Setup', 'Filesystem', 'Ensure /tmp is a separate partition', 'FAIL', 'Medium', 'High', 'Low', 'Resource exhaustion protection'],
+                    ['1.3.1.1', 'Initial Setup', 'AppArmor', 'Ensure latest versions of apparmor packages are installed', 'FAIL', 'High', 'Low', 'Medium', 'Mandatory Access Control missing'],
+                    ['1.4.1', 'Initial Setup', 'Bootloader', 'Ensure bootloader password is set', 'FAIL', 'High', 'Low', 'Low', 'Boot-time security compromise'],
+                    ['3.3.*', 'Network', 'Kernel Parameters', 'Configure Network Kernel Parameters', 'FAIL', 'Critical', 'Low', 'High', 'Network attack exposure'],
+                    ['4.2.4', 'Host Firewall', 'UFW', 'Ensure ufw service is enabled', 'FAIL', 'Critical', 'Low', 'High', 'Complete network exposure'],
+                    ['4.2.8', 'Host Firewall', 'UFW', 'Ensure ufw default deny firewall policy', 'FAIL', 'Critical', 'Low', 'High', 'Default allow policy dangerous'],
+                    ['5.1.*', 'Access Control', 'SSH', 'SSH Server Configuration (22 controls)', 'PASS', 'N/A', 'N/A', 'N/A', 'Secure remote access'],
+                    ['5.3.2.2', 'Access Control', 'PAM', 'Ensure pam_faillock module is enabled', 'FAIL', 'High', 'Medium', 'Medium', 'Brute force attack exposure'],
+                    ['5.3.3.2.2', 'Access Control', 'Passwords', 'Ensure minimum password length is configured', 'FAIL', 'Medium', 'Low', 'Low', 'Weak password exposure'],
+                    ['6.2.4.1', 'Logging', 'Log Files', 'Ensure access to all logfiles has been configured', 'FAIL', 'High', 'Low', 'Medium', 'Audit trail compromise'],
+                    ['7.2.9', 'System Maintenance', 'Home Directories', 'Ensure user home directories are configured', 'FAIL', 'Low', 'Medium', 'Low', 'User data exposure']
+                ];
+
+                const csvContent = csvData.map(row => row.join(',')).join('\n');
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'detailed_cis_security_assessment_' + new Date().toISOString().split('T')[0] + '.csv';
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                console.log('Detailed CSV export completed');
+            } catch (error) {
+                console.error('Error exporting detailed CSV:', error);
+                alert('Detailed CSV export failed. Please try again.');
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'p':
+                        e.preventDefault();
+                        downloadPDF();
+                        break;
+                    case 'e':
+                        e.preventDefault();
+                        exportCSV();
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        generateRemediationScript();
+                        break;
+                }
+            }
         });
     </script>
 </body>
-</html> severity-critical">
-                    <div class="finding-title">1. Complete Network Infrastructure Failure</div>
-                    <div class="finding-description">
-                        <strong>Firewall Status:</strong> UFW, nftables, and iptables are all disabled or misconfigured<br>
-                        <strong>Network Compliance:</strong> Only 18% (CIS-CAT) / 7% (OpenSCAP)<br>
-                        <strong>Impact:</strong> System is completely exposed to network attacks with no perimeter defense
-                    </div>
-                </div>
-
-                <div class="finding-item severity-critical">
-                    <div class="finding-title">2. Authentication and Access Control Gaps</div>
-                    <div class="finding-description">
-                        <strong>PAM Configuration:</strong> pam_faillock, pam_pwquality, pam_pwhistory modules disabled<br>
-                        <strong>Password Policies:</strong> No complexity requirements, lockout policies, or history enforcement<br>
-                        <strong>Impact:</strong> Unlimited brute force attacks possible, weak passwords allowed
-                    </div>
-                </div>
-
-                <div class="finding-item severity-high">
-                    <div class="finding-title">3. System Hardening Deficiencies</div>
-                    <div class="finding-description">
-                        <strong>AppArmor:</strong> Not installed or properly configured (Mandatory Access Control missing)<br>
-                        <strong>Bootloader:</strong> No password protection, configuration files not secured<br>
-                        <strong>Impact:</strong> Reduced defense layers, potential boot-time compromise
-                    </div>
-                </div>
-
-                <div class="finding-item severity-high">
-                    <div class="finding-title">4. Log File Security Issues</div>
-                    <div class="finding-description">
-                        <strong>Permissions:</strong> Log files lack proper access controls<br>
-                        <strong>Configuration:</strong> journald not properly forwarding to rsyslog<br>
-                        <strong>Impact:</strong> Potential log tampering, audit trail compromise
-                    </div>
-                </div>
-
-                <div class="finding-item severity-medium">
-                    <div class="finding-title">5. Tool Assessment Discrepancy - Access Control</div>
-                    <div class="finding-description">
-                        <strong>Variance:</strong> CIS-CAT reports 64% vs OpenSCAP 19% (+45% difference)<br>
-                        <strong>Area:</strong> PAM module configuration and access control policies<br>
-                        <strong>Action Required:</strong> Manual investigation and third-party validation needed
-                    </div>
-                </div>
-            </div>
-
-            <!-- Positive Findings -->
-            <div class="tool-validation">
-                <h3 style="color: #27ae60; margin-top: 0;">✅ Security Strengths Identified</h3>
-                <div class="finding-item" style="border-left-color: #27ae60;">
-                    <div class="finding-title">SSH Configuration Excellence</div>
-                    <div class="finding-description">
-                        <strong>Perfect Score:</strong> CIS-CAT shows 100% pass rate for all 22 SSH security controls<br>
-                        <strong>Configuration:</strong> Secure protocols, proper authentication, access controls implemented<br>
-                        <strong>Status:</strong> No SSH-related remediation required - maintain current configuration
-                    </div>
-                </div>
-                <div class="finding-item
+</html> #27ae60;">
