@@ -22,14 +22,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CIS-CAT vs OpenSCAP Security Assessment Comparison</title>
-    <!-- Multiple Chart.js CDN fallbacks -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <script>
-        // Fallback CDN loading
-        if (typeof Chart === 'undefined') {
-            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"><\/script>');
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js" crossorigin="anonymous"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -156,11 +149,13 @@ This comprehensive analysis compares two leading security assessment tools - **C
         .chart-fallback {
             display: none;
             text-align: center;
-            padding: 50px 20px;
+            padding: 30px 20px;
             color: #666;
             background: #f8f9fa;
             border-radius: 8px;
             border: 2px dashed #ddd;
+            height: 100%;
+            box-sizing: border-box;
         }
         
         .chart-fallback.active {
@@ -168,7 +163,6 @@ This comprehensive analysis compares two leading security assessment tools - **C
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%;
         }
         
         .fallback-data {
@@ -177,6 +171,25 @@ This comprehensive analysis compares two leading security assessment tools - **C
             border-radius: 8px;
             margin-top: 15px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 300px;
+        }
+        
+        .fallback-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        .fallback-table th,
+        .fallback-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .fallback-table th {
+            background: #f0f0f0;
+            font-weight: bold;
         }
         
         .full-width {
@@ -546,7 +559,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
                     <div class="chart-fallback" id="fallback5">
                         <h4>📊 Category Pass Rate Comparison</h4>
                         <div class="fallback-data">
-                            <table style="width: 100%; text-align: left;">
+                            <table class="fallback-table">
                                 <tr><th>Category</th><th>CIS-CAT</th><th>OpenSCAP</th></tr>
                                 <tr><td>Initial Setup</td><td>55%</td><td>36%</td></tr>
                                 <tr><td>Services</td><td>72%</td><td>78%</td></tr>
@@ -739,10 +752,10 @@ This comprehensive analysis compares two leading security assessment tools - **C
                 <div class="insight-card">
                     <h4>✅ System Maintenance Strength</h4>
                     <p><strong>Both tools confirm strong system maintenance</strong>: CIS-CAT 91%, OpenSCAP 98%. This validates that basic system hygiene practices are well-implemented.</p>
-                </div>
-            </div
-            
-            <div style="margin-top: 30px; padding: 25px; background: #fff3cd; border-radius: 10px; border-left: 5px solid #f39c12;">
+               </div>
+           </div>
+           
+           <div style="margin-top: 30px; padding: 25px; background: #fff3cd; border-radius: 10px; border-left: 5px solid #f39c12;">
                <h4 style="color: #856404; margin-top: 0;">🚀 Recommended Action Plan</h4>
                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                    <div>
@@ -781,297 +794,238 @@ This comprehensive analysis compares two leading security assessment tools - **C
    </div>
 
    <script>
-       // Multiple fallback strategy for Chart.js loading
-       let chartJSLoaded = false;
-       let loadAttempts = 0;
-       const maxAttempts = 3;
+       // Wait for page to fully load
+       document.addEventListener('DOMContentLoaded', function() {
+           console.log('DOM loaded, initializing charts...');
+           setTimeout(initializeCharts, 1000); // Wait 1 second for any Jekyll processing
+       });
 
-       function checkChartJS() {
-           if (typeof Chart !== 'undefined') {
-               chartJSLoaded = true;
-               initializeCharts();
-           } else {
-               loadAttempts++;
-               if (loadAttempts < maxAttempts) {
-                   // Try alternative CDN
-                   setTimeout(() => {
-                       const script = document.createElement('script');
-                       script.src = loadAttempts === 1 ? 
-                           'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js' :
-                           'https://unpkg.com/chart.js@3.9.1/dist/chart.min.js';
-                       script.onload = checkChartJS;
-                       script.onerror = checkChartJS;
-                       document.head.appendChild(script);
-                   }, 1000);
-               } else {
-                   // Show fallback content
-                   showFallbackCharts();
+       function initializeCharts() {
+           console.log('Chart.js available:', typeof Chart !== 'undefined');
+           
+           if (typeof Chart === 'undefined') {
+               console.log('Chart.js not available, showing fallback content');
+               showFallbackCharts();
+               return;
+           }
+
+           console.log('Creating charts...');
+
+           // Chart.js configuration
+           Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+           Chart.defaults.font.size = 12;
+           
+           // Colors
+           const colors = {
+               pass: '#27ae60',
+               fail: '#e74c3c',
+               manual: '#f39c12',
+               other: '#9b59b6',
+               ciscat: '#3498db',
+               openscap: '#e74c3c'
+           };
+
+           // Data
+           const chartData = {
+               ciscatL1: [135, 93, 21],
+               openscapL1: [132, 90, 8],
+               ciscatL2: [146, 143, 21],
+               openscapL2: [134, 104, 15],
+               categories: {
+                   ciscat: [55, 72, 18, 20, 64, 69, 91],
+                   openscap: [36, 78, 7, 7, 19, 56, 98]
                }
+           };
+
+           // Create each chart with individual error handling
+           createChart('ciscatLevel1Chart', 'doughnut', {
+               labels: ['Passed', 'Failed', 'Manual Review'],
+               data: chartData.ciscatL1,
+               colors: [colors.pass, colors.fail, colors.manual]
+           }, 'fallback1');
+
+           createChart('openscapLevel1Chart', 'doughnut', {
+               labels: ['Passed', 'Failed', 'Other Issues'],
+               data: chartData.openscapL1,
+               colors: [colors.pass, colors.fail, colors.other]
+           }, 'fallback2');
+
+           createChart('ciscatLevel2Chart', 'doughnut', {
+               labels: ['Passed', 'Failed', 'Manual Review'],
+               data: chartData.ciscatL2,
+               colors: [colors.pass, colors.fail, colors.manual]
+           }, 'fallback3');
+
+           createChart('openscapLevel2Chart', 'doughnut', {
+               labels: ['Passed', 'Failed', 'Other Issues'],
+               data: chartData.openscapL2,
+               colors: [colors.pass, colors.fail, colors.other]
+           }, 'fallback4');
+
+           createBarChart('categoryComparisonChart', {
+               labels: ['Initial Setup', 'Services', 'Network', 'Host Firewall', 'Access Control', 'Logging & Auditing', 'System Maintenance'],
+               ciscat: chartData.categories.ciscat,
+               openscap: chartData.categories.openscap
+           }, 'fallback5');
+       }
+
+       function createChart(canvasId, type, config, fallbackId) {
+           try {
+               const canvas = document.getElementById(canvasId);
+               if (!canvas) {
+                   console.error('Canvas not found:', canvasId);
+                   return;
+               }
+
+               const ctx = canvas.getContext('2d');
+               
+               new Chart(ctx, {
+                   type: type,
+                   data: {
+                       labels: config.labels,
+                       datasets: [{
+                           data: config.data,
+                           backgroundColor: config.colors,
+                           borderWidth: 2,
+                           borderColor: '#ffffff'
+                       }]
+                   },
+                   options: {
+                       responsive: true,
+                       maintainAspectRatio: false,
+                       plugins: {
+                           legend: {
+                               position: 'bottom',
+                               labels: {
+                                   padding: 15,
+                                   usePointStyle: true,
+                                   font: { size: 11 }
+                               }
+                           },
+                           tooltip: {
+                               callbacks: {
+                                   label: function(context) {
+                                       const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                       const percentage = ((context.parsed * 100) / total).toFixed(1);
+                                       return `${context.label}: ${context.parsed} (${percentage}%)`;
+                                   }
+                               }
+                           }
+                       }
+                   }
+               });
+               
+               console.log('Chart created successfully:', canvasId);
+               
+           } catch (error) {
+               console.error('Error creating chart:', canvasId, error);
+               activateFallback(fallbackId);
+           }
+       }
+
+       function createBarChart(canvasId, config, fallbackId) {
+           try {
+               const canvas = document.getElementById(canvasId);
+               if (!canvas) {
+                   console.error('Canvas not found:', canvasId);
+                   return;
+               }
+
+               const ctx = canvas.getContext('2d');
+               
+               new Chart(ctx, {
+                   type: 'bar',
+                   data: {
+                       labels: config.labels,
+                       datasets: [{
+                           label: 'CIS-CAT Pass Rate (%)',
+                           data: config.ciscat,
+                           backgroundColor: '#3498db',
+                           borderColor: '#3498db',
+                           borderWidth: 1
+                       }, {
+                           label: 'OpenSCAP Pass Rate (%)',
+                           data: config.openscap,
+                           backgroundColor: '#e74c3c',
+                           borderColor: '#e74c3c',
+                           borderWidth: 1
+                       }]
+                   },
+                   options: {
+                       responsive: true,
+                       maintainAspectRatio: false,
+                       scales: {
+                           y: {
+                               beginAtZero: true,
+                               max: 100,
+                               title: {
+                                   display: true,
+                                   text: 'Pass Rate (%)'
+                               }
+                           },
+                           x: {
+                               title: {
+                                   display: true,
+                                   text: 'CIS Control Categories'
+                               },
+                               ticks: {
+                                   maxRotation: 45
+                               }
+                           }
+                       },
+                       plugins: {
+                           legend: {
+                               position: 'top'
+                           },
+                           tooltip: {
+                               callbacks: {
+                                   afterLabel: function(context) {
+                                       const ciscatValue = context.chart.data.datasets[0].data[context.dataIndex];
+                                       const openscapValue = context.chart.data.datasets[1].data[context.dataIndex];
+                                       const diff = ciscatValue - openscapValue;
+                                       return `Difference: ${diff > 0 ? '+' : ''}${diff}%`;
+                                   }
+                               }
+                           }
+                       }
+                   }
+               });
+               
+               console.log('Bar chart created successfully:', canvasId);
+               
+           } catch (error) {
+               console.error('Error creating bar chart:', canvasId, error);
+               activateFallback(fallbackId);
+           }
+       }
+
+       function activateFallback(fallbackId) {
+           const fallback = document.getElementById(fallbackId);
+           if (fallback) {
+               fallback.classList.add('active');
+               console.log('Activated fallback:', fallbackId);
            }
        }
 
        function showFallbackCharts() {
-           console.log('Chart.js failed to load, showing fallback content');
            const fallbacks = ['fallback1', 'fallback2', 'fallback3', 'fallback4', 'fallback5'];
-           fallbacks.forEach(id => {
-               const element = document.getElementById(id);
-               if (element) {
-                   element.classList.add('active');
-               }
-           });
+           fallbacks.forEach(id => activateFallback(id));
        }
 
-       function initializeCharts() {
-           // Chart configuration
-           Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
-           Chart.defaults.font.size = 12;
-           Chart.defaults.plugins.legend.position = 'bottom';
-           Chart.defaults.plugins.legend.labels.padding = 20;
-           
-           // Color scheme
-           const colors = {
-               ciscatPrimary: '#3498db',
-               openscapPrimary: '#e74c3c',
-               pass: '#27ae60',
-               fail: '#e74c3c',
-               manual: '#f39c12',
-               other: '#9b59b6'
-           };
-
-           // Data sets
-           const ciscatL1Data = { pass: 135, fail: 93, manual: 21 };
-           const openscapL1Data = { pass: 132, fail: 90, other: 8 };
-           const ciscatL2Data = { pass: 146, fail: 143, manual: 21 };
-           const openscapL2Data = { pass: 134, fail: 104, other: 15 };
-
-           // Helper function to create pie chart
-           function createPieChart(ctx, data, labels, chartColors) {
-               try {
-                   return new Chart(ctx, {
-                       type: 'doughnut',
-                       data: {
-                           labels: labels,
-                           datasets: [{
-                               data: Object.values(data),
-                               backgroundColor: chartColors,
-                               borderWidth: 3,
-                               borderColor: '#fff',
-                               hoverOffset: 10
-                           }]
-                       },
-                       options: {
-                           responsive: true,
-                           maintainAspectRatio: false,
-                           plugins: {
-                               legend: {
-                                   position: 'bottom',
-                                   labels: {
-                                       padding: 15,
-                                       usePointStyle: true,
-                                       font: { size: 11, weight: '600' }
-                                   }
-                               },
-                               tooltip: {
-                                   backgroundColor: 'rgba(0,0,0,0.8)',
-                                   titleColor: 'white',
-                                   bodyColor: 'white',
-                                   borderColor: 'rgba(255,255,255,0.3)',
-                                   borderWidth: 1,
-                                   callbacks: {
-                                       label: function(context) {
-                                           const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                           const percentage = ((context.parsed * 100) / total).toFixed(1);
-                                           return `${context.label}: ${context.parsed} rules (${percentage}%)`;
-                                       }
-                                   }
-                               }
-                           },
-                           layout: { padding: 10 }
-                       }
-                   });
-               } catch (error) {
-                   console.error('Error creating pie chart:', error);
-                   return null;
-               }
-           }
-
-           // Create all charts with error handling
-           try {
-               // CIS-CAT Level 1 Chart
-               const ciscatL1Ctx = document.getElementById('ciscatLevel1Chart');
-               if (ciscatL1Ctx) {
-                   const chart1 = createPieChart(
-                       ciscatL1Ctx.getContext('2d'),
-                       ciscatL1Data,
-                       ['Passed', 'Failed', 'Manual Review'],
-                       [colors.pass, colors.fail, colors.manual]
-                   );
-                   if (!chart1) document.getElementById('fallback1').classList.add('active');
-               }
-
-               // OpenSCAP Level 1 Chart
-               const openscapL1Ctx = document.getElementById('openscapLevel1Chart');
-               if (openscapL1Ctx) {
-                   const chart2 = createPieChart(
-                       openscapL1Ctx.getContext('2d'),
-                       openscapL1Data,
-                       ['Passed', 'Failed', 'Other Issues'],
-                       [colors.pass, colors.fail, colors.other]
-                   );
-                   if (!chart2) document.getElementById('fallback2').classList.add('active');
-               }
-
-               // CIS-CAT Level 2 Chart
-               const ciscatL2Ctx = document.getElementById('ciscatLevel2Chart');
-               if (ciscatL2Ctx) {
-                   const chart3 = createPieChart(
-                       ciscatL2Ctx.getContext('2d'),
-                       ciscatL2Data,
-                       ['Passed', 'Failed', 'Manual Review'],
-                       [colors.pass, colors.fail, colors.manual]
-                   );
-                   if (!chart3) document.getElementById('fallback3').classList.add('active');
-               }
-
-               // OpenSCAP Level 2 Chart
-               const openscapL2Ctx = document.getElementById('openscapLevel2Chart');
-               if (openscapL2Ctx) {
-                   const chart4 = createPieChart(
-                       openscapL2Ctx.getContext('2d'),
-                       openscapL2Data,
-                       ['Passed', 'Failed', 'Other Issues'],
-                       [colors.pass, colors.fail, colors.other]
-                   );
-                   if (!chart4) document.getElementById('fallback4').classList.add('active');
-               }
-
-               // Category Comparison Bar Chart
-               const categoryCtx = document.getElementById('categoryComparisonChart');
-               if (categoryCtx) {
-                   try {
-                       new Chart(categoryCtx.getContext('2d'), {
-                           type: 'bar',
-                           data: {
-                               labels: [
-                                   'Initial Setup',
-                                   'Services',
-                                   'Network',
-                                   'Host Firewall',
-                                   'Access Control',
-                                   'Logging & Auditing',
-                                   'System Maintenance'
-                               ],
-                               datasets: [{
-                                   label: 'CIS-CAT Pass Rate (%)',
-                                   data: [55, 72, 18, 20, 64, 69, 91],
-                                   backgroundColor: colors.ciscatPrimary,
-                                   borderColor: colors.ciscatPrimary,
-                                   borderWidth: 2,
-                                   borderRadius: 4,
-                                   borderSkipped: false,
-                               }, {
-                                   label: 'OpenSCAP Pass Rate (%)',
-                                   data: [36, 78, 7, 7, 19, 56, 98],
-                                   backgroundColor: colors.openscapPrimary,
-                                   borderColor: colors.openscapPrimary,
-                                   borderWidth: 2,
-                                   borderRadius: 4,
-                                   borderSkipped: false,
-                               }]
-                           },
-                           options: {
-                               responsive: true,
-                               maintainAspectRatio: false,
-                               interaction: {
-                                   intersect: false,
-                                   mode: 'index'
-                               },
-                               scales: {
-                                   y: {
-                                       beginAtZero: true,
-                                       max: 100,
-                                       title: {
-                                           display: true,
-                                           text: 'Pass Rate (%)',
-                                           font: { size: 14, weight: 'bold' }
-                                       },
-                                       grid: {
-                                           color: 'rgba(0,0,0,0.1)'
-                                       }
-                                   },
-                                   x: {
-                                       title: {
-                                           display: true,
-                                           text: 'CIS Control Categories',
-                                           font: { size: 14, weight: 'bold' }
-                                       },
-                                       ticks: {
-                                           maxRotation: 45,
-                                           minRotation: 45
-                                       }
-                                   }
-                               },
-                               plugins: {
-                                   legend: {
-                                       position: 'top',
-                                       labels: {
-                                           usePointStyle: true,
-                                           padding: 20,
-                                           font: { size: 13, weight: '600' }
-                                       }
-                                   },
-                                   tooltip: {
-                                       backgroundColor: 'rgba(0,0,0,0.8)',
-                                       titleColor: 'white',
-                                       bodyColor: 'white',
-                                       borderColor: 'rgba(255,255,255,0.3)',
-                                       borderWidth: 1,
-                                       callbacks: {
-                                           label: function(context) {
-                                               return `${context.dataset.label}: ${context.parsed.y}%`;
-                                           },
-                                           afterLabel: function(context) {
-                                               const ciscatValue = context.chart.data.datasets[0].data[context.dataIndex];
-                                               const openscapValue = context.chart.data.datasets[1].data[context.dataIndex];
-                                               const diff = ciscatValue - openscapValue;
-                                               return `Difference: ${diff > 0 ? '+' : ''}${diff.toFixed(1)}%`;
-                                           }
-                                       }
-                                   }
-                               }
-                           }
-                       });
-                   } catch (error) {
-                       console.error('Error creating bar chart:', error);
-                       document.getElementById('fallback5').classList.add('active');
-                   }
-               }
-
-               console.log('Charts initialized successfully');
-               
-           } catch (error) {
-               console.error('Error initializing charts:', error);
-               showFallbackCharts();
-           }
-       }
-
-       // Download Functions
+       // Export functions
        function downloadPDF() {
            try {
-               // Hide download section for printing
                const downloadSection = document.querySelector('.download-section');
                if (downloadSection) downloadSection.style.display = 'none';
                
-               // Print the page
                window.print();
                
-               // Restore download section
                setTimeout(() => {
                    if (downloadSection) downloadSection.style.display = 'block';
                }, 1000);
            } catch (error) {
                console.error('Error downloading PDF:', error);
-               alert('Unable to generate PDF. Please try using your browser\'s print function (Ctrl+P).');
+               alert('Unable to generate PDF. Please use your browser\'s print function (Ctrl+P).');
            }
        }
 
@@ -1100,50 +1054,36 @@ This comprehensive analysis compares two leading security assessment tools - **C
                ];
 
                const csvContent = csvData.map(row => row.join(',')).join('\n');
-               const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-               const link = document.createElement('a');
+               const blob = new Blob([csvContent], { type: 'text/csv' });
                const url = URL.createObjectURL(blob);
-               
-               link.setAttribute('href', url);
-               link.setAttribute('download', 'ubuntu_security_assessment_comparison.csv');
-               link.style.visibility = 'hidden';
-               
-               document.body.appendChild(link);
-               link.click();
-               document.body.removeChild(link);
+               const a = document.createElement('a');
+               a.href = url;
+               a.download = 'ubuntu_security_assessment_comparison.csv';
+               a.click();
                URL.revokeObjectURL(url);
                
-               console.log('CSV export completed successfully');
-               
+               console.log('CSV export completed');
            } catch (error) {
                console.error('Error exporting CSV:', error);
-               alert('Unable to export CSV. Please check your browser settings and try again.');
+               alert('CSV export failed. Please try again.');
            }
        }
 
-       // Initialize everything when DOM is ready
+       // Initialize hover effects
        document.addEventListener('DOMContentLoaded', function() {
-           console.log('DOM loaded, checking Chart.js...');
-           checkChartJS();
-           
-           // Add interaction effects
-           const interactiveElements = document.querySelectorAll('.tool-card, .insight-card, .stat-item');
-           interactiveElements.forEach(element => {
+           const hoverElements = document.querySelectorAll('.tool-card, .insight-card, .stat-item');
+           hoverElements.forEach(element => {
                element.addEventListener('mouseenter', function() {
-                   if (!this.style.transform.includes('translateY')) {
-                       this.style.transform = 'translateY(-5px)';
-                       this.style.transition = 'transform 0.3s ease';
-                   }
+                   this.style.transform = 'translateY(-5px)';
+                   this.style.transition = 'transform 0.3s ease';
                });
-               
                element.addEventListener('mouseleave', function() {
                    this.style.transform = 'translateY(0)';
                });
            });
-
-           console.log('Interactive elements initialized');
        });
 
+       console.log('Script loaded successfully');
    </script>
 </body>
 </html>
@@ -1170,7 +1110,7 @@ Based on this comprehensive security assessment, the following **immediate actio
 - **Combined Approach**: Leverage strengths of both tools for complete coverage
 
 This assessment provides a solid foundation for systematic security improvement with validated findings from two independent professional security assessment tools.
-
+                    
 
 
 
