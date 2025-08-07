@@ -7,7 +7,6 @@ order_number: 20
 header: 
   og_image: "research/map.png"
 ---
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -937,8 +936,8 @@ header:
                 <button class="download-btn" onclick="exportDetailedCSV()">
                     📋 Export Detailed Analysis (CSV)
                 </button>
-                <button class="download-btn" onclick="generateRemediationScript()">
-                    [🔧 Download Remediation Script](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/_research/Remediation.md)
+                <button class="download-btn" onclick="[generateRemediationScript](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/_research/Remediation.md)()">
+                    🔧 Download Remediation Script
                 </button>
             </div>
             <div style="margin-top: 20px; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto;">
