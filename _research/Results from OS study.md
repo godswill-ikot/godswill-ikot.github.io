@@ -17,7 +17,6 @@ This comprehensive analysis compares two leading security assessment tools - **C
 - **Critical Vulnerabilities**: Network security and firewall configuration require immediate attention
 - **Major Discrepancy**: Access Control assessment varies significantly between tools (+45% difference)
 - **Implementation Readiness**: 85% of requirements are either implemented or easily addressable
-![BAR CHART](_research/0....png)
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -429,7 +428,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
             <div class="charts-title">📊 Security Assessment Visualization</div>
             
             <!-- Level 1 & Level 2 Pie Charts -->
-            <img src="_research/0..png"
+            <img src="images/0....png"
                  alt="CIS-CAT vs OpenSCAP Level 1 and Level 2 Results Comparison" 
                  class="chart-image">
             <div class="chart-description">
