@@ -21,7 +21,7 @@ This comprehensive analysis compares two leading security assessment tools - **C
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIS-CAT vs OpenSCAP Security Assessment Comparison</title>
+    <title>CIS-CAT and OpenSCAP Security Assessment </title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
