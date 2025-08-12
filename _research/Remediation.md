@@ -120,39 +120,107 @@ sudo chmod +x /etc/cron.weekly/openscap-check
 ```powershell
 # Windows Security Remediation - PowerShell 7 Manual Commands
 # CIS Microsoft Windows 10 Enterprise Benchmark v4.0.0 Level 1
-# Prerequisites: 
-# - PowerShell 7.0+
-# - Administrator privileges: Requires -RunAsAdministrator 
-# - Windows 10
-# =================================
+# Requires -Version 7.0 RunAsAdministrator
+# ===============================================================================
+# Function to create registry path if it doesn't exist (use before using codes in the GROUPS)
+function New-RegistryPath {
+    param([string]$Path)
+    if (!(Test-Path $Path)) {
+        try {
+            New-Item -Path $Path -Force -ErrorAction Stop | Out-Null
+            Write-Host "Created registry path: $Path" -ForegroundColor Green
+        }
+        catch {
+            Write-Warning "Failed to create registry path: $Path - $($_.Exception.Message)"
+        }
+    }
+}
+
+# Function to safely set registry property
+function Set-SafeRegistryProperty {
+    param(
+        [string]$Path,
+        [string]$Name,
+        [object]$Value,
+        [string]$Type = "DWord"
+    )
+    
+    New-RegistryPath -Path $Path
+    
+    try {
+        Set-ItemProperty -Path $Path -Name $Name -Value $Value -Type $Type -Force -ErrorAction Stop
+        Write-Host "Set $Path\$Name = $Value" -ForegroundColor Cyan
+    }
+    catch {
+        Write-Warning "Failed to set $Path\$Name - $($_.Exception.Message)"
+    }
+}
+
+Write-Host "Starting Windows Security Hardening..." -ForegroundColor Yellow
+# ===============================================================================
 # GROUP 1: INITIAL SETUP - Easy Implementation Controls
-# =================================
+# ===============================================================================
+Write-Host "`n=== GROUP 1: Initial Setup ===" -ForegroundColor Magenta
 # Windows Update Automatic Policies (Critical Impact)
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoUpdate" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUOptions" -Value 4 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallDay" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallTime" -Value 3 -Type DWord -Force
+Write-Host "Configuring Windows Update policies..." -ForegroundColor Yellow
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoUpdate" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUOptions" -Value 4
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallDay" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallTime" -Value 3
 # Storage Sense Automated Cleanup (Medium Impact)
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense" -Name "AllowStorageSenseGlobal" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense" -Name "AllowStorageSenseTemporaryFilesCleanup" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense" -Name "StorageSenseCloudContentDehydrationThreshold" -Value 30 -Type DWord -Force
+Write-Host "Configuring Storage Sense policies..." -ForegroundColor Yellow
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense" -Name "AllowStorageSenseGlobal" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense" -Name "AllowStorageSenseTemporaryFilesCleanup" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense" -Name "StorageSenseCloudContentDehydrationThreshold" -Value 30
 # System Restore Point Policies (Medium Impact)
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" -Name "DisableConfig" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" -Name "DisableSR" -Value 0 -Type DWord -Force
-Enable-ComputerRestore -Drive "C:\"
-Checkpoint-Computer -Description "Security Remediation Baseline" -RestorePointType "MODIFY_SETTINGS"
-# Disk Quota Management (Medium Impact) - Enable quota management for system drives
-fsutil quota enforce C:
-fsutil quota modify C: 10737418240 8589934592 Administrator
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "NtfsDisableLastAccessUpdate" -Value 1 -Type DWord -Force
-# ===============
-# GROUP 2: SERVICES - Easy Implementation Controls  
-# ===============
+Write-Host "Configuring System Restore policies..." -ForegroundColor Yellow
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" -Name "DisableConfig" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" -Name "DisableSR" -Value 0
+# Enable System Restore (using WMI instead of unavailable cmdlets)
+Write-Host "Enabling System Restore..." -ForegroundColor Yellow
+try {
+    Enable-ComputerRestore -Drive "C:\" -ErrorAction Stop
+    Checkpoint-Computer -Description "Security Remediation Baseline" -RestorePointType "MODIFY_SETTINGS" -ErrorAction Stop
+    Write-Host "System Restore configured successfully" -ForegroundColor Green
+}
+catch {
+    Write-Host "System Restore cmdlets not available in PowerShell 7. Using alternative method..." -ForegroundColor Yellow
+    try {
+        $wmi = Get-WmiObject -Class "Win32_SystemRestore" -ErrorAction Stop
+        $wmi.Enable("C:\")
+        Write-Host "System Restore enabled via WMI" -ForegroundColor Green
+    }
+    catch {
+        Write-Warning "Could not enable System Restore: $($_.Exception.Message)"
+    }
+}
+
+# Disk Quota Management (Medium Impact)
+Write-Host "Configuring disk quota..." -ForegroundColor Yellow
+try {
+    fsutil quota enforce C:
+    fsutil quota modify C: 10737418240 8589934592 Administrator
+    Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "NtfsDisableLastAccessUpdate" -Value 1
+}
+catch {
+    Write-Warning "Disk quota configuration failed: $($_.Exception.Message)"
+}
+# ===============================================================================
+# GROUP 2: SERVICES - Easy Implementation Controls
+# ===============================================================================
+Write-Host "`n=== GROUP 2: Services ===" -ForegroundColor Magenta
 # Task Scheduler Security Policies (Medium Impact)
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule" -Name "DisableRpcOverTcp" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Task Scheduler5.0" -Name "Disable New Task Creation" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Task Scheduler5.0" -Name "Allow Cross Forest Tasks" -Value 0 -Type DWord -Force
+Write-Host "Configuring Task Scheduler policies..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule" -Name "DisableRpcOverTcp" -Value 1
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Task Scheduler5.0"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Task Scheduler5.0" -Name "Disable New Task Creation" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Task Scheduler5.0" -Name "Allow Cross Forest Tasks" -Value 0
+
 # Disable Unnecessary Services (Medium Impact)
+Write-Host "Disabling unnecessary services..." -ForegroundColor Yellow
 $servicesToDisable = @(
     "TabletInputService",        # Tablet PC Input Service
     "WSearch",                   # Windows Search (if not needed)
@@ -167,111 +235,169 @@ $servicesToDisable = @(
 )
 
 foreach ($service in $servicesToDisable) {
-    if (Get-Service -Name $service -ErrorAction SilentlyContinue) {
-        Stop-Service -Name $service -Force -ErrorAction SilentlyContinue
-        Set-Service -Name $service -StartupType Disabled
-        Write-Host "Disabled service: $service" -ForegroundColor Yellow
+    try {
+        if (Get-Service -Name $service -ErrorAction SilentlyContinue) {
+            Stop-Service -Name $service -Force -ErrorAction SilentlyContinue
+            Set-Service -Name $service -StartupType Disabled -ErrorAction Stop
+            Write-Host "Disabled service: $service" -ForegroundColor Green
+        }
+    }
+    catch {
+        Write-Warning "Failed to disable service $service`: $($_.Exception.Message)"
     }
 }
 
 # Service Failure Recovery Actions (Medium Impact)
+Write-Host "Configuring service recovery actions..." -ForegroundColor Yellow
 sc.exe failure "Themes" reset= 86400 actions= restart/60000/restart/60000/restart/60000
 sc.exe failure "AudioSrv" reset= 86400 actions= restart/60000/restart/60000/restart/60000
 sc.exe failure "EventLog" reset= 86400 actions= restart/60000/restart/60000/restart/60000
+
 # Service Account Restrictions (High Impact)
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictAnonymous" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictAnonymousSAM" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters" -Name "RestrictNullSessAccess" -Value 1 -Type DWord -Force
-# ================
+Write-Host "Configuring service account restrictions..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictAnonymous" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictAnonymousSAM" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters" -Name "RestrictNullSessAccess" -Value 1
+
+# ===============================================================================
 # GROUP 3: NETWORK - Easy Implementation Controls
-# ================
+# ===============================================================================
+Write-Host "`n=== GROUP 3: Network Security ===" -ForegroundColor Magenta
+
 # IPv6 Transition Security (High Impact)
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" -Name "DisabledComponents" -Value 0xFF -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TCPIP\v6Transition" -Name "Force_Tunneling" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TCPIP\v6Transition" -Name "6to4_State" -Value 1 -Type DWord -Force
+Write-Host "Configuring IPv6 security..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" -Name "DisabledComponents" -Value 0xFF
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TCPIP\v6Transition"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TCPIP\v6Transition" -Name "Force_Tunneling" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TCPIP\v6Transition" -Name "6to4_State" -Value 1
+
 # SSL Configuration Hardening (High Impact)
+Write-Host "Hardening SSL configuration..." -ForegroundColor Yellow
+
 # Disable SSL 2.0
-New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0" -Force
-New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Client" -Force
-New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Server" -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Client" -Name "Enabled" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Server" -Name "Enabled" -Value 0 -Type DWord -Force
+New-RegistryPath -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Client"
+New-RegistryPath -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Server"
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Client" -Name "Enabled" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Server" -Name "Enabled" -Value 0
+
 # Disable SSL 3.0
-New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0" -Force
-New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Client" -Force
-New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server" -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Client" -Name "Enabled" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server" -Name "Enabled" -Value 0 -Type DWord -Force
+New-RegistryPath -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Client"
+New-RegistryPath -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server"
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Client" -Name "Enabled" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server" -Name "Enabled" -Value 0
+
 # Network Provider Security Settings (Medium Impact)
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\NetworkProvider\Order" -Name "ProviderOrder" -Value "RDPNP,LanmanWorkstation,webclient" -Type String -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections" -Name "NC_ShowSharedAccessUI" -Value 0 -Type DWord -Force
+Write-Host "Configuring network provider security..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\NetworkProvider\Order" -Name "ProviderOrder" -Value "RDPNP,LanmanWorkstation,webclient" -Type "String"
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections" -Name "NC_ShowSharedAccessUI" -Value 0
+
 # WLAN Media Cost Policies (Medium Impact)
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" -Name "fMinimizeConnections" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" -Name "fBlockNonDomain" -Value 1 -Type DWord -Force
+Write-Host "Configuring WLAN policies..." -ForegroundColor Yellow
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" -Name "fMinimizeConnections" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" -Name "fBlockNonDomain" -Value 1
+
 # Network Connection Security (High Impact)
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections" -Name "NC_StdDomainUserSetLocation" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections" -Name "NC_AllowNetBridge_NLA" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Netbt\Parameters" -Name "NoNameReleaseOnDemand" -Value 1 -Type DWord -Force
-# ==================
+Write-Host "Configuring network connection security..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections" -Name "NC_StdDomainUserSetLocation" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections" -Name "NC_AllowNetBridge_NLA" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Netbt\Parameters" -Name "NoNameReleaseOnDemand" -Value 1
+
+# ===============================================================================
 # GROUP 4: HOST-BASED FIREWALL - Easy Implementation Controls
-# ==================
+# ===============================================================================
+
+Write-Host "`n=== GROUP 4: Firewall Configuration ===" -ForegroundColor Magenta
+
 # Advanced Firewall Logging (Medium Impact)
+Write-Host "Configuring firewall logging..." -ForegroundColor Yellow
 netsh advfirewall set allprofiles logging filename %systemroot%\system32\LogFiles\Firewall\pfirewall.log
 netsh advfirewall set allprofiles logging maxfilesize 4096
 netsh advfirewall set allprofiles logging droppedconnections enable
 netsh advfirewall set allprofiles logging allowedconnections enable
-# Custom Firewall Rules (Medium Impact) - Block common attack vectors
+
+# Custom Firewall Rules (Medium Impact)
+Write-Host "Adding custom firewall rules..." -ForegroundColor Yellow
 netsh advfirewall firewall add rule name="Block WinRM HTTP" dir=in action=block protocol=TCP localport=5985
 netsh advfirewall firewall add rule name="Block WinRM HTTPS" dir=in action=block protocol=TCP localport=5986
 netsh advfirewall firewall add rule name="Block SMB" dir=in action=block protocol=TCP localport=445
 netsh advfirewall firewall add rule name="Block NetBIOS" dir=in action=block protocol=TCP localport=139
 netsh advfirewall firewall add rule name="Block RPC Endpoint Mapper" dir=in action=block protocol=TCP localport=135
+
 # Firewall Notification Settings (Medium Impact)
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile" -Name "DisableNotifications" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile" -Name "DisableNotifications" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile" -Name "DisableNotifications" -Value 0 -Type DWord -Force
-# =======================
+Write-Host "Configuring firewall notifications..." -ForegroundColor Yellow
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile"
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile"
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile" -Name "DisableNotifications" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile" -Name "DisableNotifications" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile" -Name "DisableNotifications" -Value 0
+
+# ===============================================================================
 # GROUP 5: ACCESS CONTROL - Easy Implementation Controls
-# =======================
+# ===============================================================================
+
+Write-Host "`n=== GROUP 5: Access Control ===" -ForegroundColor Magenta
+
 # Enhanced UAC Settings (High Impact)
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 2 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorUser" -Value 3 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableInstallerDetection" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ValidateAdminCodeSignatures" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableSecureUIAPaths" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableLUA" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Value 1 -Type DWord -Force
+Write-Host "Configuring UAC settings..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 2
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorUser" -Value 3
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableInstallerDetection" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ValidateAdminCodeSignatures" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableSecureUIAPaths" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableLUA" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Value 1
+
 # Interactive Logon Security (High Impact)
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DontDisplayLastUserName" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DontDisplayLockedUserId" -Value 3 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "InactivityTimeoutSecs" -Value 900 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -Name "ScreenSaverGracePeriod" -Value 5 -Type DWord -Force
+Write-Host "Configuring logon security..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DontDisplayLastUserName" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DontDisplayLockedUserId" -Value 3
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "InactivityTimeoutSecs" -Value 900
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -Name "ScreenSaverGracePeriod" -Value 5
+
 # Network Logon Restrictions (High Impact)
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LimitBlankPasswordUse" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "NoLMHash" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LmCompatibilityLevel" -Value 5 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "NTLMMinClientSec" -Value 537395200 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "NTLMMinServerSec" -Value 537395200 -Type DWord -Force
+Write-Host "Configuring network logon restrictions..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LimitBlankPasswordUse" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "NoLMHash" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LmCompatibilityLevel" -Value 5
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "NTLMMinClientSec" -Value 537395200
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "NTLMMinServerSec" -Value 537395200
+
 # Session Timeout Policies (Medium Impact)
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "autodisconnect" -Value 15 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "EnableSecuritySignature" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "RequireSecuritySignature" -Value 1 -Type DWord -Force
-# ======================
+Write-Host "Configuring session timeouts..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "autodisconnect" -Value 15
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "EnableSecuritySignature" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "RequireSecuritySignature" -Value 1
+
+# ===============================================================================
 # GROUP 6: LOGGING AND AUDITING - Easy Implementation Controls
-# ======================
+# ===============================================================================
+
+Write-Host "`n=== GROUP 6: Logging and Auditing ===" -ForegroundColor Magenta
+
 # Event Log Size Configuration (Medium Impact)
+Write-Host "Configuring event log sizes..." -ForegroundColor Yellow
 wevtutil sl Security /ms:196608000
-wevtutil sl Application /ms:32768000  
+wevtutil sl Application /ms:32768000
 wevtutil sl System /ms:32768000
 wevtutil sl "Windows PowerShell" /ms:32768000
+
 # Log Retention Policies (Medium Impact)
+Write-Host "Configuring log retention..." -ForegroundColor Yellow
 wevtutil sl Security /rt:false
 wevtutil sl Application /rt:false
 wevtutil sl System /rt:false
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security" -Name "Retention" -Value "0" -Type String -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application" -Name "Retention" -Value "0" -Type String -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\System" -Name "Retention" -Value "0" -Type String -Force
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security"
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application"
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\System"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security" -Name "Retention" -Value "0" -Type "String"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application" -Name "Retention" -Value "0" -Type "String"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\System" -Name "Retention" -Value "0" -Type "String"
+
 # Additional Audit Categories (Medium Impact)
+Write-Host "Configuring audit policies..." -ForegroundColor Yellow
 auditpol /set /subcategory:"Credential Validation" /success:enable /failure:enable
 auditpol /set /subcategory:"Application Group Management" /success:enable /failure:enable
 auditpol /set /subcategory:"Computer Account Management" /success:enable /failure:enable
@@ -283,44 +409,107 @@ auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable
 auditpol /set /subcategory:"Directory Service Changes" /success:enable /failure:enable
 auditpol /set /subcategory:"Directory Service Replication" /success:enable /failure:enable
 auditpol /set /subcategory:"Detailed Directory Service Replication" /success:enable /failure:enable
+
 # Event Log Security Permissions (Medium Impact)
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\EventLog\Security" -Name "RestrictGuestAccess" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\EventLog\Application" -Name "RestrictGuestAccess" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\EventLog\System" -Name "RestrictGuestAccess" -Value 1 -Type DWord -Force
-# ===========================
+Write-Host "Configuring event log permissions..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\EventLog\Security" -Name "RestrictGuestAccess" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\EventLog\Application" -Name "RestrictGuestAccess" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\EventLog\System" -Name "RestrictGuestAccess" -Value 1
+
+# ===============================================================================
 # GROUP 7: SYSTEM MAINTENANCE - Easy Implementation Controls
-# ===========================
+# ===============================================================================
+
+Write-Host "`n=== GROUP 7: System Maintenance ===" -ForegroundColor Magenta
+
 # System Settings Hardening (High Impact)
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager" -Name "SafeDllSearchMode" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager" -Name "ProtectionMode" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableCAD" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Setup\RecoveryConsole" -Name "SecurityLevel" -Value 0 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Setup\RecoveryConsole" -Name "SetCommand" -Value 0 -Type DWord -Force
+Write-Host "Hardening system settings..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager" -Name "SafeDllSearchMode" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager" -Name "ProtectionMode" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableCAD" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Setup\RecoveryConsole" -Name "SecurityLevel" -Value 0
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Setup\RecoveryConsole" -Name "SetCommand" -Value 0
+
 # File and Folder Permission Templates (Medium Impact)
-icacls "C:\Windows\System32\config" /inheritance:r /grant:r "Administrators:(OI)(CI)F" "SYSTEM:(OI)(CI)F"
-icacls "C:\Windows\System32\drivers" /inheritance:r /grant:r "Administrators:(OI)(CI)F" "SYSTEM:(OI)(CI)F" "TrustedInstaller:(OI)(CI)F"
-icacls "C:\Windows\System32\spool" /inheritance:r /grant:r "Administrators:(OI)(CI)F" "SYSTEM:(OI)(CI)F"
+Write-Host "Setting file and folder permissions..." -ForegroundColor Yellow
+try {
+    icacls "C:\Windows\System32\config" /inheritance:r /grant:r "Administrators:(OI)(CI)F" "SYSTEM:(OI)(CI)F"
+    icacls "C:\Windows\System32\drivers" /inheritance:r /grant:r "Administrators:(OI)(CI)F" "SYSTEM:(OI)(CI)F"
+    icacls "C:\Windows\System32\spool" /inheritance:r /grant:r "Administrators:(OI)(CI)F" "SYSTEM:(OI)(CI)F"
+    Write-Host "File permissions configured successfully" -ForegroundColor Green
+}
+catch {
+    Write-Warning "Some file permission changes failed: $($_.Exception.Message)"
+}
+
 # Registry Access Restrictions (Medium Impact)
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurePipeServers\winreg" -Name "Description" -Value "Registry Server" -Type String -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurePipeServers\winreg" -Name "AllowedExactPaths" -Value @("System\CurrentControlSet\Control\ProductOptions", "System\CurrentControlSet\Control\Server Applications", "Software\Microsoft\Windows NT\CurrentVersion") -Type MultiString -Force
+Write-Host "Configuring registry access restrictions..." -ForegroundColor Yellow
+Set-SafeRegistryProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurePipeServers\winreg" -Name "Description" -Value "Registry Server" -Type "String"
+
 # System Maintenance Scheduling (Medium Impact)
-schtasks /create /tn "Security Baseline Check" /tr "powershell.exe -ExecutionPolicy Bypass -File C:\Scripts\SecurityCheck.ps1" /sc weekly /d SUN /st 02:00 /ru SYSTEM /f
-schtasks /create /tn "Event Log Cleanup" /tr "wevtutil cl Application" /sc monthly /d 1 /st 03:00 /ru SYSTEM /f
-# Temporary File Cleanup Policies (Medium Impact)
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Storage Sense" -Name "AllowStorageSenseTemporaryFilesCleanup" -Value 1 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Storage Sense" -Name "ConfigStorageSenseRecycleBinCleanupThreshold" -Value 30 -Type DWord -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Storage Sense" -Name "ConfigStorageSenseDownloadsCleanupThreshold" -Value 30 -Type DWord -Force
-# =========================
+Write-Host "Creating maintenance tasks..." -ForegroundColor Yellow
+try {
+    # Create a simple security check script
+    $scriptPath = "C:\Scripts"
+    if (!(Test-Path $scriptPath)) {
+        New-Item -Path $scriptPath -ItemType Directory -Force | Out-Null
+    }
+    
+    $securityScript = @"
+# Simple security check script
+Get-Date | Out-File "C:\Scripts\LastSecurityCheck.txt"
+Get-EventLog -LogName Security -Newest 10 | Out-File "C:\Scripts\RecentSecurityEvents.txt"
+"@
+    
+    $securityScript | Out-File -FilePath "C:\Scripts\SecurityCheck.ps1" -Force
+    
+    schtasks /create /tn "Security Baseline Check" /tr "powershell.exe -ExecutionPolicy Bypass -File C:\Scripts\SecurityCheck.ps1" /sc weekly /d SUN /st 02:00 /ru SYSTEM /f
+    schtasks /create /tn "Event Log Cleanup" /tr "wevtutil cl Application" /sc monthly /d 1 /st 03:00 /ru SYSTEM /f
+    Write-Host "Maintenance tasks created successfully" -ForegroundColor Green
+}
+catch {
+    Write-Warning "Failed to create maintenance tasks: $($_.Exception.Message)"
+}
+
+# Storage Sense Cleanup Policies (Medium Impact)
+Write-Host "Configuring storage cleanup..." -ForegroundColor Yellow
+New-RegistryPath -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Storage Sense"
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Storage Sense" -Name "AllowStorageSenseTemporaryFilesCleanup" -Value 1
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Storage Sense" -Name "ConfigStorageSenseRecycleBinCleanupThreshold" -Value 30
+Set-SafeRegistryProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Storage Sense" -Name "ConfigStorageSenseDownloadsCleanupThreshold" -Value 30
+
+# ===============================================================================
 # VERIFICATION AND RESTART RECOMMENDATIONS
-# =========================
-Write-Host "=== Security Remediation Complete ===" -ForegroundColor Green
+# ===============================================================================
+
+Write-Host "`n=== Security Remediation Complete ===" -ForegroundColor Green
 Write-Host "Manual verification recommended for:" -ForegroundColor Yellow
 Write-Host "1. Windows Update settings in Settings > Update & Security" -ForegroundColor White
-Write-Host "2. Firewall rules in Windows Defender Firewall with Advanced Security" -ForegroundColor White  
+Write-Host "2. Firewall rules in Windows Defender Firewall with Advanced Security" -ForegroundColor White
 Write-Host "3. UAC settings in Control Panel > User Accounts" -ForegroundColor White
 Write-Host "4. Event log sizes in Event Viewer properties" -ForegroundColor White
 Write-Host "5. Service status in services.msc" -ForegroundColor White
 Write-Host ""
 Write-Host "RESTART REQUIRED for some changes to take effect" -ForegroundColor Red
 Write-Host "Run 'Restart-Computer -Force' when ready" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "Script completed with error handling. Check any warnings above." -ForegroundColor Green
+
+# Use the below codes to REMEDIATE important services 
+The Service dependencies, Registry Security, Performance Counter Services and WMI (Windows Management Instrumentation) should not be changed but only if needed.
+
+# Re-enable critical WMI services
+Set-Service -Name "WmiApSrv" -StartupType Automatic
+Start-Service -Name "WmiApSrv"
+Set-Service -Name "PerfHost" -StartupType Manual
+
+# Re-register performance counters
+lodctr /R
+
+# Restart WMI service
+Restart-Service -Name "Winmgmt" -Force
+
+# Optional: Re-enable Windows Search if you need those counters
+Set-Service -Name "WSearch" -StartupType Automatic
+Start-Service -Name "WSearch"
 ```
