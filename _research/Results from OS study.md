@@ -1689,9 +1689,8 @@ echo "Reboot required for some changes to take effect."
                     <h4>🎯 CIS Control Status Distribution</h4>
                     <p>The doughnut charts show the dramatic shift from 71% failing controls (262 out of 370) to only 46% failing controls (171 out of 370), demonstrating the effectiveness of the integrated CIS-CAT Pro Assessor and MSCT remediation process in achieving Center for Internet Security compliance standards.</p>
                 </div>
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" 
-                     alt="Control Status Distribution Before and After" class="chart-image"
-                     style="background: #f1f2f6; height: 400px; display: flex; align-items: center; justify-content: center; color: #636e72;">
+                <img src="https://godswill-ikot.github.io/images/chart3.png" 
+                     alt="CIS-CAT Category Performance Before vs After" class="chart-image">
                 <!-- 
                 INSTRUCTIONS FOR GITHUB DEPLOYMENT:
                 Replace the src above with: "images/chart3.png"
