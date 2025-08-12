@@ -1746,19 +1746,9 @@ echo "Reboot required for some changes to take effect."
                     <li><strong>Best Practice Documentation:</strong> Document successful CIS-CAT and MSCT remediation procedures for future deployments</li>
                 </ul>
             </div>
-
-            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 30px; text-align: center; color: #636e72;">
-                <h4>✅ CIS-CAT & MSCT Dashboard Ready for Deployment</h4>
-                <p><strong>CIS-CAT Pro Assessor v4.56.0</strong> + <strong>Microsoft Security Compliance Toolkit</strong> Results</p>
-                <p>🎯 All chart images are now properly linked to: <strong>godswill-ikot.github.io/images/</strong></p>
-                <p>📋 Simply copy and paste this code - no editing required!</p>
-                <p>🚀 Deploy directly to GitHub Pages for instant professional security dashboard</p>
             </div>
         </div>
     </div>
 </body>
 </html>
 
-
-
-            
