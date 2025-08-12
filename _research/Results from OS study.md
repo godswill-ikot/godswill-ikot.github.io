@@ -1745,10 +1745,12 @@ echo "Reboot required for some changes to take effect."
                     <li><strong>Future MSCT Enhancements:</strong> Focus on Administrative Templates (User) and remaining firewall controls using updated Microsoft baselines</li>
                     <li><strong>Best Practice Documentation:</strong> Document successful CIS-CAT and MSCT remediation procedures for future deployments</li>
                 </ul>
-            </div>
-            </div>
         </div>
     </div>
 </body>
 </html>
+
+
+
+
 
