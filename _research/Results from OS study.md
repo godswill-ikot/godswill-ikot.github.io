@@ -1736,7 +1736,6 @@ echo "Reboot required for some changes to take effect."
             <!-- Comprehensive Security Scan Results Section -->
             <div class="analysis-section">
                 <h3>🛡️ Comprehensive Security Scan Results</h3>
-                
                 <div class="key-metrics">
                     <div class="metric-card" style="background: linear-gradient(135deg, #00b894, #00a085);">
                         <h4>Scan Overview</h4>
