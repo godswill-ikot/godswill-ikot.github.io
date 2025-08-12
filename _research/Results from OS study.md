@@ -8,7 +8,7 @@ header:
   og_image: "_research/0....png"
   teaser: "_research/0....png"
 ---
-### 🛡️ Ubuntu 20.04 CIS Security Assessment Results
+### 🛡️ Ubuntu 20.04 CIS Benchmark Assessment Analysis
 
 This comprehensive analysis compares two leading security assessment tools - **CIS-CAT Lite** and **OpenSCAP** - evaluating Ubuntu 20.04 LTS against CIS (Center for Internet Security) benchmarks.
 
@@ -1310,7 +1310,7 @@ echo "Reboot required for some changes to take effect."
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIS-CAT Security Assessment Success Analysis</title>
+    <title>CIS-CAT Benchmark and MSCT Assessment Analysis</title>
     <style>
         * {
             margin: 0;
@@ -1577,8 +1577,8 @@ echo "Reboot required for some changes to take effect."
 <body>
     <div class="container">
         <div class="header">
-            <h1>🛡️ CIS-CAT Security Assessment Success Analysis</h1>
-            <p>Windows 10 Enterprise Benchmark v4.0.0 Level 1 - Successful Remediation Results</p>
+            <h1>🛡️ CIS-CAT Benchmark and MSCT Assessment Analysis</h1>
+            <p>Windows 10 Enterprise Benchmark v4.0.0 Level 1 - Remediation Analysis</p>
             <p>Target: DESKTOP-JGURJJH (10.0.2.15)</p>
             <p>Assessment Date: August 12, 2025</p>
         </div>
@@ -1594,7 +1594,7 @@ echo "Reboot required for some changes to take effect."
                     <p>The top metrics show dramatic improvements: 23% compliance increase, 78 new passing controls, and 91 fewer failing controls. The compliance chart demonstrates the successful jump from 29% to 52% compliance rate.</p>
                 </div>
                 <!-- Replace with your actual chart images -->
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" 
+                <img src="https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/images/chart1.png" 
                      alt="Summary Metrics and Overall Compliance Charts" class="chart-image"
                      style="background: #f1f2f6; height: 300px; display: flex; align-items: center; justify-content: center; color: #636e72;">
                 <!-- 
@@ -1688,7 +1688,7 @@ echo "Reboot required for some changes to take effect."
                     <h4>📈 Category Performance Comparison</h4>
                     <p>This chart shows the before/after comparison for each security category, highlighting the massive improvements in Administrative Templates (+41%) and Windows Firewall (+22%) configurations.</p>
                 </div>
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" 
+                <img src="https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/images/chart2.png" 
                      alt="Category Performance Before vs After" class="chart-image"
                      style="background: #f1f2f6; height: 400px; display: flex; align-items: center; justify-content: center; color: #636e72;">
                 <!-- 
@@ -1707,7 +1707,7 @@ echo "Reboot required for some changes to take effect."
                     <h4>🎯 Control Status Distribution</h4>
                     <p>The doughnut charts show the dramatic shift from 71% failing controls (262 out of 370) to only 46% failing controls (171 out of 370), demonstrating the effectiveness of the remediation process.</p>
                 </div>
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" 
+                <img src="https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/images/chart3.png" 
                      alt="Control Status Distribution Before and After" class="chart-image"
                      style="background: #f1f2f6; height: 400px; display: flex; align-items: center; justify-content: center; color: #636e72;">
                 <!-- 
@@ -1777,11 +1777,7 @@ echo "Reboot required for some changes to take effect."
             </div>
 
             <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 30px; text-align: center; color: #636e72;">
-                <h4>📋 Deployment Instructions for GitHub</h4>
-                <p>1. Create an "images" folder in your repository</p>
-                <p>2. Upload your three chart images as chart1.png, chart2.png, and chart3.png</p>
-                <p>3. Update the image src attributes in the HTML code</p>
-                <p>4. Commit and push to see your complete dashboard</p>
+                
             </div>
         </div>
     </div>
