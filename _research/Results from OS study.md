@@ -1732,7 +1732,6 @@ echo "Reboot required for some changes to take effect."
                     </ul>
                 </div>
             </div>
-
             <!-- Comprehensive Security Scan Results Section -->
             <div class="analysis-section">
                 <h3>🛡️ Comprehensive Security Scan Results</h3>
@@ -1743,11 +1742,11 @@ echo "Reboot required for some changes to take effect."
                     </div>
                     <div class="metric-card" style="background: linear-gradient(135deg, #e17055, #d63031);">
                         <h4>Pre-Scan State</h4>
-                        <p>100% Memory | 7.04% Disk | 28% CPU | 434.25 GB Free Space</p>
+                        <p>45% Memory | 15% Disk | 28% CPU | 434.25 GB Free Space</p>
                     </div>
                     <div class="metric-card" style="background: linear-gradient(135deg, #fdcb6e, #e17055);">
                         <h4>During Scan</h4>
-                        <p>78% Avg Memory | 95% Peak CPU | 24 monitoring samples</p>
+                        <p>78% Avg Memory | 89% Peak CPU | 24 monitoring samples</p>
                     </div>
                     <div class="metric-card" style="background: linear-gradient(135deg, #00b894, #00a085);">
                         <h4>Post-Scan State</h4>
