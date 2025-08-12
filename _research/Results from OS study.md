@@ -1305,8 +1305,6 @@ echo "Reboot required for some changes to take effect."
     </script>
 </body>
 </html>
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1691,14 +1689,6 @@ echo "Reboot required for some changes to take effect."
                 </div>
                 <img src="https://godswill-ikot.github.io/images/chart3.png" 
                      alt="CIS-CAT Category Performance Before vs After" class="chart-image">
-                <!-- 
-                INSTRUCTIONS FOR GITHUB DEPLOYMENT:
-                Replace the src above with: "images/chart3.png"
-                Upload Image 3 (doughnut charts) as chart3.png
-                -->
-                <div style="text-align: center; padding: 20px; background: #f1f2f6; margin: 10px 0; border-radius: 8px;">
-                    <strong>📸 Replace this placeholder with Image 3</strong><br>
-                    <small>Update src="images/chart3.png" in the code above</small>
                 </div>
             </div>
 
