@@ -1839,16 +1839,6 @@ echo "Reboot required for some changes to take effect."
                     <li><strong>Schedule Regular Assessments:</strong> Set up automated CIS-CAT and comprehensive scanning for ongoing compliance</li>
                     <li><strong>Document Procedures:</strong> Record successful integrated CIS-CAT, MSCT, and comprehensive assessment procedures</li>
                 </ul>
-            </div>
-
-            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 30px; text-align: center; color: #636e72;">
-                <h4>✅ Integrated Security Assessment Dashboard Ready</h4>
-                <p><strong>CIS-CAT Pro Assessor v4.56.0</strong> + <strong>Microsoft Security Compliance Toolkit</strong> + <strong>Comprehensive Security Scan</strong></p>
-                <p>🎯 Complete assessment with compliance analysis, system monitoring, and security inventory</p>
-                <p>📋 All chart images linked to: <strong>godswill-ikot.github.io/images/</strong></p>
-                <p>📁 Scan Output Directory: <strong>C:\SecurityScan_20250812_180749</strong></p>
-                <p>🚀 Professional enterprise security assessment dashboard - copy and paste ready!</p>
-            </div>
         </div>
     </div>
 </body>
