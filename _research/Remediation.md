@@ -118,6 +118,45 @@ sudo chmod +x /etc/cron.weekly/openscap-check
 ```
 #### Manual Remediation for Windows_10 using
 ```powershell
+# GROUP 1: Initial Setup - Windows Update Configuration
+Write-Host "=== Configuring Windows Update ===" -ForegroundColor Yellow
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUOptions" -Value 4
+
+# GROUP 2: Services - Disable Unnecessary Services
+Write-Host "=== Disabling Tablet PC Input Service ===" -ForegroundColor Yellow
+Stop-Service -Name "TabletInputService" -Force -ErrorAction SilentlyContinue
+Set-Service -Name "TabletInputService" -StartupType Disabled
+
+# GROUP 3: Network Security - Disable SSL 2.0
+Write-Host "=== Disabling SSL 2.0 Client ===" -ForegroundColor Yellow
+New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Client" -Force
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Client" -Name "Enabled" -Value 0
+
+# GROUP 4: Host-Based Firewall - Block SMB Port
+Write-Host "=== Blocking SMB port 445 ===" -ForegroundColor Yellow
+netsh advfirewall firewall add rule name="Block SMB" dir=in action=block protocol=TCP localport=445
+
+# GROUP 5: Access Control - Enhanced UAC Settings
+Write-Host "=== Configuring UAC settings ===" -ForegroundColor Yellow
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 2
+
+# GROUP 6: Logging and Auditing - Increase Security Log Size
+Write-Host "=== Increasing Security log size ===" -ForegroundColor Yellow
+wevtutil sl Security /ms:196608000
+
+# GROUP 7: System Maintenance - Enable Safe DLL Search Mode
+Write-Host "=== Enabling Safe DLL Search Mode ===" -ForegroundColor Yellow
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager" -Name "SafeDllSearchMode" -Value 1
+
+Additional PowerShell 7 Compatible Examples
+# Storage Sense Configuration
+Write-Host "=== Configuring Storage Sense ===" -ForegroundColor Yellow
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense" -Name "AllowStorageSenseGlobal" -Value 1
+
+                                OR
+
 # Windows Security Remediation - PowerShell 7 Manual Commands
 # CIS Microsoft Windows 10 Enterprise Benchmark v4.0.0 Level 1
 # Requires -Version 7.0 RunAsAdministrator
