@@ -1622,10 +1622,10 @@ echo "Reboot required for some changes to take effect."
                         </tr>
                         <tr>
                             <td class="category-name">Local Policies</td>
+                            <td>60%</td>
                             <td>68%</td>
-                            <td>68%</td>
-                            <td class="change-neutral">0%</td>
-                            <td><span class="status-indicator status-stable"></span>Stable</td>
+                            <td class="change-neutral">8%</td>
+                            <td><span class="status-indicator status-improved"></span>Stable</td>
                             <td>Low</td>
                         </tr>
                         <tr>
@@ -1646,9 +1646,9 @@ echo "Reboot required for some changes to take effect."
                         </tr>
                         <tr>
                             <td class="category-name">Advanced Audit Policy</td>
+                            <td>33%</td>
                             <td>48%</td>
-                            <td>48%</td>
-                            <td class="change-neutral">0%</td>
+                            <td class="change-neutral">15%</td>
                             <td><span class="status-indicator status-stable"></span>Stable</td>
                             <td>Low</td>
                         </tr>
