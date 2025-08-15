@@ -64,6 +64,85 @@ sudo tee /etc/issue.net << 'EOF'
 WARNING: Unauthorized access to this system is prohibited.
 All connections are monitored and recorded.
 EOF
+
+                          OR
+
+# WEEK 1: CRITICAL INFRASTRUCTURE
+echo "=== WEEK 1: CRITICAL INFRASTRUCTURE ==="
+
+# 1. Enable Firewall Protection
+echo "Configuring UFW Firewall..."
+systemctl unmask ufw.service
+systemctl --now enable ufw.service
+ufw allow ssh
+ufw default deny incoming
+ufw default deny outgoing
+ufw allow out http
+ufw allow out https
+ufw allow out 53
+ufw logging on
+ufw --force enable
+
+# 2. Configure Network Security Parameters
+echo "Configuring Network Security..."
+cat >> /etc/sysctl.conf << EOF
+# Network Security Parameters
+net.ipv4.ip_forward = 0
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.conf.all.secure_redirects = 0
+net.ipv4.conf.default.secure_redirects = 0
+net.ipv4.conf.all.log_martians = 1
+net.ipv4.conf.default.log_martians = 1
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.tcp_syncookies = 1
+EOF
+sysctl -p
+
+# 3. Configure PAM Account Lockout
+echo "Configuring PAM Account Lockout..."
+apt update && apt install -y libpam-pwquality
+echo "deny = 5" >> /etc/security/faillock.conf
+echo "unlock_time = 900" >> /etc/security/faillock.conf
+
+# 4. Secure Log File Permissions
+echo "Securing Log Files..."
+find /var/log -type f -exec chmod 640 {} \\;
+find /var/log -type f -exec chown root:adm {} \\;
+
+# WEEK 2: SECURITY HARDENING
+echo "=== WEEK 2: SECURITY HARDENING ==="
+
+# Install AppArmor
+echo "Installing AppArmor..."
+apt install -y apparmor apparmor-utils
+sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="apparmor=1 security=apparmor"/' /etc/default/grub
+update-grub
+
+# Configure Password Quality
+echo "Configuring Password Policies..."
+cat >> /etc/security/pwquality.conf << EOF
+# Password Quality Requirements
+minlen = 14
+difok = 2
+maxrepeat = 3
+maxsequence = 3
+enforce_for_root
+EOF
+
+# Secure Cron
+echo "Securing Cron..."
+chown root:root /etc/crontab
+chmod og-rwx /etc/crontab
+chown root:root /etc/cron.hourly /etc/cron.daily /etc/cron.weekly /etc/cron.monthly /etc/cron.d
+chmod og-rwx /etc/cron.hourly /etc/cron.daily /etc/cron.weekly /etc/cron.monthly /etc/cron.d
 ```
 Verify Remediation Results using Lynis, OpenSCAP and CIS-CAT for Ubuntu 20.04
 ```bash
