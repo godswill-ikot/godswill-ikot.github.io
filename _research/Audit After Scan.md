@@ -16,12 +16,82 @@ David B. Carter, Bailee Donahue, and Rob Williams. "Border Walls, Cooperation, a
 
 > The number of fortified borders around the world has risen precipitously. This surge in walls is an important part of the larger globalization “backlash,” as countries react to the unwanted consequences of economic openness and globalization, with a rise in illicit trade and smuggling being a prominent example. Despite the prominence of the idea that walls are built to combat illicit flows, no research systematically explores how walls generally affect illicit trade. This is a notable omission for at least two reasons. First, the most prominent explanations for wall construction put combating illicit trade front and center. Second, recent work that finds walls significantly reduce legal trade argues that this finding derives from border fortifications diverting illegal trade to ports of entry, which leads to more inspection, security, and transaction costs. We develop a new measure of illicit trade flows using over five decades of product-level data and provide a battery of evidence that shows border barriers increase illicit flows at ports of entry.
 
+
 [Article](https://doi.org/10.1093/isq/sqae094){: .btn--research}
 
 Rob Williams, Daniel Gustafson, Stephen Gent, and Mark Crescenzi. "A Latent Variable Approach to Measuring and Explaining Peace Agreement Strength." *Political Science Research and Methods*.
 
 > Much of the peace agreement durability literature assumes that stronger peace agreements are more likely to survive the trials of the post-conflict environment. This work does an excellent job identifying which provisions indicate that agreements are more likely to endure. However, there is no widely accepted way to directly measure the strength of agreements, and existing measures suffer from a lack of nuance or reliance on subjective weighting. We use a Bayesian item response theory model to develop a principled measure of the latent strength of peace agreements in civil conflicts from 1975-2005. We illustrate the measure’s utility by exploring how various international factors such as sanctions and mediation contribute to the strength or weakness of agreements.
+# Major Security Requirement Assessment After Scan
 
+## Security Assessment Results
+
+| Security Requirement Category | CIS Benchmark Control (%) | Approximate Page Number |
+|------------------------------|---------------------------|------------------------|
+
+### Core Security Controls
+
+| **8. Audit Log Files** | 4.1.3 Ensure audit log files are owned by root and mode 0640 or less permissive | **-118-120** |
+| **9. Auditing Enabled Boot Kernel Parameter** | 4.1.1.2 Ensure auditd is enabled at boot | **-114-115** |
+| **10. Auditd Utility Present** | 4.1.x (Various specific audit rules, too many to list individually here: e.g., 4.1.14 Ensure successful file system mounts are collected <br> 4.1.6 Ensure events that modify the system administration scope (sudoers) are collected <br> 4.1.5 Ensure events that modify a user's privileges are collected <br> 4.1.6 Ensure auditd is configured to rotate logs) | **-124-159 (Section 4.1 Mandatory Access Controls)** |
+| **11. Audit Record Backup** | 4.1.4 Ensure logs are shipped to a remote log host | **-121-122** |
+| **12. Auto File System Mounting Tools** | 2.2.14 Disable Automounting | **-78-79** |
+| **13. IP Forwarding** | 3.2.1 Ensure IP forwarding is disabled | **-97-98** |
+| **14. Relay Files Ownership** | 5.1.1 Ensure cron daemon is enabled <br> (General system file permissions) | **-185-191** |
+| **15. Mail Relaying** | 2.2.12 Configure Postfix for Local-Only Mail (if Postfix is used) | **-75-76** |
+| **16. Post Core Dumps** | 1.5.5 Ensure core dumps are restricted | **-38-49** |
+| **17. Password, Shadow, and Group Files** | 6.1.2 Ensure /etc/passwd permissions are configured <br> 6.1.3 Ensure /etc/shadow permissions are configured <br> 6.1.4 Ensure /etc/group permissions are configured <br> 6.1.5 Ensure /etc/gshadow permissions are configured | **-189-195** |
+| **18. Aid Service** | 2.2.16 Disable aid | **-90-81** |
+| **19. Telnet Client and DHCP Client** | 2.3.1 Disable telnet client <br> 2.2.17 Disable dhclient (if not needed) | **-90-81** <br> **-81-82** |
+| **20. Graphical Desktop Environment** | 1.7.3 Ensure GNOME/GDM is configured to lock the screen (if applicable for Desktop) | **-58-60** |
+| **21. LDAP Server** | 2.3.2 Remove unnecessary packages: LDAP Server (Specific to stand on Ubuntu) | **-66-67** |
+| **22. External Devices** | 1.1.2 Disable USB Storage | **-35-36** |
+| **23. Firewalls** | 3.5.1 Ensure ufw is installed and enabled <br> 3.5.2 Ensure iptv4 is default deny policy | **-107-109** |
+
+### Additional Security Requirements
+
+| Security Requirement Category | CIS Benchmark Control (%) | Approximate Page Number |
+|------------------------------|---------------------------|------------------------|
+| **1. File Integrity Monitoring** | 1.3.1 Ensure AIDE is installed <br> 1.3.2 Ensure filesystem integrity is regularly checked | **-37-40** |
+| **2. Login Banner** | 1.7.2 Ensure local login warning banner is configured properly <br> 1.7.3 Ensure remote login warning banner is configured properly | **-56-60** |
+| **3. Account Lockout & Password Policy** | 5.4.1 Ensure password expiration is set for password policies <br> 5.3.1 Ensure password creation requirements are configured <br> 5.3.4 Ensure password hashing algorithm is SHA-512 or stronger | **-166-168** <br> **-169-172** <br> **-173** |
+| **4. Public Directories (Ownership)** | Implicitly covered by general file permissions, e.g., sticky bit on world-writable directories which are root owned by default | **-24 (Section 1.1 Initial Setup - Filesystem Configuration)** |
+| **5. Sticky Bit on Public Directories** | 1.1.20 Ensure sticky bit is set on all world-writable directories | **-50-51** |
+| **6. Syslog Log File Ownership** | 4.1.4 Ensure rsyslog default file permissions are configured | **-121-122** |
+| **7. System Command Ownership** | 6.1.1 Ensure system file permissions are configured (General system file permissions) | **-189-191** |
+| **24. Display Unsuccessful Login Attempts** | 5.1.8 Ensure pam_lastlog is enabled | **-164-165** |
+| **25. Enable Postfix** | 2.2.12 Configure Postfix for Local Only Mail (if used) | **-75-76** |
+| **26. Other Services** | 2.2.x (Specific services, e.g.) <br> 2.2.2 Ensure X Window System is not installed <br> 2.2.3 Ensure Avahi Server is not enabled <br> 2.2.19 Disable Bluetooth <br> 2.2.20 Disable automatic mounting <br> 2.2.21 Disable outdated preference chrony/ntpd <br> 2.2.22 Disable oldated | **-70-85 (Section 2.2 Services)** |
+| **27. NFS, SCTP, TPC and DCCP** | 3.1.2 Ensure wireless interfaces are disabled (DCCP) <br> 3.1.3 Disable SCTP <br> 3.1.4 Disable RDS <br> 3.1.5 Disable TIPC | **-90-93** |
+| **28. SSH Service** | 5.2.x (Numerous specific SSH configurations, e.g.) <br> 5.2.3 Ensure permissions on /etc/ssh/sshd_config are configured <br> 5.2.8 Ensure SSH IgnoreRhosts is enabled <br> 5.2.10 Ensure SSH root login is disabled <br> 5.2.14 Ensure SSH MaxAuthTries is set to 4 or less <br> 5.2.16 Ensure SSH LoginGraceTime is set to one minute or less <br> 5.2.18 Ensure SSH ClientAliveCountMax is set to 3 or less | **-168-185** <br> **-169-171** <br> **-ssh Configuration** |
+| **29. System Boot Configuration** | 1.5.1 Ensure bootloader password is set <br> 1.5.2 Ensure permissions on bootloader config are configured | **-44-47** |
+| **30. Correct Umask** | 1.5.1 Ensure default umask for users is 027 or more restrictive | **-37-38** |
+| **31. Screen Service** | 1.7.4 Ensure console screen lock is enabled (if applicable for Desktop) | **-60-61** |
+| **32. Kernel Parameters** | 3.2.x (Various kernel parameter settings, e.g.) <br> 3.2.3 Ensure net.ipv4.tcp_syncookies is enabled <br> 3.2.5 Ensure net.ipv4.conf.all.accept_redirects is disabled <br> 3.2.9 Ensure net.ipv6.conf.all.accept_ra_pinfo is disabled | **-97-106** <br> **-(Section 3.2 Network Parameters)** |
+| **33. System Logins** | 5.5.1 Set mesg.group for users | **-187-188** |
+| **34. Interactive User** | 5.4.5 Ensure default user shell timeout is disabled | **-187** |
+| **35. Virtual and Serial Consoles** | 5.1.5 Limit root login to system console | **-161-162** |
+| **36. Attack on VPN Networks** | N/A (Network architecture, not OS hardening control) | **N/A** |
+| **37. Linux Security Module** | 1.6.1.1 Ensure AppArmor is installed <br> 1.6.1.2 Ensure AppArmor is enabled in the bootloader configuration <br> 1.6.1.3 Ensure all AppArmor Profiles are in enforce or complain mode | **-30-54 (Section 1.6 Mandatory Access Controls)** |
+| **38. Filesystem Partition** | 1.1.3 Ensure /tmp is a separate partition <br> 1.1.5 Ensure separate partition exists for /var <br> 1.1.6 Ensure separate partition exists for /var/log <br> 1.1.7 Ensure separate partition exists for /var/log/audit <br> 1.1.9 Ensure separate partition exists for /home | **-25-28** |
+| **39. Samba Client and FTP Protocol** | N/A (generally no specific CIS control if not used; removal of unnecessary packages would be 2.2.x Remove unnecessary packages) | **N/A** |
+
+## Summary
+
+This assessment covers **39 major security requirements** based on CIS Benchmark controls. Each control is mapped to specific page numbers in the CIS documentation for detailed implementation guidance.
+
+### Key Areas Covered:
+- **Audit and Logging** (Controls 8-11, 24)
+- **Network Security** (Controls 13, 23, 27-28, 36)
+- **Access Control** (Controls 2-3, 31, 33-35)
+- **File System Security** (Controls 1, 4-7, 38)
+- **Service Management** (Controls 12, 15, 18-22, 26, 29)
+- **System Configuration** (Controls 14, 16-17, 30, 32, 37, 39)
+
+### Implementation Priority:
+1. **Critical**: Audit logging, firewall configuration, access controls
+2. **High**: File integrity monitoring, login banners, service management  
+3. **Medium**: System hardening, kernel parameters, filesystem partitioning
 [Article](https://doi.org/10.1017/psrm.2019.23){: .btn--research} [Preprint](/files/pdf/research/Agreement Strength.pdf){: .btn--research} [Supplemental Information](/files/pdf/research/Agreement Strength SI.pdf){: .btn--research} [Replication Archive](https://doi.org/10.7910/DVN/VUY8UI){: .btn--research} [GitHub Repo](https://github.com/jayrobwilliams/Peace-Agreement-Strength){: .btn--research}
 
 ## Working papers
