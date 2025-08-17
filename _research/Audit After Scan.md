@@ -32,9 +32,11 @@ In this set of projects, I use advanced quanitative methods to tackle the proble
 | **21. LDAP Server** | 2.3.2 Remove unnecessary packages: LDAP Server (Specific to stand on Ubuntu) | **-66-67** |
 | **22. External Devices** | 1.1.2 Disable USB Storage | **-35-36** |
 | **23. Firewalls** | 3.5.1 Ensure ufw is installed and enabled, 3.5.2 Ensure iptv4 is default deny policy | **-107-109** |
-**Security Assessment Results (CIS Microsoft Windows 10 Enterprise Benchmark)**
+
+# Security Assessment Results (CIS Microsoft Windows 10 Enterprise Benchmark)
+
 | Security Requirement Category | CIS Benchmark Control | Approximate Page Number |
-|-------------------------------|----------------------|------------------------|
+|---|---|---|
 | **8. Audit Log Files** | 17.1.1 Ensure 'Audit Credential Validation' is set to 'Success and Failure'<br>17.5.1 Ensure 'Audit Account Lockout' is set to 'Failure' | 210-215 |
 | **9. Auditing Enabled Boot** | 17.1.1 Ensure 'Audit Credential Validation' is set to 'Success and Failure'<br>Advanced Audit Policy Configuration | 210-215 |
 | **10. Audit Utility Present** | 17.1.1 Ensure 'Audit Credential Validation' is set to 'Success and Failure'<br>17.3.1 Ensure 'Audit PNP Activity' is set to include 'Success'<br>17.5.4 Ensure 'Audit User Account Management' is set to 'Success and Failure'<br>17.6.1 Ensure 'Audit Detailed Directory Service Replication' is set to include 'Failure' | 210-230 (Section 17 Advanced Audit Policy Configuration) |
