@@ -9,24 +9,66 @@ header:
 ---
 
 In this set of projects, I use advanced quanitative methods to tackle the problem of more accurately measuring concepts of interest in international relations. One uses Bayesian latent variable models to directly assess the strength of peace agreements in civil conflict rather than having to use agreement duration as a proxy for strength. Another harnesses advances in big data and develops new measures of economic interdependence and methods for detecting disruptions of regular economic exchange between states from a product-level trade dataset with over two billion observations.
-| Security Requirement Category       | CIS Benchmark Control (%)                                                                                                                                                                                                                                         | Approx. Page Number             |
-|-------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|
-| 8. Audit Log Files                  | 4.1.3 Ensure audit log files are owned by root and mode 0640 or less permissive                                                                                                                                                                                   | 118–120                         |
-| 9. Auditing Enabled Boot Kernel Param | 4.1.1.2 Ensure auditd is enabled at boot                                                                                                                                                                                                                          | 114–115                         |
-| 10. Auditd Utility Present          | 4.1.x (Various audit rules, e.g.:<br> • 4.1.14 Ensure successful file system mounts are collected<br> • 4.1.6 Ensure events that modify sudoers are collected<br> • 4.1.5 Ensure events modifying user privileges are collected<br> • 4.1.6 Ensure auditd rotates logs) | 124–159 (Sec. 4.1 MAC)          |
-| 11. Audit Record Backup             | 4.1.4 Ensure logs are shipped to a remote log host                                                                                                                                                                                                                | 121–122                         |
-| 12. Auto File System Mounting Tools | 2.2.14 Disable Automounting                                                                                                                                                                                                                                       | 78–79                           |
-| 13. IP Forwarding                   | 3.2.1 Ensure IP forwarding is disabled                                                                                                                                                                                                                            | 97–98                           |
-| 14. Relay Files Ownership           | 5.1.1 Ensure cron daemon is enabled<br>(General system file permissions)                                                                                                                                                                                          | 185–191                         |
-| 15. Mail Relaying                   | 2.2.12 Configure Postfix for Local-Only Mail (if Postfix is used)                                                                                                                                                                                                 | 75–76                           |
-| 16. Post Core Dumps                 | 1.5.5 Ensure core dumps are restricted                                                                                                                                                                                                                            | 38–49                           |
-| 17. Password, Shadow, and Group Files | 6.1.2 Ensure /etc/passwd permissions are configured<br>6.1.3 Ensure /etc/shadow permissions are configured<br>6.1.4 Ensure /etc/group permissions are configured<br>6.1.5 Ensure /etc/gshadow permissions are configured                                          | 189–195                         |
-| 18. Aid Service                     | 2.2.16 Disable aid                                                                                                                                                                                                                                                | 80–81                           |
-| 19. Telnet Client & DHCP Client     | 2.3.1 Disable telnet client<br>2.2.17 Disable dhclient (if not needed)                                                                                                                                                                                             | 80–82                           |
-| 20. Graphical Desktop Environment   | 1.7.3 Ensure GNOME/GDM is configured to lock the screen (if applicable for Desktop)                                                                                                                                                                                | 58–60                           |
-| 21. LDAP Server                     | 2.3.2 Remove unnecessary packages: LDAP Server (Ubuntu specific)                                                                                                                                                                                                  | 66–67                           |
-| 22. External Devices                | 1.1.2 Disable USB Storage                                                                                                                                                                                                                                         | 35–36                           |
-| 23. Firewalls                       | 3.5.1 Ensure ufw is installed and enabled<br>3.5.2 Ensure iptables IPv4 default deny policy                                                                                                                                                                       | 107–109                         |
+# Security Assessment Results
+
+## Core Security Controls
+
+| Security Requirement Category | CIS Benchmark Control | Approximate Page Number |
+|-------------------------------|----------------------|------------------------|
+| **8. Audit Log Files** | 4.1.3 Ensure audit log files are owned by root and mode 0640 or less permissive | **-118-120** |
+| **9. Auditing Enabled Boot Kernel Parameter** | 4.1.1.2 Ensure auditd is enabled at boot | **-114-115** |
+| **10. Auditd Utility Present** | 4.1.x (Various specific audit rules, too many to list individually here: e.g., 4.1.14 Ensure successful file system mounts are collected, 4.1.6 Ensure events that modify the system administration scope (sudoers) are collected, 4.1.5 Ensure events that modify a user's privileges are collected, 4.1.6 Ensure auditd is configured to rotate logs) | **-124-159 (Section 4.1 Mandatory Access Controls)** |
+| **11. Audit Record Backup** | 4.1.4 Ensure logs are shipped to a remote log host | **-121-122** |
+| **12. Auto File System Mounting Tools** | 2.2.14 Disable Automounting | **-78-79** |
+| **13. IP Forwarding** | 3.2.1 Ensure IP forwarding is disabled | **-97-98** |
+| **14. Relay Files Ownership** | 5.1.1 Ensure cron daemon is enabled (General system file permissions) | **-185-191** |
+| **15. Mail Relaying** | 2.2.12 Configure Postfix for Local-Only Mail (if Postfix is used) | **-75-76** |
+| **16. Post Core Dumps** | 1.5.5 Ensure core dumps are restricted | **-38-49** |
+| **17. Password, Shadow, and Group Files** | 6.1.2 Ensure /etc/passwd permissions are configured, 6.1.3 Ensure /etc/shadow permissions are configured, 6.1.4 Ensure /etc/group permissions are configured, 6.1.5 Ensure /etc/gshadow permissions are configured | **-189-195** |
+| **18. Aid Service** | 2.2.16 Disable aid | **-90-81** |
+| **19. Telnet Client and DHCP Client** | 2.3.1 Disable telnet client, 2.2.17 Disable dhclient (if not needed) | **-90-81, -81-82** |
+| **20. Graphical Desktop Environment** | 1.7.3 Ensure GNOME/GDM is configured to lock the screen (if applicable for Desktop) | **-58-60** |
+| **21. LDAP Server** | 2.3.2 Remove unnecessary packages: LDAP Server (Specific to stand on Ubuntu) | **-66-67** |
+| **22. External Devices** | 1.1.2 Disable USB Storage | **-35-36** |
+| **23. Firewalls** | 3.5.1 Ensure ufw is installed and enabled, 3.5.2 Ensure iptv4 is default deny policy | **-107-109** |
+
+## Additional Security Requirements
+
+| Security Requirement Category | CIS Benchmark Control | Approximate Page Number |
+|-------------------------------|----------------------|------------------------|
+| **1. File Integrity Monitoring** | 1.3.1 Ensure AIDE is installed, 1.3.2 Ensure filesystem integrity is regularly checked | **-37-40** |
+| **2. Login Banner** | 1.7.2 Ensure local login warning banner is configured properly, 1.7.3 Ensure remote login warning banner is configured properly | **-56-60** |
+| **3. Account Lockout & Password Policy** | 5.4.1 Ensure password expiration is set for password policies, 5.3.1 Ensure password creation requirements are configured, 5.3.4 Ensure password hashing algorithm is SHA-512 or stronger | **-166-168, -169-172, -173** |
+| **4. Public Directories (Ownership)** | Implicitly covered by general file permissions, e.g., sticky bit on world-writable directories which are root owned by default | **-24 (Section 1.1 Initial Setup - Filesystem Configuration)** |
+| **5. Sticky Bit on Public Directories** | 1.1.20 Ensure sticky bit is set on all world-writable directories | **-50-51** |
+| **6. Syslog Log File Ownership** | 4.1.4 Ensure rsyslog default file permissions are configured | **-121-122** |
+| **7. System Command Ownership** | 6.1.1 Ensure system file permissions are configured (General system file permissions) | **-189-191** |
+| **24. Display Unsuccessful Login Attempts** | 5.1.8 Ensure pam_lastlog is enabled | **-164-165** |
+| **25. Enable Postfix** | 2.2.12 Configure Postfix for Local Only Mail (if used) | **-75-76** |
+| **26. Other Services** | 2.2.x (Specific services, e.g.) 2.2.2 Ensure X Window System is not installed, 2.2.3 Ensure Avahi Server is not enabled, 2.2.19 Disable Bluetooth, 2.2.20 Disable automatic mounting, 2.2.21 Disable outdated preference chrony/ntpd, 2.2.22 Disable outdated | **-70-85 (Section 2.2 Services)** |
+| **27. NFS, SCTP, TPC and DCCP** | 3.1.2 Ensure wireless interfaces are disabled (DCCP), 3.1.3 Disable SCTP, 3.1.4 Disable RDS, 3.1.5 Disable TIPC | **-90-93** |
+| **28. SSH Service** | 5.2.x (Numerous specific SSH configurations, e.g.) 5.2.3 Ensure permissions on /etc/ssh/sshd_config are configured, 5.2.8 Ensure SSH IgnoreRhosts is enabled, 5.2.10 Ensure SSH root login is disabled, 5.2.14 Ensure SSH MaxAuthTries is set to 4 or less, 5.2.16 Ensure SSH LoginGraceTime is set to one minute or less, 5.2.18 Ensure SSH ClientAliveCountMax is set to 3 or less | **-168-185, -169-171, -ssh Configuration** |
+| **29. System Boot Configuration** | 1.5.1 Ensure bootloader password is set, 1.5.2 Ensure permissions on bootloader config are configured | **-44-47** |
+| **30. Correct Umask** | 1.5.1 Ensure default umask for users is 027 or more restrictive | **-37-38** |
+| **31. Screen Service** | 1.7.4 Ensure console screen lock is enabled (if applicable for Desktop) | **-60-61** |
+| **32. Kernel Parameters** | 3.2.x (Various kernel parameter settings, e.g.) 3.2.3 Ensure net.ipv4.tcp_syncookies is enabled, 3.2.5 Ensure net.ipv4.conf.all.accept_redirects is disabled, 3.2.9 Ensure net.ipv6.conf.all.accept_ra_pinfo is disabled | **-97-106 (Section 3.2 Network Parameters)** |
+| **33. System Logins** | 5.5.1 Set mesg.group for users | **-187-188** |
+| **34. Interactive User** | 5.4.5 Ensure default user shell timeout is disabled | **-187** |
+| **35. Virtual and Serial Consoles** | 5.1.5 Limit root login to system console | **-161-162** |
+| **36. Attack on VPN Networks** | N/A (Network architecture, not OS hardening control) | **N/A** |
+| **37. Linux Security Module** | 1.6.1.1 Ensure AppArmor is installed, 1.6.1.2 Ensure AppArmor is enabled in the bootloader configuration, 1.6.1.3 Ensure all AppArmor Profiles are in enforce or complain mode | **-30-54 (Section 1.6 Mandatory Access Controls)** |
+| **38. Filesystem Partition** | 1.1.3 Ensure /tmp is a separate partition, 1.1.5 Ensure separate partition exists for /var, 1.1.6 Ensure separate partition exists for /var/log, 1.1.7 Ensure separate partition exists for /var/log/audit, 1.1.9 Ensure separate partition exists for /home | **-25-28** |
+| **39. Samba Client and FTP Protocol** | N/A (generally no specific CIS control if not used; removal of unnecessary packages would be 2.2.x Remove unnecessary packages) | **N/A** |
+
+## Summary
+
+This assessment covers **39 major security requirements** based on CIS Benchmark controls. Each control is mapped to specific page numbers in the CIS documentation for detailed implementation guidance.
+
+### Key Areas Covered:
+- **Audit and Logging** (Controls 8-11, 24)
+- **Network Security** (Controls 13, 23, 27-28, 36)
+- **Access Control** (Controls 2-3, 31, 33-35)
+- **File System Security** (Controls 1,
 
 ## Articles
 
