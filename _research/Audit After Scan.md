@@ -82,17 +82,17 @@ In this set of projects, I use advanced quanitative methods to tackle the proble
 
 
 #### Key Areas Covered:
-Audit and Logging (Controls 8-11, 24)
-Network Security (Controls 13, 23, 27-28, 36)
-Access Control (Controls 2-3, 31, 33-35)
-File System Security (Controls 1, 4-7, 38)
-Service Management (Controls 12, 15, 18-22, 26, 29)
-System Configuration (Controls 14, 16-17, 30, 32, 37, 39)
+- Audit and Logging (Controls 8-11, 24)
+- Network Security (Controls 13, 23, 27-28, 36)
+- Access Control (Controls 2-3, 31, 33-35)
+- File System Security (Controls 1, 4-7, 38)
+- Service Management (Controls 12, 15, 18-22, 26, 29)
+- System Configuration (Controls 14, 16-17, 30, 32, 37, 39)
 
 #### Implementation Priority:
-Critical: Audit logging, firewall configuration, access controls
-High: File integrity monitoring, login banners, service management
-Medium: System hardening, kernel parameters, filesystem partitioning
+- Critical: Audit logging, firewall configuration, access controls
+- High: File integrity monitoring, login banners, service management
+- Medium: System hardening, kernel parameters, filesystem partitioning
 
 ## Articles
 
