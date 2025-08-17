@@ -22,11 +22,14 @@ David B. Carter, Bailee Donahue, and Rob Williams. "Border Walls, Cooperation, a
 Rob Williams, Daniel Gustafson, Stephen Gent, and Mark Crescenzi. "A Latent Variable Approach to Measuring and Explaining Peace Agreement Strength." *Political Science Research and Methods*.
 
 > Much of the peace agreement durability literature assumes that stronger peace agreements are more likely to survive the trials of the post-conflict environment. This work does an excellent job identifying which provisions indicate that agreements are more likely to endure. However, there is no widely accepted way to directly measure the strength of agreements, and existing measures suffer from a lack of nuance or reliance on subjective weighting. We use a Bayesian item response theory model to develop a principled measure of the latent strength of peace agreements in civil conflicts from 1975-2005. We illustrate the measure’s utility by exploring how various international factors such as sanctions and mediation contribute to the strength or weakness of agreements.
+> 
 # Major Security Requirement Assessment After Scan
 
 ## Security Assessment Results
+
 ### Core Security Controls
 | Security Requirement Category | CIS Benchmark Control (%) | Approximate Page Number |
+|------------------------------|---------------------------|------------------------|
 | **8. Audit Log Files** | 4.1.3 Ensure audit log files are owned by root and mode 0640 or less permissive | **-118-120** |
 | **9. Auditing Enabled Boot Kernel Parameter** | 4.1.1.2 Ensure auditd is enabled at boot | **-114-115** |
 | **10. Auditd Utility Present** | 4.1.x (Various specific audit rules, too many to list individually here: e.g., 4.1.14 Ensure successful file system mounts are collected <br> 4.1.6 Ensure events that modify the system administration scope (sudoers) are collected <br> 4.1.5 Ensure events that modify a user's privileges are collected <br> 4.1.6 Ensure auditd is configured to rotate logs) | **-124-159 (Section 4.1 Mandatory Access Controls)** |
