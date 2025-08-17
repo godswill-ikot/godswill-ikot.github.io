@@ -9,9 +9,10 @@ header:
 ---
 
 In this set of projects, I use advanced quanitative methods to tackle the problem of more accurately measuring concepts of interest in international relations. One uses Bayesian latent variable models to directly assess the strength of peace agreements in civil conflict rather than having to use agreement duration as a proxy for strength. Another harnesses advances in big data and develops new measures of economic interdependence and methods for detecting disruptions of regular economic exchange between states from a product-level trade dataset with over two billion observations.
-# Security Assessment Results
 
-## Core Security Controls
+### Security Assessment Results
+```
+## Core Security Controls for Ubuntu 20.04
 
 | Security Requirement Category | CIS Benchmark Control | Approximate Page Number |
 |-------------------------------|----------------------|------------------------|
@@ -31,7 +32,28 @@ In this set of projects, I use advanced quanitative methods to tackle the proble
 | **21. LDAP Server** | 2.3.2 Remove unnecessary packages: LDAP Server (Specific to stand on Ubuntu) | **-66-67** |
 | **22. External Devices** | 1.1.2 Disable USB Storage | **-35-36** |
 | **23. Firewalls** | 3.5.1 Ensure ufw is installed and enabled, 3.5.2 Ensure iptv4 is default deny policy | **-107-109** |
+```
 
+# Security Assessment Results (CIS Microsoft Windows 10 Enterprise Benchmark)
+
+| Security Requirement Category | CIS Benchmark Control | Approximate Page Number |
+|---|---|---|
+| **8. Audit Log Files** | 17.1.1 Ensure 'Audit Credential Validation' is set to 'Success and Failure'<br>17.5.1 Ensure 'Audit Account Lockout' is set to 'Failure' | 210-215 |
+| **9. Auditing Enabled Boot** | 17.1.1 Ensure 'Audit Credential Validation' is set to 'Success and Failure'<br>Advanced Audit Policy Configuration | 210-215 |
+| **10. Audit Utility Present** | 17.1.1 Ensure 'Audit Credential Validation' is set to 'Success and Failure'<br>17.3.1 Ensure 'Audit PNP Activity' is set to include 'Success'<br>17.5.4 Ensure 'Audit User Account Management' is set to 'Success and Failure'<br>17.6.1 Ensure 'Audit Detailed Directory Service Replication' is set to include 'Failure' | 210-230 (Section 17 Advanced Audit Policy Configuration) |
+| **11. Audit Record Backup** | 18.8.21.2 Ensure 'Configure registry policy processing: Do not apply during periodic background processing' is set to 'Enabled: FALSE' | 310-315 |
+| **12. Auto File System Mounting** | 18.9.8.1 Ensure 'Turn off Autoplay' is set to 'Enabled: All drives'<br>18.9.8.2 Ensure 'Set the default behavior for AutoRun' is set to 'Enabled: Do not execute any autorun commands' | 350-355 |
+| **13. IP Forwarding** | 18.5.4.1 Ensure 'MSS: (EnableICMPRedirect) Allow ICMP redirects to override OSPF generated routes' is set to 'Disabled'<br>18.5.8.1 Ensure 'MSS: (NoNameReleaseOnDemand) Allow the computer to ignore NetBIOS name release requests except from WINS servers' is set to 'Enabled' | 280-290 |
+| **14. System Files Ownership** | 2.2.21 Ensure 'Log on as a service' is set to 'No One' (DC only)<br>File and Registry permissions via Security Templates | 120-125 |
+| **15. Mail Relaying** | 2.2.33 Ensure 'Simple TCP/IP Services' is set to 'Disabled or Not Installed'<br>2.2.34 Ensure 'SNMP Service' is set to 'Disabled or Not Installed' | 140-145 |
+| **16. Core Dumps** | 18.8.22.1.13 Ensure 'Turn off heap termination on corruption' is set to 'Disabled'<br>Computer Configuration\Windows Settings\Security Settings\Local Policies\Security Options | 320-325 |
+| **17. Password, SAM, and Registry Files** | 18.8.21.2 Ensure 'Configure registry policy processing'<br>2.3.1.1 Ensure 'Accounts: Administrator account status' is set to 'Disabled'<br>2.3.1.4 Ensure 'Accounts: Guest account status' is set to 'Disabled' | 75-85 |
+| **18. Unnecessary Services** | 2.2.1 Ensure 'Access Credential Manager as a trusted caller' is set to 'No One'<br>2.2.5 Ensure 'Add workstations to domain' is set to 'Administrators' (DC only)<br>Various service disable recommendations | 90-140 |
+| **19. Telnet and DHCP Client** | 2.2.38 Ensure 'Telnet' is set to 'Disabled or Not Installed'<br>18.5.19.2.1 Ensure 'Prohibit installation and configuration of Network Bridge on your DNS domain network' is set to 'Enabled' | 145-150<br>295-300 |
+| **20. GUI Desktop Environment** | 18.9.15.1 Ensure 'Turn off the advertising ID' is set to 'Enabled'<br>18.9.16.1 Ensure 'Turn off location' is set to 'Enabled'<br>Control Panel restrictions | 380-390 |
+| **21. LDAP Server** | 2.2.17 Ensure 'DNS Server' is set to 'Disabled or Not Installed' (if not a DNS server)<br>Remove unnecessary Windows Features | 130-135 |
+| **22. External Devices** | 18.9.10.1.1 Ensure 'Prevent installation of devices that match any of these device IDs' is set to 'Enabled'<br>18.9.10.1.2 Ensure 'Prevent installation of devices using drivers that match these device setup classes' is set to 'Enabled' | 360-365 |
+| **23. Windows Firewall** | 9.1.1 Ensure 'Windows Firewall: Domain: Firewall state' is set to 'On'<br>9.2.1 Ensure 'Windows Firewall: Private: Firewall state' is set to 'On'<br>9.3.1 Ensure 'Windows Firewall: Public: Firewall state' is set to 'On' | 190-210 |
 ## Additional Security Requirements
 
 | Security Requirement Category | CIS Benchmark Control | Approximate Page Number |
@@ -60,15 +82,20 @@ In this set of projects, I use advanced quanitative methods to tackle the proble
 | **38. Filesystem Partition** | 1.1.3 Ensure /tmp is a separate partition, 1.1.5 Ensure separate partition exists for /var, 1.1.6 Ensure separate partition exists for /var/log, 1.1.7 Ensure separate partition exists for /var/log/audit, 1.1.9 Ensure separate partition exists for /home | **-25-28** |
 | **39. Samba Client and FTP Protocol** | N/A (generally no specific CIS control if not used; removal of unnecessary packages would be 2.2.x Remove unnecessary packages) | **N/A** |
 
-## Summary
 
-This assessment covers **39 major security requirements** based on CIS Benchmark controls. Each control is mapped to specific page numbers in the CIS documentation for detailed implementation guidance.
 
-### Key Areas Covered:
-- **Audit and Logging** (Controls 8-11, 24)
-- **Network Security** (Controls 13, 23, 27-28, 36)
-- **Access Control** (Controls 2-3, 31, 33-35)
-- **File System Security** (Controls 1,
+#### Key Areas Covered:
+Audit and Logging (Controls 8-11, 24)
+Network Security (Controls 13, 23, 27-28, 36)
+Access Control (Controls 2-3, 31, 33-35)
+File System Security (Controls 1, 4-7, 38)
+Service Management (Controls 12, 15, 18-22, 26, 29)
+System Configuration (Controls 14, 16-17, 30, 32, 37, 39)
+
+#### Implementation Priority:
+Critical: Audit logging, firewall configuration, access controls
+High: File integrity monitoring, login banners, service management
+Medium: System hardening, kernel parameters, filesystem partitioning
 
 ## Articles
 
