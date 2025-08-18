@@ -10,7 +10,8 @@ header:
 
 In this set of projects, I use advanced quanitative methods to tackle the problem of more accurately measuring concepts of interest in international relations. One uses Bayesian latent variable models to directly assess the strength of peace agreements in civil conflict rather than having to use agreement duration as a proxy for strength. Another harnesses advances in big data and develops new measures of economic interdependence and methods for detecting disruptions of regular economic exchange between states from a product-level trade dataset with over two billion observations.
 
-[Article](https://doi.org/10.1017/psrm.2019.23){: .btn--research} [Preprint]
+To see research data artfacts (results PDFs) click the buttons below:
+[Ubuntu L1 Scan Before Hardening]([https://doi.org/10.1017/psrm.2019.23](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/C1%20Benchmark%20Result%20xccdf_org.cisecurity.benchmarks_testresult_3.0.0_CIS_Ubuntu_Linux_20.04_LTS_Benchmark.pdf)){: .btn--research}
 
 ### Security Assessment Results
 **Core Security Controls for Ubuntu 20.04**
@@ -35,7 +36,7 @@ In this set of projects, I use advanced quanitative methods to tackle the proble
 | **23. Firewalls** | 3.5.1 Ensure ufw is installed and enabled, 3.5.2 Ensure iptv4 is default deny policy | **-107-109** |
 
 ### Security Assessment Results 
-** Core CIS Microsoft Windows 10 Enterprise Benchmark Control**
+**Core CIS Microsoft Windows 10 Enterprise Benchmark Control**
 
 | Security Requirement Category | CIS Benchmark Control | Approximate Page Number |
 |-------------------------------|----------------------|------------------------|
