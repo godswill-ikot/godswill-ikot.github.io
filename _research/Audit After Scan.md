@@ -14,7 +14,9 @@ To see research data artfacts (results PDFs) click the buttons below where L1= L
 
 **Scan Summary**
 
-[Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/Enhanced%20Security%20Scan%20Summary%20Report.pdf){: .btn--research}
+[Before Hardening Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/Enhanced%20Security%20Scan%20Summary%20Report.pdf){: .btn--research}
+
+[After Hardening Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/Remediation%20Scans%20Summary.pdf){: .btn--research}
 
 **CIS-CAT Results for Ubuntu 20.04 Level 1 and 2 before hardening**
 
