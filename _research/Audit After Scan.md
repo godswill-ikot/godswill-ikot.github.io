@@ -14,7 +14,7 @@ To see research data artfacts (results PDFs) click the buttons below where L1= L
 
 **Scan Summary**
 
-[Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/Enhanced%20Security%20Scan%20Summary%20Report.pdf)
+[Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/Enhanced%20Security%20Scan%20Summary%20Report.pdf){: .btn--research}
 
 **CIS-CAT Results for Ubuntu 20.04 Level 1 and 2 before hardening**
 
@@ -33,7 +33,7 @@ To see research data artfacts (results PDFs) click the buttons below where L1= L
 
 [OpenSCAP L1 Before Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_cis_level1_workstation%20_%20OpenSCAP%20Evaluation%20Report.pdf){: .btn--research}
 
-[OpenSCAP L2 Before Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_cis_level2_workstation%20_%20OpenSCAP%20Evaluation%20Report.pdf)
+[OpenSCAP L2 Before Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_cis_level2_workstation%20_%20OpenSCAP%20Evaluation%20Report.pdf){: .btn--research}
 
 ### Security Assessment Results
 **Core Security Controls for Ubuntu 20.04**
