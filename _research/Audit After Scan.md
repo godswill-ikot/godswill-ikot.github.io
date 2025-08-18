@@ -35,8 +35,10 @@ To see research data artfacts (results PDFs) click the buttons below where L1= L
 [OpenSCAP L2 Before Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_cis_level2_workstation%20_%20OpenSCAP%20Evaluation%20Report.pdf){: .btn--research}
 
 **OpenSCAP Results for Ubuntu 20.04 Level 1 and 2 After Hardening**
+
 [OpenSCAP L1 After Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/OpenSCAP%20After%20remediation%20level%201.pdf)
 [OpenSCAP L2 After Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/OpenSCAP%20After%20remediation%20level%202.pdf)
+
 ### Security Assessment Results
 **Core Security Controls for Ubuntu 20.04**
 
