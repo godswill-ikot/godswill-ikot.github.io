@@ -19,6 +19,9 @@ To see research data artfacts (results PDFs) click the buttons below where L1= L
 
 **Results for Ubuntu 20.04 Level 1 and 2 after hardening**
 
+[Ubuntu L1 After Scan](https://github.com/godswill-ikot/godswill-ikot.github.io/tree/master/files/pdf){: .btn--research}
+[Ubuntu L2 After Scan](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/cis-cat%20level%202%20after%20hardening.pdf){: .btn--research}
+
 ### Security Assessment Results
 **Core Security Controls for Ubuntu 20.04**
 
