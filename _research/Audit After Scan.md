@@ -11,7 +11,8 @@ header:
 In this set of projects, I use advanced quanitative methods to tackle the problem of more accurately measuring concepts of interest in international relations. One uses Bayesian latent variable models to directly assess the strength of peace agreements in civil conflict rather than having to use agreement duration as a proxy for strength. Another harnesses advances in big data and develops new measures of economic interdependence and methods for detecting disruptions of regular economic exchange between states from a product-level trade dataset with over two billion observations.
 
 To see research data artfacts (results PDFs) click the buttons below where L1= Level 1 and L2 = Level 2:
-[Ubuntu L1 Scan Before Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/C1%20Benchmark%20Result%20xccdf_org.cisecurity.benchmarks_testresult_3.0.0_CIS_Ubuntu_Linux_20.04_LTS_Benchmark.pdf){: .btn--research}  ,  [Ubuntu L2 Scan Before Hardening]([https://doi.org/10.1017/psrm.2019.23](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/C1%20Benchmark%20Result%20xccdf_org.cisecurity.benchmarks_testresult_3.0.0_CIS_Ubuntu_Linux_20.04_LTS_Benchmark.pdf)){: .btn--research}
+[Ubuntu L1 Scan Before Hardening](godswill-ikot.github.io/files/pdf
+/C1 Benchmark Result xccdf_org.cisecurity.benchmarks_testresult_3.0.0_CIS_Ubuntu_Linux_20.04_LTS_Benchmark.pdf){: .btn--research}  ,  [Ubuntu L2 Scan Before Hardening]([https://doi.org/10.1017/psrm.2019.23](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/C1%20Benchmark%20Result%20xccdf_org.cisecurity.benchmarks_testresult_3.0.0_CIS_Ubuntu_Linux_20.04_LTS_Benchmark.pdf)){: .btn--research}
 
 ### Security Assessment Results
 **Core Security Controls for Ubuntu 20.04**
