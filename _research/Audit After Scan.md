@@ -12,15 +12,28 @@ In this set of projects, I use advanced quanitative methods to tackle the proble
 
 To see research data artfacts (results PDFs) click the buttons below where L1= Level 1 and L2 = Level 2:
 
-**Results for Ubuntu 20.04 Level 1 and 2 before hardening**
+**Scan Summary**
 
-[Ubuntu L1 Scan](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/C1%20Benchmark%20Result%20xccdf_org.cisecurity.benchmarks_testresult_3.0.0_CIS_Ubuntu_Linux_20.04_LTS_Benchmark.pdf){: .btn--research}
-[Ubuntu L2 Scan](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/C2%20Benchmark%20Result%20xccdf_org.cisecurity.benchmarks_testresult_3.0.0_CIS_Ubuntu_Linux_20.04_LTS_Benchmark.pdf){: .btn--research}
+[Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/Enhanced%20Security%20Scan%20Summary%20Report.pdf)
+
+**CIS-CAT Results for Ubuntu 20.04 Level 1 and 2 before hardening**
+
+[Ubuntu L1 Scan Before Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/C1%20Benchmark%20Result%20xccdf_org.cisecurity.benchmarks_testresult_3.0.0_CIS_Ubuntu_Linux_20.04_LTS_Benchmark.pdf){: .btn--research}
+[Ubuntu L2 Scan Before Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/C2%20Benchmark%20Result%20xccdf_org.cisecurity.benchmarks_testresult_3.0.0_CIS_Ubuntu_Linux_20.04_LTS_Benchmark.pdf){: .btn--research}
 
 **Results for Ubuntu 20.04 Level 1 and 2 after hardening**
 
-[Ubuntu L1 After Scan](https://github.com/godswill-ikot/godswill-ikot.github.io/tree/master/files/pdf){: .btn--research}
-[Ubuntu L2 After Scan](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/cis-cat%20level%202%20after%20hardening.pdf){: .btn--research}
+[Ubuntu L1 After Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/tree/master/files/pdf){: .btn--research}
+[Ubuntu L2 After Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/cis-cat%20level%202%20after%20hardening.pdf){: .btn--research}
+
+**Result for Lynis Deep Scan on Ubuntu 20.04**
+[Lynis After Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/lynis_full_output_20250720_114954.txt.pdf){: .btn--research}
+
+**OpenSCAP Results for Ubuntu 20.04 Level 1 and 2 before hardening**
+
+[OpenSCAP L1 Before Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_cis_level1_workstation%20_%20OpenSCAP%20Evaluation%20Report.pdf){: .btn--research}
+
+[OpenSCAP L2 Before Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_cis_level2_workstation%20_%20OpenSCAP%20Evaluation%20Report.pdf)
 
 ### Security Assessment Results
 **Core Security Controls for Ubuntu 20.04**
