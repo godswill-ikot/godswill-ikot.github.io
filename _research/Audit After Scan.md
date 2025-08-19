@@ -22,6 +22,18 @@ The AUDIT AFTER SCAN phase of this project explains how the result was examined 
 | **Logging & Auditing** | Very Low | Moderate | Log configuration, audit rules | **4-7** |
 | **System Maintenance** | Very Low | Low | File permissions, maintenance tasks | **1-3** |
 
+
+#### Security Domain Percentage Assessment for Windows
+
+| Security Domain | Before % | After % | Primary Improvements |
+|-----------------|----------|---------|---------------------|
+| **Account Policies** | 40 | 52 | Password history, min age, length and complexity |
+| **Local Policy** | 60 | 68 | Service configuration, unnecessary services removed |
+| **Adv Audit Policy** | 33 | 48 | Acct logon, Mgt, detailed tracking, privilege use |
+| **Windows Defender** | | | |
+| **Firewall** | 0 | 22 | Domain, and public profile |
+
+
 To see research data artfacts (results PDFs) click the buttons below where L1 = Level 1 and L2 = Level 2:
 
 **Scan Summary**
