@@ -8,7 +8,7 @@ header:
   og_image: "research/Agreement-Strength.png"
 ---
 
-The AUDIT AFTER SCAN phase of this project explains how the result was examined after scanning; I audited the scanned results by carefully looking into critical areas of the selected study's OSs, and while finding True Positives, False Positives, False Negatives and True Negatives. During this search, I discovered none of the predicted outcomes, as areas not scanned in the Level 1 security guide profile were extensively covered when the Level 2 security guide was used. The result was broken down into seven (7) major groups 
+The AUDIT AFTER SCAN phase of this project explains how the result was examined after scanning; I audited the scanned results by carefully looking into critical areas of the selected study's OSs, and while finding True Positives, False Positives, False Negatives and True Negatives. During this search, I discovered none of the predicted outcomes, as areas not scanned in the Level 1 security guide profile were extensively covered when the Level 2 security guide was used. The result was extensively broken into considerable parts and further broken down into seven (7) major groups for easy and collective analysis.
 
 #### Security Domain Assessment Results for Ubuntu 20.04
 
@@ -29,8 +29,8 @@ The AUDIT AFTER SCAN phase of this project explains how the result was examined 
 |-----------------|----------|---------|---------------------|
 | **Account Policies** | 40 | 52 | Password history, min age, length and complexity |
 | **Local Policy** | 60 | 68 | Service configuration, unnecessary services removed |
-| **Adv Audit Policy** | 33 | 48 | Acct logon, Mgt, detailed tracking, privilege use |
-| **Windows Defender** | | | |
+| **Advance Audit Policy** | 33 | 48 | Acct logon, Mgt, detailed tracking, privilege use |
+| **Windows Defender** | 0 | 22 | |
 | **Firewall** | 0 | 22 | Domain, and public profile |
 
 
