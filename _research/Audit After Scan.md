@@ -9,7 +9,8 @@ header:
 ---
 
 The AUDIT AFTER SCAN phase of this project explains how the result was examined after scanning; I audited the scanned results by carefully looking into critical areas of the selected study's OSs, and while finding True Positives, False Positives, False Negatives and True Negatives. During this search, I discovered none of the predicted outcomes, as areas not scanned in the Level 1 security guide profile were extensively covered when the Level 2 security guide was used. The result was broken down into seven (7) major groups 
-# Security Domain Assessment Results
+
+#### Security Domain Assessment Results for Ubuntu 20.04
 
 | Security Domain | Before | After | Primary Improvements | Fail Rule |
 |-----------------|--------|-------|---------------------|-----------|
@@ -20,6 +21,7 @@ The AUDIT AFTER SCAN phase of this project explains how the result was examined 
 | **Access Control** | Very Low | High | PAM configuration, user management | **26-31** |
 | **Logging & Auditing** | Very Low | Moderate | Log configuration, audit rules | **4-7** |
 | **System Maintenance** | Very Low | Low | File permissions, maintenance tasks | **1-3** |
+
 To see research data artfacts (results PDFs) click the buttons below where L1 = Level 1 and L2 = Level 2:
 
 **Scan Summary**
