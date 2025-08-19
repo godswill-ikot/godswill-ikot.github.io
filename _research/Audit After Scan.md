@@ -8,9 +8,19 @@ header:
   og_image: "research/Agreement-Strength.png"
 ---
 
-In this set of projects, I use advanced quanitative methods to tackle the problem of more accurately measuring concepts of interest in international relations. One uses Bayesian latent variable models to directly assess the strength of peace agreements in civil conflict rather than having to use agreement duration as a proxy for strength. Another harnesses advances in big data and develops new measures of economic interdependence and methods for detecting disruptions of regular economic exchange between states from a product-level trade dataset with over two billion observations.
+The AUDIT AFTER SCAN phase of this project explains how the result was examined after scanning; I audited the scanned results by carefully looking into critical areas of the selected study's OSs, and while finding True Positives, False Positives, False Negatives and True Negatives. During this search, I discovered none of the predicted outcomes, as areas not scanned in the Level 1 security guide profile were extensively covered when the Level 2 security guide was used. The result was broken down into seven (7) major groups 
+# Security Domain Assessment Results
 
-To see research data artfacts (results PDFs) click the buttons below where L1= Level 1 and L2 = Level 2:
+| Security Domain | Before | After | Primary Improvements | Fail Rule |
+|-----------------|--------|-------|---------------------|-----------|
+| **Initial Setup** | Low | High | Bootload security, system hardening, EOL Service configuration, unnecessary services removal | **31-34** |
+| **Services** | Very Low | Moderate | | **14-19** |
+| **Network** | Low | Very High | Network parameters, kernel hardening | **10-25** |
+| **Host-Based Firewall** | Moderate | Very High | Firewall rules, traffic filtering | **25-28** |
+| **Access Control** | Very Low | High | PAM configuration, user management | **26-31** |
+| **Logging & Auditing** | Very Low | Moderate | Log configuration, audit rules | **4-7** |
+| **System Maintenance** | Very Low | Low | File permissions, maintenance tasks | **1-3** |
+To see research data artfacts (results PDFs) click the buttons below where L1 = Level 1 and L2 = Level 2:
 
 **Scan Summary**
 
