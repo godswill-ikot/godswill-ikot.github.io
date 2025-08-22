@@ -18,6 +18,8 @@ The findings of this research stress the growing need for standard security eval
 Key results and findings showed that automated benchmarking tools offer substantial benefits to maintain stable and better security postures, such as strong cross-platform support and compatibility in CIS-CAT Lite. The study develops and recommends the best practice tool integration, reporting, and remediation practices. OpenSCAP turned out to be effective on Linux-based systems as a result of its native SCAP compliance, and Windows-specific checkmate was as a result of a combination of CIS-CAT (Lite) and security features in place.  
 
 The research contributes interesting values in cybersecurity by providing inherent evidence of the effect of the tool, by creating evaluation approaches, and by constructing policies and frameworks for sustained security monitoring. Experience demonstrated that tremendous security improvements can be achieved by applying these benchmarking tools in an incremental phased manner by individuals and organisations, via measurable reductions in security risk exposure and enhanced conformance postures. 
+
+[Screencast](https://app.clipchamp.com/editor/7a7649bd-1981-44fb-a92a-8772f83e5c50?utm_source=m365&utm_campaign=pdp&utm_term=start+creating+today&culture=en-af&country=af){: .btn--research}
 <nbsp>
 
 {% include base_path %}
