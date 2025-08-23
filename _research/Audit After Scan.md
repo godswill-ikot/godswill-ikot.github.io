@@ -36,10 +36,14 @@ The AUDIT AFTER SCAN phase of this project explains how the result was examined 
 
 To see research data artfacts (results PDFs) click the buttons below where L1 = Level 1 and L2 = Level 2:
 
-**Scan Summary**
+**Scan Summary for Ubuntu**
 
 [Before Hardening Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/Enhanced%20Security%20Scan%20Summary%20Report.pdf){: .btn--research}
 [After Hardening Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/Remediation%20Scans%20Summary.pdf){: .btn--research}
+
+**Scan Summary for Windows_10_Ent**
+
+[Before Hardening Scan Summary](){: .btn--research}[After Hardening Scan Summary](){: .btn--research}
 
 **CIS-CAT Results for Ubuntu 20.04 Level 1 and 2 before hardening**
 
