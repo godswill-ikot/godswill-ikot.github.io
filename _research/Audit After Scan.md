@@ -43,7 +43,8 @@ To see research data artfacts (results PDFs) click the buttons below where L1 = 
 
 **Scan Summary for Windows_10_Ent**
 
-[Before Hardening Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/Before%20Hardening%20Scan%20Report.pdf){: .btn--research} [After Hardening Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/After%20Hardening.pdf){: .btn--research}
+[Before Hardening Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/Before%20Hardening%20Scan%20Report.pdf){: .btn--research} 
+[After Hardening Scan Summary](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/After%20Hardening.pdf){: .btn--research}
 
 **CIS-CAT Results for Ubuntu 20.04 Level 1 and 2 before hardening**
 
