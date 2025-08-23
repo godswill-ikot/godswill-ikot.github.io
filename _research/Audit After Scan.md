@@ -43,7 +43,7 @@ To see research data artfacts (results PDFs) click the buttons below where L1 = 
 
 **Scan Summary for Windows_10_Ent**
 
-[Before Hardening Scan Summary](){: .btn--research}[After Hardening Scan Summary](){: .btn--research}
+[Before Hardening Scan Summary](files/pdf/Before Hardening Scan Report.pdf){: .btn--research}[After Hardening Scan Summary](){: .btn--research}
 
 **CIS-CAT Results for Ubuntu 20.04 Level 1 and 2 before hardening**
 
