@@ -69,6 +69,11 @@ To see research data artfacts (results PDFs) click the buttons below where L1 = 
 [OpenSCAP L1 After Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/OpenSCAP%20After%20remediation%20level%201.pdf){: .btn--research}
 [OpenSCAP L2 After Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/OpenSCAP%20After%20remediation%20level%202.pdf){: .btn--research}
 
+**CIS-CAT Results for WINDOWS_10_ENT Level 1 and 2 before hardening**
+
+[WINDOWS_10 Scan Before Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/Benchmark%20Result%20xccdf_org.cisecurity.benchmarks_testresult_4.0.0_CIS_Microsoft_Windows_10_Enterprise_Benchmark%20(1).pdf){: .btn--research}
+[WINDOWS_10 Scan After Hardening](https://github.com/godswill-ikot/godswill-ikot.github.io/blob/master/files/pdf/N_Windows%20CIS-CAT%20SCAN.pdf){: .btn--research}
+
 ### Security Assessment Results
 **Core Security Controls for Ubuntu 20.04**
 
